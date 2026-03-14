@@ -1,0 +1,345 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String              @id @default(uuid())
+  clerkUserId        String              @unique
+  email              String              @unique
+  name               String?
+  phone              String?
+  imageUrl           String?
+  role               UserRole            @default(UNASSIGNED)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  credits            Int                 @default(0)
+  practiceArea       String?
+  experience         Int?
+  credentialUrl      String?
+  description        String?
+  verificationStatus VerificationStatus? @default(PENDING)
+  qualifications     String[]
+  emergencyEmails    String[]
+  city               String?
+  availabilities     Availability[]
+  transactions       CreditTransaction[]
+  internEscalations  Dispute[]           @relation("InternEscalations")
+  seniorEscalations  Dispute[]           @relation("SeniorEscalations")
+  disputes           Dispute[]           @relation("UserDisputes")
+  emergencyAlerts    EmergencyAlert[]
+  clientCases        LegalCase[]         @relation("ClientCases")
+  lawyerCases        LegalCase[]         @relation("LawyerCases")
+  paymentRequests    PaymentRequest[]
+  payouts            Payout[]
+}
+
+model EmergencyAlert {
+  id        String          @id @default(uuid())
+  userId    String
+  latitude  Float?
+  longitude Float?
+  status    EmergencyStatus @default(ACTIVE)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+}
+
+model Availability {
+  id        String     @id @default(uuid())
+  lawyerId  String
+  startTime DateTime
+  endTime   DateTime
+  status    SlotStatus @default(AVAILABLE)
+  lawyer    User       @relation(fields: [lawyerId], references: [id], onDelete: Cascade)
+
+  @@index([lawyerId, startTime])
+}
+
+model LegalCase {
+  id                String       @id @default(uuid())
+  clientId          String
+  lawyerId          String
+  startTime         DateTime
+  endTime           DateTime
+  status            CaseStatus   @default(SCHEDULED)
+  notes             String?
+  clientDescription String?
+  clientName        String
+  clientPhone       String
+  clientAge         Int
+  clientGender      String
+  videoSessionId    String?
+  videoSessionToken String?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  legalAdvice       LegalAdvice?
+  client            User         @relation("ClientCases", fields: [clientId], references: [id])
+  lawyer            User         @relation("LawyerCases", fields: [lawyerId], references: [id])
+
+  @@index([status, startTime])
+  @@index([lawyerId, startTime])
+}
+
+model CreditTransaction {
+  id            String          @id @default(uuid())
+  userId        String
+  amount        Int
+  type          TransactionType
+  packageId     String?
+  transactionId String?         @unique
+  createdAt     DateTime        @default(now())
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Payout {
+  id                String       @id @default(uuid())
+  lawyerId          String
+  amount            Float
+  credits           Int
+  platformFee       Float
+  netAmount         Float
+  paypalEmail       String
+  razorpayPaymentId String?
+  status            PayoutStatus @default(PROCESSING)
+  paymentId         String?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @default(now()) @updatedAt
+  processedAt       DateTime?
+  processedBy       String?
+  lawyer            User         @relation(fields: [lawyerId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([lawyerId, status])
+}
+
+model Blog {
+  id          String    @id @default(uuid())
+  title       String
+  slug        String    @unique
+  excerpt     String?
+  content     String
+  imageUrl    String?
+  isPublished Boolean   @default(true)
+  categoryId  String?
+  tags        String[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  likes       Int       @default(0)
+  category    Category? @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id    String @id @default(uuid())
+  name  String @unique
+  blogs Blog[]
+}
+
+model LawFirm {
+  id        String   @id @default(uuid())
+  name      String
+  address   String
+  phone     String?
+  rating    Float    @default(0)
+  reviews   Int      @default(0)
+  timings   String
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LegalAdvice {
+  id           String    @id @default(cuid())
+  caseId       String    @unique
+  lawyerId     String
+  clientId     String
+  caseHistory  String?
+  caseSummary  String?
+  legalPoints  String
+  instructions String?
+  followUpDate DateTime?
+  createdAt    DateTime  @default(now())
+  case         LegalCase @relation(fields: [caseId], references: [id])
+}
+
+model PaymentRequest {
+  id            String        @id @default(uuid())
+  userId        String
+  amount        Float
+  credits       Int
+  screenshotUrl String
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+  paymentMethod String?
+  packageId     String?
+  isNotified    Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  processedAt   DateTime?
+  processedBy   String?
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model News {
+  id        String   @id @default(uuid())
+  title     String
+  content   String?
+  imageUrl  String?
+  link      String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OfflineOffice {
+  id           String   @id @default(uuid())
+  name         String
+  lawyerName   String
+  practiceArea String
+  phone        String
+  email        String?
+  address      String
+  city         String
+  state        String
+  pincode      String
+  latitude     Float
+  longitude    Float
+  timing       String
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([city])
+  @@index([isActive])
+}
+
+model Dispute {
+  id                   String        @id @default(uuid())
+  userId               String
+  complainantName      String
+  complainantEmail     String
+  complainantPhone     String
+  opponentName         String?
+  opponentEmail        String?
+  category             String
+  description          String
+  aiQuestions          Json?
+  aiAnalysis           String?
+  legalNotice          String?
+  settlementDraft      String?
+  meetLink             String?
+  preferredDate        DateTime?
+  preferredTime        String?
+  status               DisputeStatus @default(INTAKE)
+  userResolved         Boolean       @default(false)
+  opponentResolved     Boolean       @default(false)
+  internId             String?
+  seniorLawyerId       String?
+  escalationNotes      String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  lastPenaltyAt        DateTime?
+  opponentPenaltyCount Int           @default(0)
+  intern               User?         @relation("InternEscalations", fields: [internId], references: [id])
+  seniorLawyer         User?         @relation("SeniorEscalations", fields: [seniorLawyerId], references: [id])
+  user                 User          @relation("UserDisputes", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+}
+
+model LegalDocument {
+  id             String   @id @default(uuid())
+  clerkUserId    String
+  leegalityDocId String   @unique
+  status         String   @default("PENDING")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([clerkUserId])
+  @@index([leegalityDocId])
+}
+
+model LegalKnowledge {
+  id          String           @id @default(uuid())
+  title       String
+  description String?
+  category    String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  chunks      KnowledgeChunk[]
+}
+
+model KnowledgeChunk {
+  id              String         @id @default(uuid())
+  content         String
+  knowledgeBaseId String
+  createdAt       DateTime       @default(now())
+  knowledgeBase   LegalKnowledge @relation(fields: [knowledgeBaseId], references: [id], onDelete: Cascade)
+}
+
+enum EmergencyStatus {
+  ACTIVE
+  RESOLVED
+}
+
+enum UserRole {
+  UNASSIGNED
+  CLIENT
+  LAWYER
+  ADMIN
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum SlotStatus {
+  AVAILABLE
+  BOOKED
+  BLOCKED
+}
+
+enum CaseStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum DisputeStatus {
+  INTAKE
+  ANALYZED
+  NOTICE_GENERATED
+  NOTICE_SENT
+  MEDIATION
+  RESOLVED
+  ESCALATED_INTERN
+  ESCALATED_SENIOR
+  CLOSED
+}
+
+enum TransactionType {
+  CREDIT_PURCHASE
+  CASE_DEDUCTION
+  ADMIN_ADJUSTMENT
+}
+
+enum PayoutStatus {
+  PROCESSING
+  PROCESSED
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

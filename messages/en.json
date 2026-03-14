@@ -1,0 +1,46 @@
+{
+  "Common": {
+    "home": "Home",
+    "submitDispute": "Submit Dispute",
+    "legalNotification": "Legal Notification",
+    "howItWorks": "How It Works",
+    "myDashboard": "My Dashboard",
+    "signIn": "Sign In"
+  },
+  "Footer": {
+    "pricing": "Pricing",
+    "credits": "Credits",
+    "helpCenter": "Help Center",
+    "blogs": "Blogs",
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us",
+    "developers": "Developers",
+    "legalInfo": "Legal Information"
+  },
+  "LawyerAI": {
+    "greeting": "Hello! I'm LawyerAI 👋 I'm here to help you understand your legal concerns on Justifi. What brings you in today? Please describe the dispute or legal issue you're facing.",
+    "thinking": "Thinking...",
+    "speaking": "Speaking...",
+    "listening": "Listening...",
+    "placeholder": "Type or tap mic to speak...",
+    "restart": "New consultation",
+    "bookLawyer": "Book a Professional Lawyer on Justifi"
+  },
+  "Home": {
+    "heroBadge": "Next-Gen AI Legal Platform",
+    "heroTitle1": "Your AI Legal",
+    "heroTitle2": "Advocate for",
+    "heroTitle3": "Every Dispute",
+    "heroSub": "Understand your rights, analyze disputes, and resolve legal conflicts faster with AI-powered legal guidance.",
+    "resolveDispute": "Resolve Dispute",
+    "aiAssistant": "AI Assistant",
+    "findLawyers": "Find Top Lawyers",
+    "trustedBy": "Trusted by 10,000+ users",
+    "bankSecurity": "Bank-level security",
+    "verifiedLawyers": "Verified lawyers",
+    "howItWorksTitle": "How It Works",
+    "howItWorksSub": "Simple 5-step process to get legal justice",
+    "disputeCategoriesTitle": "Dispute Categories",
+    "disputeCategoriesSub": "Coverage for every legal struggle in your life."
+  }
+}
