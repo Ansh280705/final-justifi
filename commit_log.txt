@@ -2,3 +2,4 @@ commit 1 - 2026-03-14 00:00 - Initial project setup with Next.js and Tailwind CS
 commit 2 - 2026-03-14 15:26 - Add Prisma schema and database configuration
 commit 3 - 2026-03-15 06:53 - Set up Clerk authentication middleware
 commit 4 - 2026-03-15 22:20 - Create base layout and navigation components
+commit 5 - 2026-03-16 13:47 - Add landing page hero section
