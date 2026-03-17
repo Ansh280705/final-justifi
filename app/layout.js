@@ -1,0 +1,232 @@
+import { Poppins } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/header";
+import Footer from "@/components/footer";
+import { ClerkProvider } from "@clerk/nextjs";
+import { CreditsProvider } from "@/context/CreditsContext";
+import Script from "next/script";
+import { checkUser } from "@/lib/checkUser";
+import PageLoader from "@/components/PageLoader";
+import { Toaster } from "sonner";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import SOSButton from "@/components/SOSButton";
+import PaymentToast from "@/components/payment-toast";
+
+/* =========================
+   FONT SETUP
+   ========================= */
+const inter = Poppins({
+  weight: ["400", "600", "700"],
+  subsets: ["latin"],
+});
+
+/* =========================
+   SEO / METADATA (NEXT.JS)
+   ========================= */
+export const metadata = {
+  title: {
+    default: "Justifi",
+    template: "%s | Justifi",
+  },
+
+  description:
+    "Justifi is a smart case and client management platform for modern legal professionals, enabling online consultations, digital case records, scheduling, billing, and seamless law firm workflows in one secure system.",
+
+  keywords: [
+      // Brand
+    "Justifi",
+
+    // Core product
+    "lawyer consultation app",
+    "online legal advice",
+    "law firm management software",
+    "case management system",
+    "lawyer scheduling software",
+    "legal resolution platform",
+
+    // Comparison / intent-based
+    "online legal consultation app",
+    "lawyer booking app",
+    "legal services platform",
+    "best lawyer app in india",
+
+    // Feature based
+    "consultation booking for lawyers",
+    "law firm appointment management",
+    "legal practice management software",
+    "legal saas platform",
+    "digital law firm software",
+
+    // Geo / market
+    "lawyer consultation app india",
+    "online law firm management india",
+  ],
+
+  metadataBase: new URL("https://Justifi.co.in"),
+
+  manifest: "/manifest.json",
+
+  /* --------- FAVICON --------- */
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+
+  /* --------- OPEN GRAPH --------- */
+  openGraph: {
+    title: "Justifi",
+    description:
+      "Smart case & client management platform for modern legal professionals.",
+    url: "https://Justifi.co.in",
+    siteName: "Justifi",
+    images: [
+      {
+        url: "https://Justifi.co.in/justifi-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Justifi Logo",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+
+  /* --------- TWITTER --------- */
+  twitter: {
+    card: "summary_large_image",
+    title: "Justifi",
+    description:
+      "Secure scheduling and workflow platform for lawyers & firms.",
+    images: ["https://Justifi.co.in/justifi-logo.png"],
+  },
+
+  /* --------- ROBOTS --------- */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+/* =========================
+   VIEWPORT
+   ========================= */
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#6ba49f" },
+    { media: "(prefers-color-scheme: dark)", color: "#6ba49f" },
+  ],
+};
+
+/* =========================
+   ROOT LAYOUT
+   ========================= */
+export default async function RootLayout({ children }) {
+  const user = await checkUser(); // Server-side user check
+
+  return (
+    <ClerkProvider
+      appearance={{
+        theme: "simple",
+        layout: {
+          showLogo: false,
+          logoText: "Justifi",
+          socialButtonsVariant: "none",
+        },
+      }}
+    >
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className}>
+
+          {/* =========================
+             GOOGLE ANALYTICS
+             ========================= */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-GXCHKJRJ01"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-GXCHKJRJ01');
+            `}
+          </Script>
+
+          {/* =========================
+             🔥 GOOGLE LOGO FIX (IMPORTANT)
+             This makes logo appear in Google search
+             ========================= */}
+          <Script
+            id="organization-schema"
+            type="application/ld+json"
+            strategy="afterInteractive"
+          >
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Justifi",
+              url: "https://Justifi.co.in",
+              logo: "https://Justifi.co.in/justifi-logo.png",
+            })}
+          </Script>
+
+          {/* =========================
+             WEBSITE SCHEMA (OPTIONAL)
+             ========================= */}
+          <Script
+            id="website-schema"
+            type="application/ld+json"
+            strategy="afterInteractive"
+          >
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Justifi",
+              url: "https://Justifi.co.in",
+            })}
+          </Script>
+
+          {/* =========================
+             APP PROVIDERS
+             ========================= */}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <CreditsProvider initialCredits={user?.credits || 0}>
+              <PageLoader user={user}>
+                <Header user={user} />
+
+                <Toaster richColors position="top-center" />
+
+                <main className="min-h-screen">
+                  {children}
+                </main>
+
+                <Footer />
+                <SOSButton userRole={user?.role} />
+                <WhatsAppButton />
+                <PaymentToast />
+              </PageLoader>
+            </CreditsProvider>
+          </ThemeProvider>
+
+        </body>
+      </html>
+    </ClerkProvider>
+  );
+}

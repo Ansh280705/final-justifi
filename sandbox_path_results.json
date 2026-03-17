@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://sandbox.leegality.com/v3.0/document/create",
+    "status": 405,
+    "body": "<h1>\n405 error\n</h1>\n",
+    "headers": [
+      "Authorization"
+    ]
+  },
+  {
+    "url": "https://sandbox.leegality.com/v3.0/workflow/run",
+    "status": 405,
+    "body": "<h1>\n405 error\n</h1>\n",
+    "headers": [
+      "Authorization"
+    ]
+  },
+  {
+    "url": "https://sandbox.leegality.com/api/v3.0/document/create",
+    "status": 404,
+    "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}",
+    "headers": [
+      "Authorization"
+    ]
+  },
+  {
+    "url": "https://sandbox.leegality.com/api/v1/document/create",
+    "status": 404,
+    "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}",
+    "headers": [
+      "Authorization"
+    ]
+  },
+  {
+    "url": "https://sandbox.leegality.com/v3/document/create",
+    "status": 405,
+    "body": "<h1>\n405 error\n</h1>\n",
+    "headers": [
+      "Authorization"
+    ]
+  }
+]
