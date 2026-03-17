@@ -70,6 +70,10 @@ export default function HomeClient() {
                   Open a Case
                   <ArrowRight className="ml-3 w-5 h-5" />
                 </Link>
+                <Link href="/legal-ai" className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 text-base font-black rounded-2xl text-white bg-[#00C896] hover:bg-[#00DDA6] transition-all shadow-xl hover:-translate-y-1">
+                  <BrainCircuit className="mr-2 w-5 h-5" />
+                  AI Assistant
+                </Link>
                 <Link href="/lawyers" className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 text-base font-bold rounded-2xl text-navy bg-white border border-slate-200 hover:border-emerald-200 hover:bg-slate-50 transition-all shadow-sm">
                   Find Top Lawyers
                 </Link>
@@ -315,7 +319,7 @@ export default function HomeClient() {
                 ))}
               </ul>
 
-              <Link href="/onboarding" className="inline-flex items-center justify-center px-10 py-5 text-base font-black rounded-2xl text-navy bg-emerald-500 hover:bg-emerald-400 transition-all shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+              <Link href="/legal-ai" className="inline-flex items-center justify-center px-10 py-5 text-base font-black rounded-2xl text-navy bg-emerald-500 hover:bg-emerald-400 transition-all shadow-[0_0_40px_rgba(16,185,129,0.2)]">
                 Try AI Analyzer
                 <Zap className="ml-3 w-5 h-5" />
               </Link>
