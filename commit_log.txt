@@ -4,3 +4,4 @@ commit 3 - 2026-03-15 06:53 - Set up Clerk authentication middleware
 commit 4 - 2026-03-15 22:20 - Create base layout and navigation components
 commit 5 - 2026-03-16 13:47 - Add landing page hero section
 commit 6 - 2026-03-17 05:14 - Implement user registration flow
+commit 7 - 2026-03-17 20:41 - Add LawyerAI RAG pipeline foundation
