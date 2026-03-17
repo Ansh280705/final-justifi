@@ -86,7 +86,7 @@ export const metadata = {
     siteName: "Justifi",
     images: [
       {
-        url: "https://Justifi.co.in/lawyer-desk-logo.png",
+        url: "https://Justifi.co.in/justifi-logo.png",
         width: 1200,
         height: 630,
         alt: "Justifi Logo",
@@ -102,7 +102,7 @@ export const metadata = {
     title: "Justifi",
     description:
       "Secure scheduling and workflow platform for lawyers & firms.",
-    images: ["https://Justifi.co.in/lawyer-desk-logo.png"],
+    images: ["https://Justifi.co.in/justifi-logo.png"],
   },
 
   /* --------- ROBOTS --------- */
@@ -140,7 +140,7 @@ export default async function RootLayout({ children }) {
         theme: "simple",
         layout: {
           showLogo: false,
-          logoText: "LawyerDesk",
+          logoText: "Justifi",
           socialButtonsVariant: "none",
         },
       }}
@@ -178,7 +178,7 @@ export default async function RootLayout({ children }) {
               "@type": "Organization",
               name: "Justifi",
               url: "https://Justifi.co.in",
-              logo: "https://Justifi.co.in/lawyer-desk-logo.png",
+              logo: "https://Justifi.co.in/justifi-logo.png",
             })}
           </Script>
 

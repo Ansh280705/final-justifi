@@ -346,7 +346,7 @@ export default function AIConsultation() {
             className="flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r from-teal-500 to-emerald-500 text-white rounded-2xl font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-teal-500/30"
           >
             <Calendar className="w-4 h-4" />
-            Book a Professional Lawyer on LawyerDesk
+            Book a Professional Lawyer on Justifi
           </Link>
         </div>
       )}

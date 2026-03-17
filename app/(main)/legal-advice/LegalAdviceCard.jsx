@@ -12,13 +12,13 @@ export default function LegalAdviceCard({ legalAdvice }) {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-client pb-3 mb-4">
         <div className="flex items-center gap-3 mb-3 md:mb-0">
           <img
-            src="lawyer-desk-logo.png"
-            alt="LawyerDesk Logo"
+            src="justifi-logo.png"
+            alt="Justifi Logo"
             className="h-12 w-12 object-contain"
           />
           <div>
             <h2 className="text-lg font-bold">
-              Lawyer<span className="text-client">Desk</span>
+              Justi<span className="text-client">fi</span>
             </h2>
             <p className="text-sm text-gray-500">
               Trusted Legal Platform
@@ -122,7 +122,7 @@ export default function LegalAdviceCard({ legalAdvice }) {
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
           <p className="font-medium">Validity:</p>
           <p className="text-gray-700 text-xs">
-            This legal document is issued following LawyerDesk Guidelines. It is valid as an electronic record and should be retained by the client.
+            This legal document is issued following Justifi Guidelines. It is valid as an electronic record and should be retained by the client.
           </p>
           <p className="font-medium mt-2">Consultation Consent:</p>
           <p className="text-gray-700 text-xs">
@@ -142,7 +142,7 @@ export default function LegalAdviceCard({ legalAdvice }) {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div className="flex items-center gap-2 mb-2 md:mb-0">
             <img
-              src="lawyer-desk-logo.png"
+              src="justifi-logo.png"
               alt="Justifi Logo"
               className="h-6 w-6"
             />

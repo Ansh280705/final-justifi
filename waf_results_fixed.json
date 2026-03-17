@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Real Token",
+    "status": 401,
+    "body": "",
+    "server": "CloudFront"
+  },
+  {
+    "name": "Fake Token",
+    "status": 401,
+    "body": "",
+    "server": "CloudFront"
+  },
+  {
+    "name": "No Token",
+    "status": 404,
+    "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}",
+    "server": "CloudFront"
+  },
+  {
+    "name": "Alternative Header",
+    "status": 404,
+    "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}",
+    "server": "CloudFront"
+  }
+]

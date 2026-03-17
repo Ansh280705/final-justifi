@@ -1,0 +1,30 @@
+[
+  {
+    "headers": [
+      "X-Auth-Token"
+    ],
+    "status": 401,
+    "body": ""
+  },
+  {
+    "headers": [
+      "Authorization"
+    ],
+    "status": 401,
+    "body": "{\"error\":\"Invalid JWT token format.\"}"
+  },
+  {
+    "headers": [
+      "X-Token"
+    ],
+    "status": 404,
+    "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}"
+  },
+  {
+    "headers": [
+      "Auth-Token"
+    ],
+    "status": 404,
+    "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}"
+  }
+]

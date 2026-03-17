@@ -111,7 +111,7 @@ export default function Footer() {
           <div className="col-span-2">
             <div className="flex items-center ">
               <Image
-                src="/lawyer-desk-logo.png"
+                src="/justifi-logo.png"
                 alt="Justifi Logo"
                 width={40}
                 height={40}

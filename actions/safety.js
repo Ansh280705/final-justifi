@@ -143,7 +143,7 @@ export async function triggerEmergencyAlert(latitude, longitude) {
         title: "🚨 SOS ALERT — Client Emergency!",
         body: `${user.name || user.email} has triggered an SOS. Tap to open dashboard.`,
         url: "/admin",
-        icon: "/lawyer-desk-logo.png",
+        icon: "/justifi-logo.png",
       });
 
       await Promise.allSettled(

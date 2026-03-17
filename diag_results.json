@@ -1,0 +1,156 @@
+[
+  {
+    "name": "Auth-as-Bearer on https://sandbox.leegality.com/api/v3.0/document/create",
+    "res": {
+      "status": 404,
+      "headers": {
+        "server": "CloudFront",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "date": "Tue, 17 Mar 2026 12:37:59 GMT",
+        "access-control-allow-origin": "https://sandbox.leegality.com",
+        "x-cache": "Error from cloudfront",
+        "via": "1.1 f6c6ca99f0c50e39df5862ed9ef9e0e0.cloudfront.net (CloudFront)",
+        "x-amz-cf-pop": "PNQ50-P4",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-amz-cf-id": "rHZkXa8OVFLcgnxghRmTlbv9dkT1-FHYqB9urV8qDT5zSiPzfYAPPg==",
+        "x-xss-protection": "1; mode=block",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "origin",
+        "content-security-policy": "img-src *.egov.proteantech.in heapanalytics.com *.s3.ap-south-1.amazonaws.com *.leegality.com www.google.com www.google.co.in maps.googleapis.com chart.googleapis.com *.billdesk.com 'self' data: blob:; object-src 'none'; script-src *.egov.proteantech.in editor.theleegality.com *.billdesk.com cdn.heapanalytics.com *.leegality.com *.razorpay.com www.google.com www.google-analytics.com www.gstatic.com static.userguiding.com www.recaptcha.net 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src *.leegality.com *.egov.proteantech.in *.billdesk.com cdnjs.cloudflare.com fonts.googleapis.com 'unsafe-inline' 'self'; connect-src *.nr-data.net *.egov.proteantech.in *.razorpay.com www.google-analytics.com *.leegality.com *.doubleclick.net *.userguiding.com *.billdesk.com 'self' *.amazonaws.com localhost:8004 localhost:8009 localhost:9800 localhost:2048 localhost:3900 localhost:11101 localhost:11102 localhost:11103 localhost:11104 localhost:11105 localhost:11106 localhost:11107 localhost:11108 localhost:11109 localhost:11110 localhost:11111 localhost:11112 localhost:11113 localhost:11114 localhost:11115 localhost:11116 localhost:11117 localhost:11118 localhost:11119 http://localhost:8004 wss: blob:; frame-src *.cdslindia.com *.verasys.in https://esignuat.vsign.in  https://*.egov.proteantech.in *.leegality.com editor.theleegality.com www.google.com *.razorpay.com www.youtube.com www.recaptcha.net 'self' data: blob:; font-src *.egov.proteantech.in cdnjs.cloudflare.com fonts.gstatic.com fonts.googleapis.com 'self' data:; form-action *.egov.proteantech.in https://*.cdac.in http://*.cdac.in *.billdesk.com *.vsign.in *.verasys.in *.egov-nsdl.com *.cdslindia.com *.nesl.co.in 'self' data:; default-src 'self';",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "permissions-policy": "accelerometer=(), magnetometer=(), usb=()",
+        "set-cookie": [
+          "_lee=Leegality; Path=/; HttpOnly; Secure; SameSite=Strict"
+        ]
+      },
+      "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}"
+    }
+  },
+  {
+    "name": "Auth-as-Bearer on https://sandbox.leegality.com/api/v3.0/workflow/run",
+    "res": {
+      "status": 404,
+      "headers": {
+        "server": "CloudFront",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "date": "Tue, 17 Mar 2026 12:37:59 GMT",
+        "access-control-allow-origin": "https://sandbox.leegality.com",
+        "x-cache": "Error from cloudfront",
+        "via": "1.1 f6c6ca99f0c50e39df5862ed9ef9e0e0.cloudfront.net (CloudFront)",
+        "x-amz-cf-pop": "PNQ50-P4",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-amz-cf-id": "WdjVHPDn8e5Eo7CjUPfzHvmaGFLob3YqB0kor3ExYlw1wWLAIYDeog==",
+        "x-xss-protection": "1; mode=block",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "origin",
+        "content-security-policy": "img-src *.egov.proteantech.in heapanalytics.com *.s3.ap-south-1.amazonaws.com *.leegality.com www.google.com www.google.co.in maps.googleapis.com chart.googleapis.com *.billdesk.com 'self' data: blob:; object-src 'none'; script-src *.egov.proteantech.in editor.theleegality.com *.billdesk.com cdn.heapanalytics.com *.leegality.com *.razorpay.com www.google.com www.google-analytics.com www.gstatic.com static.userguiding.com www.recaptcha.net 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src *.leegality.com *.egov.proteantech.in *.billdesk.com cdnjs.cloudflare.com fonts.googleapis.com 'unsafe-inline' 'self'; connect-src *.nr-data.net *.egov.proteantech.in *.razorpay.com www.google-analytics.com *.leegality.com *.doubleclick.net *.userguiding.com *.billdesk.com 'self' *.amazonaws.com localhost:8004 localhost:8009 localhost:9800 localhost:2048 localhost:3900 localhost:11101 localhost:11102 localhost:11103 localhost:11104 localhost:11105 localhost:11106 localhost:11107 localhost:11108 localhost:11109 localhost:11110 localhost:11111 localhost:11112 localhost:11113 localhost:11114 localhost:11115 localhost:11116 localhost:11117 localhost:11118 localhost:11119 http://localhost:8004 wss: blob:; frame-src *.cdslindia.com *.verasys.in https://esignuat.vsign.in  https://*.egov.proteantech.in *.leegality.com editor.theleegality.com www.google.com *.razorpay.com www.youtube.com www.recaptcha.net 'self' data: blob:; font-src *.egov.proteantech.in cdnjs.cloudflare.com fonts.gstatic.com fonts.googleapis.com 'self' data:; form-action *.egov.proteantech.in https://*.cdac.in http://*.cdac.in *.billdesk.com *.vsign.in *.verasys.in *.egov-nsdl.com *.cdslindia.com *.nesl.co.in 'self' data:; default-src 'self';",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "permissions-policy": "accelerometer=(), magnetometer=(), usb=()",
+        "set-cookie": [
+          "_lee=Leegality; Path=/; HttpOnly; Secure; SameSite=Strict"
+        ]
+      },
+      "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}"
+    }
+  },
+  {
+    "name": "Auth-as-Bearer on https://sandbox.leegality.com/api/v3.1/document/create",
+    "res": {
+      "status": 404,
+      "headers": {
+        "server": "CloudFront",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "date": "Tue, 17 Mar 2026 12:37:59 GMT",
+        "access-control-allow-origin": "https://sandbox.leegality.com",
+        "x-cache": "Error from cloudfront",
+        "via": "1.1 f6c6ca99f0c50e39df5862ed9ef9e0e0.cloudfront.net (CloudFront)",
+        "x-amz-cf-pop": "PNQ50-P4",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-amz-cf-id": "jx3JvXfnZ5vgRgbnAvDRwZyBWsh3ir-8Beix_nJEiUarJB2rWxDSKA==",
+        "x-xss-protection": "1; mode=block",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "origin",
+        "content-security-policy": "img-src *.egov.proteantech.in heapanalytics.com *.s3.ap-south-1.amazonaws.com *.leegality.com www.google.com www.google.co.in maps.googleapis.com chart.googleapis.com *.billdesk.com 'self' data: blob:; object-src 'none'; script-src *.egov.proteantech.in editor.theleegality.com *.billdesk.com cdn.heapanalytics.com *.leegality.com *.razorpay.com www.google.com www.google-analytics.com www.gstatic.com static.userguiding.com www.recaptcha.net 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src *.leegality.com *.egov.proteantech.in *.billdesk.com cdnjs.cloudflare.com fonts.googleapis.com 'unsafe-inline' 'self'; connect-src *.nr-data.net *.egov.proteantech.in *.razorpay.com www.google-analytics.com *.leegality.com *.doubleclick.net *.userguiding.com *.billdesk.com 'self' *.amazonaws.com localhost:8004 localhost:8009 localhost:9800 localhost:2048 localhost:3900 localhost:11101 localhost:11102 localhost:11103 localhost:11104 localhost:11105 localhost:11106 localhost:11107 localhost:11108 localhost:11109 localhost:11110 localhost:11111 localhost:11112 localhost:11113 localhost:11114 localhost:11115 localhost:11116 localhost:11117 localhost:11118 localhost:11119 http://localhost:8004 wss: blob:; frame-src *.cdslindia.com *.verasys.in https://esignuat.vsign.in  https://*.egov.proteantech.in *.leegality.com editor.theleegality.com www.google.com *.razorpay.com www.youtube.com www.recaptcha.net 'self' data: blob:; font-src *.egov.proteantech.in cdnjs.cloudflare.com fonts.gstatic.com fonts.googleapis.com 'self' data:; form-action *.egov.proteantech.in https://*.cdac.in http://*.cdac.in *.billdesk.com *.vsign.in *.verasys.in *.egov-nsdl.com *.cdslindia.com *.nesl.co.in 'self' data:; default-src 'self';",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "permissions-policy": "accelerometer=(), magnetometer=(), usb=()",
+        "set-cookie": [
+          "_lee=Leegality; Path=/; HttpOnly; Secure; SameSite=Strict"
+        ]
+      },
+      "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}"
+    }
+  },
+  {
+    "name": "Auth-as-Bearer on https://sandbox.leegality.com/api/v3.1/workflow/run",
+    "res": {
+      "status": 404,
+      "headers": {
+        "server": "CloudFront",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "date": "Tue, 17 Mar 2026 12:37:59 GMT",
+        "access-control-allow-origin": "https://sandbox.leegality.com",
+        "x-cache": "Error from cloudfront",
+        "via": "1.1 f6c6ca99f0c50e39df5862ed9ef9e0e0.cloudfront.net (CloudFront)",
+        "x-amz-cf-pop": "PNQ50-P4",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-amz-cf-id": "rmH2mE060IbGkaPmIF9s3itwpA84zfMrOXuvJKSg7Nbd8Qa-0VUYEA==",
+        "x-xss-protection": "1; mode=block",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "origin",
+        "content-security-policy": "img-src *.egov.proteantech.in heapanalytics.com *.s3.ap-south-1.amazonaws.com *.leegality.com www.google.com www.google.co.in maps.googleapis.com chart.googleapis.com *.billdesk.com 'self' data: blob:; object-src 'none'; script-src *.egov.proteantech.in editor.theleegality.com *.billdesk.com cdn.heapanalytics.com *.leegality.com *.razorpay.com www.google.com www.google-analytics.com www.gstatic.com static.userguiding.com www.recaptcha.net 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src *.leegality.com *.egov.proteantech.in *.billdesk.com cdnjs.cloudflare.com fonts.googleapis.com 'unsafe-inline' 'self'; connect-src *.nr-data.net *.egov.proteantech.in *.razorpay.com www.google-analytics.com *.leegality.com *.doubleclick.net *.userguiding.com *.billdesk.com 'self' *.amazonaws.com localhost:8004 localhost:8009 localhost:9800 localhost:2048 localhost:3900 localhost:11101 localhost:11102 localhost:11103 localhost:11104 localhost:11105 localhost:11106 localhost:11107 localhost:11108 localhost:11109 localhost:11110 localhost:11111 localhost:11112 localhost:11113 localhost:11114 localhost:11115 localhost:11116 localhost:11117 localhost:11118 localhost:11119 http://localhost:8004 wss: blob:; frame-src *.cdslindia.com *.verasys.in https://esignuat.vsign.in  https://*.egov.proteantech.in *.leegality.com editor.theleegality.com www.google.com *.razorpay.com www.youtube.com www.recaptcha.net 'self' data: blob:; font-src *.egov.proteantech.in cdnjs.cloudflare.com fonts.gstatic.com fonts.googleapis.com 'self' data:; form-action *.egov.proteantech.in https://*.cdac.in http://*.cdac.in *.billdesk.com *.vsign.in *.verasys.in *.egov-nsdl.com *.cdslindia.com *.nesl.co.in 'self' data:; default-src 'self';",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "permissions-policy": "accelerometer=(), magnetometer=(), usb=()",
+        "set-cookie": [
+          "_lee=Leegality; Path=/; HttpOnly; Secure; SameSite=Strict"
+        ]
+      },
+      "body": "{\"data\":{},\"messages\":[{\"code\":null,\"message\":\"Resource not found\"}],\"status\":0}"
+    }
+  },
+  {
+    "name": "Auth-as-Bearer on https://sandbox.leegality.com/v3.0/workflow/run",
+    "res": {
+      "status": 405,
+      "headers": {
+        "server": "CloudFront",
+        "content-type": "text/html",
+        "content-length": "21",
+        "connection": "keep-alive",
+        "date": "Tue, 17 Mar 2026 12:37:59 GMT",
+        "x-cache": "Error from cloudfront",
+        "via": "1.1 f6c6ca99f0c50e39df5862ed9ef9e0e0.cloudfront.net (CloudFront)",
+        "x-amz-cf-pop": "PNQ50-P4",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-amz-cf-id": "64jpOyXe5FMQI8Zfy0TOLri-6VNEqMP-uOD9HQQBs_bBiq4OlKMFBw==",
+        "x-xss-protection": "1; mode=block",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "origin",
+        "content-security-policy": "img-src *.egov.proteantech.in heapanalytics.com *.s3.ap-south-1.amazonaws.com *.leegality.com www.google.com www.google.co.in maps.googleapis.com chart.googleapis.com *.billdesk.com 'self' data: blob:; object-src 'none'; script-src *.egov.proteantech.in editor.theleegality.com *.billdesk.com cdn.heapanalytics.com *.leegality.com *.razorpay.com www.google.com www.google-analytics.com www.gstatic.com static.userguiding.com www.recaptcha.net 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src *.leegality.com *.egov.proteantech.in *.billdesk.com cdnjs.cloudflare.com fonts.googleapis.com 'unsafe-inline' 'self'; connect-src *.nr-data.net *.egov.proteantech.in *.razorpay.com www.google-analytics.com *.leegality.com *.doubleclick.net *.userguiding.com *.billdesk.com 'self' *.amazonaws.com localhost:8004 localhost:8009 localhost:9800 localhost:2048 localhost:3900 localhost:11101 localhost:11102 localhost:11103 localhost:11104 localhost:11105 localhost:11106 localhost:11107 localhost:11108 localhost:11109 localhost:11110 localhost:11111 localhost:11112 localhost:11113 localhost:11114 localhost:11115 localhost:11116 localhost:11117 localhost:11118 localhost:11119 http://localhost:8004 wss: blob:; frame-src *.cdslindia.com *.verasys.in https://esignuat.vsign.in  https://*.egov.proteantech.in *.leegality.com editor.theleegality.com www.google.com *.razorpay.com www.youtube.com www.recaptcha.net 'self' data: blob:; font-src *.egov.proteantech.in cdnjs.cloudflare.com fonts.gstatic.com fonts.googleapis.com 'self' data:; form-action *.egov.proteantech.in https://*.cdac.in http://*.cdac.in *.billdesk.com *.vsign.in *.verasys.in *.egov-nsdl.com *.cdslindia.com *.nesl.co.in 'self' data:; default-src 'self';",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "permissions-policy": "accelerometer=(), magnetometer=(), usb=()",
+        "set-cookie": [
+          "_lee=Leegality; Path=/; HttpOnly; Secure; SameSite=Strict"
+        ]
+      },
+      "body": "<h1>\n405 error\n</h1>\n"
+    }
+  }
+]

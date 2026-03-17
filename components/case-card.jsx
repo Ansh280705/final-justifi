@@ -35,7 +35,7 @@ import useFetch from "@/hooks/use-fetch";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export function CaseCard({
+export default function CaseCard({
   legalCase,
   userRole,
   refetchCases,

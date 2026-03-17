@@ -83,6 +83,11 @@ export type OfflineOffice = $Result.DefaultSelection<Prisma.$OfflineOfficePayloa
  * 
  */
 export type Dispute = $Result.DefaultSelection<Prisma.$DisputePayload>
+/**
+ * Model LegalDocument
+ * 
+ */
+export type LegalDocument = $Result.DefaultSelection<Prisma.$LegalDocumentPayload>
 
 /**
  * Enums
@@ -472,6 +477,16 @@ export class PrismaClient<
     * ```
     */
   get dispute(): Prisma.DisputeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.legalDocument`: Exposes CRUD operations for the **LegalDocument** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LegalDocuments
+    * const legalDocuments = await prisma.legalDocument.findMany()
+    * ```
+    */
+  get legalDocument(): Prisma.LegalDocumentDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -955,7 +970,8 @@ export namespace Prisma {
     PaymentRequest: 'PaymentRequest',
     News: 'News',
     OfflineOffice: 'OfflineOffice',
-    Dispute: 'Dispute'
+    Dispute: 'Dispute',
+    LegalDocument: 'LegalDocument'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -972,7 +988,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'emergencyAlert' | 'availability' | 'legalCase' | 'creditTransaction' | 'payout' | 'blog' | 'category' | 'lawFirm' | 'legalAdvice' | 'paymentRequest' | 'news' | 'offlineOffice' | 'dispute'
+      modelProps: 'user' | 'emergencyAlert' | 'availability' | 'legalCase' | 'creditTransaction' | 'payout' | 'blog' | 'category' | 'lawFirm' | 'legalAdvice' | 'paymentRequest' | 'news' | 'offlineOffice' | 'dispute' | 'legalDocument'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1897,6 +1913,72 @@ export namespace Prisma {
           count: {
             args: Prisma.DisputeCountArgs<ExtArgs>,
             result: $Utils.Optional<DisputeCountAggregateOutputType> | number
+          }
+        }
+      }
+      LegalDocument: {
+        payload: Prisma.$LegalDocumentPayload<ExtArgs>
+        fields: Prisma.LegalDocumentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LegalDocumentFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LegalDocumentFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload>
+          }
+          findFirst: {
+            args: Prisma.LegalDocumentFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LegalDocumentFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload>
+          }
+          findMany: {
+            args: Prisma.LegalDocumentFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload>[]
+          }
+          create: {
+            args: Prisma.LegalDocumentCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload>
+          }
+          createMany: {
+            args: Prisma.LegalDocumentCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.LegalDocumentDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload>
+          }
+          update: {
+            args: Prisma.LegalDocumentUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload>
+          }
+          deleteMany: {
+            args: Prisma.LegalDocumentDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LegalDocumentUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.LegalDocumentUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LegalDocumentPayload>
+          }
+          aggregate: {
+            args: Prisma.LegalDocumentAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateLegalDocument>
+          }
+          groupBy: {
+            args: Prisma.LegalDocumentGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<LegalDocumentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LegalDocumentCountArgs<ExtArgs>,
+            result: $Utils.Optional<LegalDocumentCountAggregateOutputType> | number
           }
         }
       }
@@ -15411,6 +15493,7 @@ export namespace Prisma {
     description: string | null
     aiAnalysis: string | null
     legalNotice: string | null
+    settlementDraft: string | null
     meetLink: string | null
     preferredDate: Date | null
     preferredTime: string | null
@@ -15436,6 +15519,7 @@ export namespace Prisma {
     description: string | null
     aiAnalysis: string | null
     legalNotice: string | null
+    settlementDraft: string | null
     meetLink: string | null
     preferredDate: Date | null
     preferredTime: string | null
@@ -15462,6 +15546,7 @@ export namespace Prisma {
     aiQuestions: number
     aiAnalysis: number
     legalNotice: number
+    settlementDraft: number
     meetLink: number
     preferredDate: number
     preferredTime: number
@@ -15489,6 +15574,7 @@ export namespace Prisma {
     description?: true
     aiAnalysis?: true
     legalNotice?: true
+    settlementDraft?: true
     meetLink?: true
     preferredDate?: true
     preferredTime?: true
@@ -15514,6 +15600,7 @@ export namespace Prisma {
     description?: true
     aiAnalysis?: true
     legalNotice?: true
+    settlementDraft?: true
     meetLink?: true
     preferredDate?: true
     preferredTime?: true
@@ -15540,6 +15627,7 @@ export namespace Prisma {
     aiQuestions?: true
     aiAnalysis?: true
     legalNotice?: true
+    settlementDraft?: true
     meetLink?: true
     preferredDate?: true
     preferredTime?: true
@@ -15639,6 +15727,7 @@ export namespace Prisma {
     aiQuestions: JsonValue | null
     aiAnalysis: string | null
     legalNotice: string | null
+    settlementDraft: string | null
     meetLink: string | null
     preferredDate: Date | null
     preferredTime: string | null
@@ -15682,6 +15771,7 @@ export namespace Prisma {
     aiQuestions?: boolean
     aiAnalysis?: boolean
     legalNotice?: boolean
+    settlementDraft?: boolean
     meetLink?: boolean
     preferredDate?: boolean
     preferredTime?: boolean
@@ -15709,6 +15799,7 @@ export namespace Prisma {
     aiQuestions?: boolean
     aiAnalysis?: boolean
     legalNotice?: boolean
+    settlementDraft?: boolean
     meetLink?: boolean
     preferredDate?: boolean
     preferredTime?: boolean
@@ -15745,6 +15836,7 @@ export namespace Prisma {
       aiQuestions: Prisma.JsonValue | null
       aiAnalysis: string | null
       legalNotice: string | null
+      settlementDraft: string | null
       meetLink: string | null
       preferredDate: Date | null
       preferredTime: string | null
@@ -16163,6 +16255,7 @@ export namespace Prisma {
     readonly aiQuestions: FieldRef<"Dispute", 'Json'>
     readonly aiAnalysis: FieldRef<"Dispute", 'String'>
     readonly legalNotice: FieldRef<"Dispute", 'String'>
+    readonly settlementDraft: FieldRef<"Dispute", 'String'>
     readonly meetLink: FieldRef<"Dispute", 'String'>
     readonly preferredDate: FieldRef<"Dispute", 'DateTime'>
     readonly preferredTime: FieldRef<"Dispute", 'String'>
@@ -16502,6 +16595,887 @@ export namespace Prisma {
 
 
   /**
+   * Model LegalDocument
+   */
+
+  export type AggregateLegalDocument = {
+    _count: LegalDocumentCountAggregateOutputType | null
+    _min: LegalDocumentMinAggregateOutputType | null
+    _max: LegalDocumentMaxAggregateOutputType | null
+  }
+
+  export type LegalDocumentMinAggregateOutputType = {
+    id: string | null
+    clerkUserId: string | null
+    leegalityDocId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LegalDocumentMaxAggregateOutputType = {
+    id: string | null
+    clerkUserId: string | null
+    leegalityDocId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LegalDocumentCountAggregateOutputType = {
+    id: number
+    clerkUserId: number
+    leegalityDocId: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type LegalDocumentMinAggregateInputType = {
+    id?: true
+    clerkUserId?: true
+    leegalityDocId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LegalDocumentMaxAggregateInputType = {
+    id?: true
+    clerkUserId?: true
+    leegalityDocId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LegalDocumentCountAggregateInputType = {
+    id?: true
+    clerkUserId?: true
+    leegalityDocId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type LegalDocumentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LegalDocument to aggregate.
+     */
+    where?: LegalDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LegalDocuments to fetch.
+     */
+    orderBy?: LegalDocumentOrderByWithRelationInput | LegalDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LegalDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LegalDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LegalDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LegalDocuments
+    **/
+    _count?: true | LegalDocumentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LegalDocumentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LegalDocumentMaxAggregateInputType
+  }
+
+  export type GetLegalDocumentAggregateType<T extends LegalDocumentAggregateArgs> = {
+        [P in keyof T & keyof AggregateLegalDocument]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLegalDocument[P]>
+      : GetScalarType<T[P], AggregateLegalDocument[P]>
+  }
+
+
+
+
+  export type LegalDocumentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LegalDocumentWhereInput
+    orderBy?: LegalDocumentOrderByWithAggregationInput | LegalDocumentOrderByWithAggregationInput[]
+    by: LegalDocumentScalarFieldEnum[] | LegalDocumentScalarFieldEnum
+    having?: LegalDocumentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LegalDocumentCountAggregateInputType | true
+    _min?: LegalDocumentMinAggregateInputType
+    _max?: LegalDocumentMaxAggregateInputType
+  }
+
+  export type LegalDocumentGroupByOutputType = {
+    id: string
+    clerkUserId: string
+    leegalityDocId: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: LegalDocumentCountAggregateOutputType | null
+    _min: LegalDocumentMinAggregateOutputType | null
+    _max: LegalDocumentMaxAggregateOutputType | null
+  }
+
+  type GetLegalDocumentGroupByPayload<T extends LegalDocumentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LegalDocumentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LegalDocumentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LegalDocumentGroupByOutputType[P]>
+            : GetScalarType<T[P], LegalDocumentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LegalDocumentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clerkUserId?: boolean
+    leegalityDocId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["legalDocument"]>
+
+  export type LegalDocumentSelectScalar = {
+    id?: boolean
+    clerkUserId?: boolean
+    leegalityDocId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $LegalDocumentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LegalDocument"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clerkUserId: string
+      leegalityDocId: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["legalDocument"]>
+    composites: {}
+  }
+
+
+  type LegalDocumentGetPayload<S extends boolean | null | undefined | LegalDocumentDefaultArgs> = $Result.GetResult<Prisma.$LegalDocumentPayload, S>
+
+  type LegalDocumentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<LegalDocumentFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: LegalDocumentCountAggregateInputType | true
+    }
+
+  export interface LegalDocumentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LegalDocument'], meta: { name: 'LegalDocument' } }
+    /**
+     * Find zero or one LegalDocument that matches the filter.
+     * @param {LegalDocumentFindUniqueArgs} args - Arguments to find a LegalDocument
+     * @example
+     * // Get one LegalDocument
+     * const legalDocument = await prisma.legalDocument.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends LegalDocumentFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, LegalDocumentFindUniqueArgs<ExtArgs>>
+    ): Prisma__LegalDocumentClient<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one LegalDocument that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {LegalDocumentFindUniqueOrThrowArgs} args - Arguments to find a LegalDocument
+     * @example
+     * // Get one LegalDocument
+     * const legalDocument = await prisma.legalDocument.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends LegalDocumentFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, LegalDocumentFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__LegalDocumentClient<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first LegalDocument that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LegalDocumentFindFirstArgs} args - Arguments to find a LegalDocument
+     * @example
+     * // Get one LegalDocument
+     * const legalDocument = await prisma.legalDocument.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends LegalDocumentFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, LegalDocumentFindFirstArgs<ExtArgs>>
+    ): Prisma__LegalDocumentClient<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first LegalDocument that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LegalDocumentFindFirstOrThrowArgs} args - Arguments to find a LegalDocument
+     * @example
+     * // Get one LegalDocument
+     * const legalDocument = await prisma.legalDocument.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends LegalDocumentFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, LegalDocumentFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__LegalDocumentClient<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more LegalDocuments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LegalDocumentFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LegalDocuments
+     * const legalDocuments = await prisma.legalDocument.findMany()
+     * 
+     * // Get first 10 LegalDocuments
+     * const legalDocuments = await prisma.legalDocument.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const legalDocumentWithIdOnly = await prisma.legalDocument.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends LegalDocumentFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LegalDocumentFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a LegalDocument.
+     * @param {LegalDocumentCreateArgs} args - Arguments to create a LegalDocument.
+     * @example
+     * // Create one LegalDocument
+     * const LegalDocument = await prisma.legalDocument.create({
+     *   data: {
+     *     // ... data to create a LegalDocument
+     *   }
+     * })
+     * 
+    **/
+    create<T extends LegalDocumentCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, LegalDocumentCreateArgs<ExtArgs>>
+    ): Prisma__LegalDocumentClient<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many LegalDocuments.
+     *     @param {LegalDocumentCreateManyArgs} args - Arguments to create many LegalDocuments.
+     *     @example
+     *     // Create many LegalDocuments
+     *     const legalDocument = await prisma.legalDocument.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends LegalDocumentCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LegalDocumentCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a LegalDocument.
+     * @param {LegalDocumentDeleteArgs} args - Arguments to delete one LegalDocument.
+     * @example
+     * // Delete one LegalDocument
+     * const LegalDocument = await prisma.legalDocument.delete({
+     *   where: {
+     *     // ... filter to delete one LegalDocument
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends LegalDocumentDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, LegalDocumentDeleteArgs<ExtArgs>>
+    ): Prisma__LegalDocumentClient<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one LegalDocument.
+     * @param {LegalDocumentUpdateArgs} args - Arguments to update one LegalDocument.
+     * @example
+     * // Update one LegalDocument
+     * const legalDocument = await prisma.legalDocument.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends LegalDocumentUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, LegalDocumentUpdateArgs<ExtArgs>>
+    ): Prisma__LegalDocumentClient<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more LegalDocuments.
+     * @param {LegalDocumentDeleteManyArgs} args - Arguments to filter LegalDocuments to delete.
+     * @example
+     * // Delete a few LegalDocuments
+     * const { count } = await prisma.legalDocument.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends LegalDocumentDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, LegalDocumentDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LegalDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LegalDocumentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LegalDocuments
+     * const legalDocument = await prisma.legalDocument.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends LegalDocumentUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, LegalDocumentUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LegalDocument.
+     * @param {LegalDocumentUpsertArgs} args - Arguments to update or create a LegalDocument.
+     * @example
+     * // Update or create a LegalDocument
+     * const legalDocument = await prisma.legalDocument.upsert({
+     *   create: {
+     *     // ... data to create a LegalDocument
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LegalDocument we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends LegalDocumentUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, LegalDocumentUpsertArgs<ExtArgs>>
+    ): Prisma__LegalDocumentClient<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of LegalDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LegalDocumentCountArgs} args - Arguments to filter LegalDocuments to count.
+     * @example
+     * // Count the number of LegalDocuments
+     * const count = await prisma.legalDocument.count({
+     *   where: {
+     *     // ... the filter for the LegalDocuments we want to count
+     *   }
+     * })
+    **/
+    count<T extends LegalDocumentCountArgs>(
+      args?: Subset<T, LegalDocumentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LegalDocumentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LegalDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LegalDocumentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LegalDocumentAggregateArgs>(args: Subset<T, LegalDocumentAggregateArgs>): Prisma.PrismaPromise<GetLegalDocumentAggregateType<T>>
+
+    /**
+     * Group by LegalDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LegalDocumentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LegalDocumentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LegalDocumentGroupByArgs['orderBy'] }
+        : { orderBy?: LegalDocumentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LegalDocumentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLegalDocumentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LegalDocument model
+   */
+  readonly fields: LegalDocumentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LegalDocument.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LegalDocumentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the LegalDocument model
+   */ 
+  interface LegalDocumentFieldRefs {
+    readonly id: FieldRef<"LegalDocument", 'String'>
+    readonly clerkUserId: FieldRef<"LegalDocument", 'String'>
+    readonly leegalityDocId: FieldRef<"LegalDocument", 'String'>
+    readonly status: FieldRef<"LegalDocument", 'String'>
+    readonly createdAt: FieldRef<"LegalDocument", 'DateTime'>
+    readonly updatedAt: FieldRef<"LegalDocument", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * LegalDocument findUnique
+   */
+  export type LegalDocumentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * Filter, which LegalDocument to fetch.
+     */
+    where: LegalDocumentWhereUniqueInput
+  }
+
+
+  /**
+   * LegalDocument findUniqueOrThrow
+   */
+  export type LegalDocumentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * Filter, which LegalDocument to fetch.
+     */
+    where: LegalDocumentWhereUniqueInput
+  }
+
+
+  /**
+   * LegalDocument findFirst
+   */
+  export type LegalDocumentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * Filter, which LegalDocument to fetch.
+     */
+    where?: LegalDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LegalDocuments to fetch.
+     */
+    orderBy?: LegalDocumentOrderByWithRelationInput | LegalDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LegalDocuments.
+     */
+    cursor?: LegalDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LegalDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LegalDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LegalDocuments.
+     */
+    distinct?: LegalDocumentScalarFieldEnum | LegalDocumentScalarFieldEnum[]
+  }
+
+
+  /**
+   * LegalDocument findFirstOrThrow
+   */
+  export type LegalDocumentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * Filter, which LegalDocument to fetch.
+     */
+    where?: LegalDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LegalDocuments to fetch.
+     */
+    orderBy?: LegalDocumentOrderByWithRelationInput | LegalDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LegalDocuments.
+     */
+    cursor?: LegalDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LegalDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LegalDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LegalDocuments.
+     */
+    distinct?: LegalDocumentScalarFieldEnum | LegalDocumentScalarFieldEnum[]
+  }
+
+
+  /**
+   * LegalDocument findMany
+   */
+  export type LegalDocumentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * Filter, which LegalDocuments to fetch.
+     */
+    where?: LegalDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LegalDocuments to fetch.
+     */
+    orderBy?: LegalDocumentOrderByWithRelationInput | LegalDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LegalDocuments.
+     */
+    cursor?: LegalDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LegalDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LegalDocuments.
+     */
+    skip?: number
+    distinct?: LegalDocumentScalarFieldEnum | LegalDocumentScalarFieldEnum[]
+  }
+
+
+  /**
+   * LegalDocument create
+   */
+  export type LegalDocumentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * The data needed to create a LegalDocument.
+     */
+    data: XOR<LegalDocumentCreateInput, LegalDocumentUncheckedCreateInput>
+  }
+
+
+  /**
+   * LegalDocument createMany
+   */
+  export type LegalDocumentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LegalDocuments.
+     */
+    data: LegalDocumentCreateManyInput | LegalDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * LegalDocument update
+   */
+  export type LegalDocumentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * The data needed to update a LegalDocument.
+     */
+    data: XOR<LegalDocumentUpdateInput, LegalDocumentUncheckedUpdateInput>
+    /**
+     * Choose, which LegalDocument to update.
+     */
+    where: LegalDocumentWhereUniqueInput
+  }
+
+
+  /**
+   * LegalDocument updateMany
+   */
+  export type LegalDocumentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LegalDocuments.
+     */
+    data: XOR<LegalDocumentUpdateManyMutationInput, LegalDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which LegalDocuments to update
+     */
+    where?: LegalDocumentWhereInput
+  }
+
+
+  /**
+   * LegalDocument upsert
+   */
+  export type LegalDocumentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * The filter to search for the LegalDocument to update in case it exists.
+     */
+    where: LegalDocumentWhereUniqueInput
+    /**
+     * In case the LegalDocument found by the `where` argument doesn't exist, create a new LegalDocument with this data.
+     */
+    create: XOR<LegalDocumentCreateInput, LegalDocumentUncheckedCreateInput>
+    /**
+     * In case the LegalDocument was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LegalDocumentUpdateInput, LegalDocumentUncheckedUpdateInput>
+  }
+
+
+  /**
+   * LegalDocument delete
+   */
+  export type LegalDocumentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+    /**
+     * Filter which LegalDocument to delete.
+     */
+    where: LegalDocumentWhereUniqueInput
+  }
+
+
+  /**
+   * LegalDocument deleteMany
+   */
+  export type LegalDocumentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LegalDocuments to delete
+     */
+    where?: LegalDocumentWhereInput
+  }
+
+
+  /**
+   * LegalDocument without action
+   */
+  export type LegalDocumentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LegalDocument
+     */
+    select?: LegalDocumentSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -16744,6 +17718,7 @@ export namespace Prisma {
     aiQuestions: 'aiQuestions',
     aiAnalysis: 'aiAnalysis',
     legalNotice: 'legalNotice',
+    settlementDraft: 'settlementDraft',
     meetLink: 'meetLink',
     preferredDate: 'preferredDate',
     preferredTime: 'preferredTime',
@@ -16758,6 +17733,18 @@ export namespace Prisma {
   };
 
   export type DisputeScalarFieldEnum = (typeof DisputeScalarFieldEnum)[keyof typeof DisputeScalarFieldEnum]
+
+
+  export const LegalDocumentScalarFieldEnum: {
+    id: 'id',
+    clerkUserId: 'clerkUserId',
+    leegalityDocId: 'leegalityDocId',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type LegalDocumentScalarFieldEnum = (typeof LegalDocumentScalarFieldEnum)[keyof typeof LegalDocumentScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -18137,6 +19124,7 @@ export namespace Prisma {
     aiQuestions?: JsonNullableFilter<"Dispute">
     aiAnalysis?: StringNullableFilter<"Dispute"> | string | null
     legalNotice?: StringNullableFilter<"Dispute"> | string | null
+    settlementDraft?: StringNullableFilter<"Dispute"> | string | null
     meetLink?: StringNullableFilter<"Dispute"> | string | null
     preferredDate?: DateTimeNullableFilter<"Dispute"> | Date | string | null
     preferredTime?: StringNullableFilter<"Dispute"> | string | null
@@ -18164,6 +19152,7 @@ export namespace Prisma {
     aiQuestions?: SortOrderInput | SortOrder
     aiAnalysis?: SortOrderInput | SortOrder
     legalNotice?: SortOrderInput | SortOrder
+    settlementDraft?: SortOrderInput | SortOrder
     meetLink?: SortOrderInput | SortOrder
     preferredDate?: SortOrderInput | SortOrder
     preferredTime?: SortOrderInput | SortOrder
@@ -18194,6 +19183,7 @@ export namespace Prisma {
     aiQuestions?: JsonNullableFilter<"Dispute">
     aiAnalysis?: StringNullableFilter<"Dispute"> | string | null
     legalNotice?: StringNullableFilter<"Dispute"> | string | null
+    settlementDraft?: StringNullableFilter<"Dispute"> | string | null
     meetLink?: StringNullableFilter<"Dispute"> | string | null
     preferredDate?: DateTimeNullableFilter<"Dispute"> | Date | string | null
     preferredTime?: StringNullableFilter<"Dispute"> | string | null
@@ -18221,6 +19211,7 @@ export namespace Prisma {
     aiQuestions?: SortOrderInput | SortOrder
     aiAnalysis?: SortOrderInput | SortOrder
     legalNotice?: SortOrderInput | SortOrder
+    settlementDraft?: SortOrderInput | SortOrder
     meetLink?: SortOrderInput | SortOrder
     preferredDate?: SortOrderInput | SortOrder
     preferredTime?: SortOrderInput | SortOrder
@@ -18253,6 +19244,7 @@ export namespace Prisma {
     aiQuestions?: JsonNullableWithAggregatesFilter<"Dispute">
     aiAnalysis?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
     legalNotice?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
+    settlementDraft?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
     meetLink?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
     preferredDate?: DateTimeNullableWithAggregatesFilter<"Dispute"> | Date | string | null
     preferredTime?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
@@ -18264,6 +19256,63 @@ export namespace Prisma {
     escalationNotes?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Dispute"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Dispute"> | Date | string
+  }
+
+  export type LegalDocumentWhereInput = {
+    AND?: LegalDocumentWhereInput | LegalDocumentWhereInput[]
+    OR?: LegalDocumentWhereInput[]
+    NOT?: LegalDocumentWhereInput | LegalDocumentWhereInput[]
+    id?: StringFilter<"LegalDocument"> | string
+    clerkUserId?: StringFilter<"LegalDocument"> | string
+    leegalityDocId?: StringFilter<"LegalDocument"> | string
+    status?: StringFilter<"LegalDocument"> | string
+    createdAt?: DateTimeFilter<"LegalDocument"> | Date | string
+    updatedAt?: DateTimeFilter<"LegalDocument"> | Date | string
+  }
+
+  export type LegalDocumentOrderByWithRelationInput = {
+    id?: SortOrder
+    clerkUserId?: SortOrder
+    leegalityDocId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LegalDocumentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    leegalityDocId?: string
+    AND?: LegalDocumentWhereInput | LegalDocumentWhereInput[]
+    OR?: LegalDocumentWhereInput[]
+    NOT?: LegalDocumentWhereInput | LegalDocumentWhereInput[]
+    clerkUserId?: StringFilter<"LegalDocument"> | string
+    status?: StringFilter<"LegalDocument"> | string
+    createdAt?: DateTimeFilter<"LegalDocument"> | Date | string
+    updatedAt?: DateTimeFilter<"LegalDocument"> | Date | string
+  }, "id" | "leegalityDocId">
+
+  export type LegalDocumentOrderByWithAggregationInput = {
+    id?: SortOrder
+    clerkUserId?: SortOrder
+    leegalityDocId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: LegalDocumentCountOrderByAggregateInput
+    _max?: LegalDocumentMaxOrderByAggregateInput
+    _min?: LegalDocumentMinOrderByAggregateInput
+  }
+
+  export type LegalDocumentScalarWhereWithAggregatesInput = {
+    AND?: LegalDocumentScalarWhereWithAggregatesInput | LegalDocumentScalarWhereWithAggregatesInput[]
+    OR?: LegalDocumentScalarWhereWithAggregatesInput[]
+    NOT?: LegalDocumentScalarWhereWithAggregatesInput | LegalDocumentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LegalDocument"> | string
+    clerkUserId?: StringWithAggregatesFilter<"LegalDocument"> | string
+    leegalityDocId?: StringWithAggregatesFilter<"LegalDocument"> | string
+    status?: StringWithAggregatesFilter<"LegalDocument"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"LegalDocument"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"LegalDocument"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -19548,6 +20597,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: string | null
     legalNotice?: string | null
+    settlementDraft?: string | null
     meetLink?: string | null
     preferredDate?: Date | string | null
     preferredTime?: string | null
@@ -19575,6 +20625,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: string | null
     legalNotice?: string | null
+    settlementDraft?: string | null
     meetLink?: string | null
     preferredDate?: Date | string | null
     preferredTime?: string | null
@@ -19600,6 +20651,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: NullableStringFieldUpdateOperationsInput | string | null
     legalNotice?: NullableStringFieldUpdateOperationsInput | string | null
+    settlementDraft?: NullableStringFieldUpdateOperationsInput | string | null
     meetLink?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19627,6 +20679,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: NullableStringFieldUpdateOperationsInput | string | null
     legalNotice?: NullableStringFieldUpdateOperationsInput | string | null
+    settlementDraft?: NullableStringFieldUpdateOperationsInput | string | null
     meetLink?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19653,6 +20706,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: string | null
     legalNotice?: string | null
+    settlementDraft?: string | null
     meetLink?: string | null
     preferredDate?: Date | string | null
     preferredTime?: string | null
@@ -19678,6 +20732,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: NullableStringFieldUpdateOperationsInput | string | null
     legalNotice?: NullableStringFieldUpdateOperationsInput | string | null
+    settlementDraft?: NullableStringFieldUpdateOperationsInput | string | null
     meetLink?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19704,6 +20759,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: NullableStringFieldUpdateOperationsInput | string | null
     legalNotice?: NullableStringFieldUpdateOperationsInput | string | null
+    settlementDraft?: NullableStringFieldUpdateOperationsInput | string | null
     meetLink?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19713,6 +20769,69 @@ export namespace Prisma {
     internId?: NullableStringFieldUpdateOperationsInput | string | null
     seniorLawyerId?: NullableStringFieldUpdateOperationsInput | string | null
     escalationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LegalDocumentCreateInput = {
+    id?: string
+    clerkUserId: string
+    leegalityDocId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LegalDocumentUncheckedCreateInput = {
+    id?: string
+    clerkUserId: string
+    leegalityDocId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LegalDocumentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkUserId?: StringFieldUpdateOperationsInput | string
+    leegalityDocId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LegalDocumentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkUserId?: StringFieldUpdateOperationsInput | string
+    leegalityDocId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LegalDocumentCreateManyInput = {
+    id?: string
+    clerkUserId: string
+    leegalityDocId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LegalDocumentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkUserId?: StringFieldUpdateOperationsInput | string
+    leegalityDocId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LegalDocumentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkUserId?: StringFieldUpdateOperationsInput | string
+    leegalityDocId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20860,6 +21979,7 @@ export namespace Prisma {
     aiQuestions?: SortOrder
     aiAnalysis?: SortOrder
     legalNotice?: SortOrder
+    settlementDraft?: SortOrder
     meetLink?: SortOrder
     preferredDate?: SortOrder
     preferredTime?: SortOrder
@@ -20885,6 +22005,7 @@ export namespace Prisma {
     description?: SortOrder
     aiAnalysis?: SortOrder
     legalNotice?: SortOrder
+    settlementDraft?: SortOrder
     meetLink?: SortOrder
     preferredDate?: SortOrder
     preferredTime?: SortOrder
@@ -20910,6 +22031,7 @@ export namespace Prisma {
     description?: SortOrder
     aiAnalysis?: SortOrder
     legalNotice?: SortOrder
+    settlementDraft?: SortOrder
     meetLink?: SortOrder
     preferredDate?: SortOrder
     preferredTime?: SortOrder
@@ -20956,6 +22078,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumDisputeStatusFilter<$PrismaModel>
     _max?: NestedEnumDisputeStatusFilter<$PrismaModel>
+  }
+
+  export type LegalDocumentCountOrderByAggregateInput = {
+    id?: SortOrder
+    clerkUserId?: SortOrder
+    leegalityDocId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LegalDocumentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clerkUserId?: SortOrder
+    leegalityDocId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LegalDocumentMinOrderByAggregateInput = {
+    id?: SortOrder
+    clerkUserId?: SortOrder
+    leegalityDocId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserCreatequalificationsInput = {
@@ -22305,6 +23454,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: string | null
     legalNotice?: string | null
+    settlementDraft?: string | null
     meetLink?: string | null
     preferredDate?: Date | string | null
     preferredTime?: string | null
@@ -22330,6 +23480,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: string | null
     legalNotice?: string | null
+    settlementDraft?: string | null
     meetLink?: string | null
     preferredDate?: Date | string | null
     preferredTime?: string | null
@@ -22596,6 +23747,7 @@ export namespace Prisma {
     aiQuestions?: JsonNullableFilter<"Dispute">
     aiAnalysis?: StringNullableFilter<"Dispute"> | string | null
     legalNotice?: StringNullableFilter<"Dispute"> | string | null
+    settlementDraft?: StringNullableFilter<"Dispute"> | string | null
     meetLink?: StringNullableFilter<"Dispute"> | string | null
     preferredDate?: DateTimeNullableFilter<"Dispute"> | Date | string | null
     preferredTime?: StringNullableFilter<"Dispute"> | string | null
@@ -23970,6 +25122,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: string | null
     legalNotice?: string | null
+    settlementDraft?: string | null
     meetLink?: string | null
     preferredDate?: Date | string | null
     preferredTime?: string | null
@@ -24278,6 +25431,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: NullableStringFieldUpdateOperationsInput | string | null
     legalNotice?: NullableStringFieldUpdateOperationsInput | string | null
+    settlementDraft?: NullableStringFieldUpdateOperationsInput | string | null
     meetLink?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24303,6 +25457,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: NullableStringFieldUpdateOperationsInput | string | null
     legalNotice?: NullableStringFieldUpdateOperationsInput | string | null
+    settlementDraft?: NullableStringFieldUpdateOperationsInput | string | null
     meetLink?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24328,6 +25483,7 @@ export namespace Prisma {
     aiQuestions?: NullableJsonNullValueInput | InputJsonValue
     aiAnalysis?: NullableStringFieldUpdateOperationsInput | string | null
     legalNotice?: NullableStringFieldUpdateOperationsInput | string | null
+    settlementDraft?: NullableStringFieldUpdateOperationsInput | string | null
     meetLink?: NullableStringFieldUpdateOperationsInput | string | null
     preferredDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     preferredTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24466,6 +25622,10 @@ export namespace Prisma {
      * @deprecated Use DisputeDefaultArgs instead
      */
     export type DisputeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DisputeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use LegalDocumentDefaultArgs instead
+     */
+    export type LegalDocumentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LegalDocumentDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

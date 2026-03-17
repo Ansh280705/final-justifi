@@ -41,6 +41,19 @@ It must include:
 Do NOT include placeholders for things you already know (like the user's name or the core issue).
 Format exactly as a text document (no markdown conversational filler).`;
 
+const SETTLEMENT_PROMPT = `You are Justifi, an expert legal mediator in India.
+Generate a formal "Settlement & Mutual Release Agreement" based on the provided dispute history.
+The agreement must formally state that both parties have reached an amicable resolution and waive all future claims related to this specific dispute.
+Include:
+1. Title: "SETTLEMENT AGREEMENT & MUTUAL RELEASE"
+2. Identification of Parties (Complainant vs Opponent)
+3. "Recitals" (Brief background of the dispute)
+4. "Settlement Terms" (What was agreed upon)
+5. "Mutual Release" (Standard legal phrasing for waiving future claims)
+6. Execution block for signatures.
+
+Format exactly as a professional legal document for e-signing. No conversational filler.`;
+
 export async function POST(req) {
   try {
     const { phase, category, description, history, complainantName, opponentName } = await req.json();
@@ -104,6 +117,28 @@ export async function POST(req) {
       });
 
       return NextResponse.json({ notice: completion.choices[0].message.content });
+    }
+
+    if (phase === "SETTLEMENT") {
+      console.log("Generating settlement for:", complainantName, "vs", opponentName);
+      
+      const messages = [
+        { role: "system", content: SETTLEMENT_PROMPT },
+        { 
+          role: "user", 
+          content: `Complainant: ${complainantName}\nOpponent: ${opponentName}\nCategory: ${category}\nInitial Complaint: ${description}\n\nCase History (Transcript):\n` + 
+          (history || []).map(h => `${h.role || 'user'}: ${h.content || h.text || ''}`).join("\n")
+        }
+      ];
+
+      const completion = await groq.chat.completions.create({
+        messages,
+        model: "llama-3.3-70b-versatile",
+        temperature: 0.3,
+      });
+
+      console.log("Settlement generated successfully");
+      return NextResponse.json({ settlement: completion.choices[0].message.content });
     }
 
     return NextResponse.json({ error: "Invalid phase" }, { status: 400 });

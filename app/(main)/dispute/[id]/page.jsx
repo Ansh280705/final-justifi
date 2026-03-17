@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -11,12 +11,17 @@ import {
   CardFooter
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, CheckCircle2, ShieldAlert, Video, Mail, CheckSquare, Clock, BrainCircuit } from "lucide-react";
-import { getDispute, markResolved, escalateDispute } from "@/actions/dispute";
+import { Loader2, CheckCircle2, ShieldAlert, Video, Mail, CheckSquare, Clock, BrainCircuit, FileText } from "lucide-react";
+import { getDispute, markResolved, escalateDispute, saveAIQuestions, saveAIAnalysis, saveLegalNotice, saveSettlementAgreement } from "@/actions/dispute";
+import { createSigningRequest } from "@/actions/leegality";
+import { LegalGateway } from "@/components/LegalGateway";
 import { useUser } from "@clerk/nextjs";
 import ReactMarkdown from "react-markdown";
+import { toast } from "sonner";
+import { jsPDF } from "jspdf";
 
 export default function DisputeDashboardPage() {
+  const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
   const role = searchParams.get("role"); // "opponent" or null
@@ -24,6 +29,8 @@ export default function DisputeDashboardPage() {
   const [dispute, setDispute] = useState(null);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
+  const [isSigningOpen, setIsSigningOpen] = useState(false);
+  const [signingUrl, setSigningUrl] = useState(null);
 
   useEffect(() => {
     async function loadDispute() {
@@ -101,6 +108,126 @@ export default function DisputeDashboardPage() {
       }
     } catch (err) {
       console.error(err);
+    }
+    setActionLoading(false);
+  };
+
+  const handleGenerateNotice = async () => {
+    setActionLoading(true);
+    const toastId = toast.loading("Generating Formal Legal Notice...");
+    try {
+      const res = await fetch("/api/dispute-ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phase: "NOTICE",
+          category: dispute.category,
+          description: dispute.description,
+          history: dispute.aiQuestions || [],
+          complainantName: dispute.complainantName,
+          opponentName: dispute.opponentName
+        })
+      });
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        throw new Error("Server returned non-JSON response: " + text.slice(0, 50));
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error || `Server Error (${res.status})`);
+      }
+
+      if (data.notice) {
+        const saveRes = await saveLegalNotice(dispute.id, data.notice);
+        if (saveRes.success) {
+          setDispute(prev => ({ ...prev, legalNotice: data.notice, status: "NOTICE_SENT" }));
+          toast.success("Legal Notice Generated & Sent!", { id: toastId });
+        } else {
+          toast.error("Notice generated but failed to save: " + saveRes.error, { id: toastId });
+        }
+      } else {
+        toast.error("AI failed to return a notice draft.", { id: toastId });
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "Failed to generate notice.", { id: toastId });
+    }
+    setActionLoading(false);
+  };
+
+  const handleGenerateSettlement = async () => {
+    setActionLoading(true);
+    const toastId = toast.loading("Generating AI Settlement Draft...");
+    try {
+      const res = await fetch("/api/dispute-ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phase: "SETTLEMENT",
+          category: dispute.category,
+          description: dispute.description,
+          complainantName: dispute.complainantName || "Complainant",
+          opponentName: dispute.opponentName || "Opposing Party",
+          history: dispute.aiQuestions || []
+        })
+      });
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        throw new Error("Server returned non-JSON response: " + text.slice(0, 50));
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error || `Server Error (${res.status})`);
+      }
+      
+      if (data.settlement) {
+        const saveRes = await saveSettlementAgreement(dispute.id, data.settlement);
+        if (saveRes.success) {
+          setDispute(prev => ({ ...prev, settlementDraft: data.settlement }));
+          toast.success("Settlement Agreement Drafted & Saved!", { id: toastId });
+        } else {
+          toast.error("Agreement generated but failed to save: " + saveRes.error, { id: toastId });
+        }
+      } else {
+        toast.error("AI failed to return a settlement draft.", { id: toastId });
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "Failed to generate settlement.", { id: toastId });
+    }
+    setActionLoading(false);
+  };
+
+  const handleLeegalitySign = async () => {
+    if (!dispute.settlementDraft) return;
+    setActionLoading(true);
+    try {
+      // Generate a formal PDF from the settlement text
+      const doc = new jsPDF();
+      const margin = 20;
+      const splitText = doc.splitTextToSize(dispute.settlementDraft, 170); // Width of 170mm
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.text(splitText, margin, margin);
+      
+      const pdfBase64 = doc.output('datauristring').split(',')[1];
+      
+      const res = await createSigningRequest(pdfBase64, "Settlement_Agreement.pdf");
+      if (res.success) {
+        setSigningUrl(res.signingUrl);
+        setIsSigningOpen(true);
+      } else {
+        toast.error(res.error);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Error generating PDF.");
     }
     setActionLoading(false);
   };
@@ -193,12 +320,43 @@ export default function DisputeDashboardPage() {
                 </CardHeader>
                 <CardContent className="pt-4">
                   <div className="prose prose-sm max-w-none prose-blue">
-                    {/* Rendered simple text for MVP, using markdown component in full version */}
                     <ReactMarkdown>{dispute.aiAnalysis}</ReactMarkdown>
                   </div>
                 </CardContent>
               </Card>
             )}
+
+            {/* Legal Notice Preview */}
+            {dispute.legalNotice && (
+              <Card className="border-emerald-200 shadow-md">
+                <CardHeader className="bg-emerald-50 border-b border-emerald-100 pb-4">
+                  <CardTitle className="text-lg text-emerald-900 flex gap-2 items-center"><Mail className="h-5 w-5 text-emerald-600"/> Formal Legal Notice</CardTitle>
+                </CardHeader>
+                <CardContent className="pt-4">
+                  <div className="bg-white p-6 border rounded-sm font-serif text-sm whitespace-pre-wrap shadow-inner overflow-y-auto max-h-[400px]">
+                    {dispute.legalNotice}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Settlement Draft */}
+            {dispute.settlementDraft && (
+              <Card className="border-amber-100 shadow-sm border-2">
+                <CardHeader className="bg-amber-50 border-b border-amber-100 pb-4 flex flex-row items-center justify-between">
+                  <CardTitle className="text-lg text-amber-900 flex gap-2 items-center"><FileText className="h-5 w-5 text-amber-600"/> Settlement & Mutual Release</CardTitle>
+                  <Button size="sm" onClick={handleLeegalitySign} disabled={actionLoading} className="bg-amber-600 hover:bg-amber-700">
+                    <CheckCircle2 className="h-4 w-4 mr-1" /> E-Sign Now
+                  </Button>
+                </CardHeader>
+                <CardContent className="pt-4">
+                  <div className="bg-white p-6 border rounded-sm font-serif text-sm shadow-inner overflow-y-auto max-h-[600px] prose prose-sm max-w-none prose-slate">
+                    <ReactMarkdown>{dispute.settlementDraft}</ReactMarkdown>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
           </div>
 
           {/* Sidebar Actions */}
@@ -230,7 +388,18 @@ export default function DisputeDashboardPage() {
                 <CardTitle className="text-md">Next Actions</CardTitle>
               </CardHeader>
               <CardContent className="pt-4 space-y-3">
-                                {dispute.status === "NOTICE_SENT" && (
+                {dispute.status === "ANALYZED" && (
+                  <Button 
+                    className="w-full bg-emerald-600 hover:bg-emerald-700" 
+                    onClick={handleGenerateNotice}
+                    disabled={actionLoading}
+                  >
+                    <FileText className="h-4 w-4 mr-2" />
+                    Generate Legal Notice
+                  </Button>
+                )}
+
+                {dispute.status === "NOTICE_SENT" && (
                   <>
                     <div className="p-3 bg-amber-50 border border-amber-100 rounded-md mb-2">
                        <p className="text-xs font-bold text-amber-800 flex items-center gap-1">
@@ -257,6 +426,17 @@ export default function DisputeDashboardPage() {
                       Schedule Mediation Meet
                     </Button>
                   </>
+                )}
+
+                {(dispute.status === "MEDIATION" || dispute.status === "NOTICE_SENT") && !dispute.settlementDraft && (
+                  <Button 
+                    className="w-full bg-amber-600 hover:bg-amber-700 mt-2" 
+                    onClick={handleGenerateSettlement}
+                    disabled={actionLoading}
+                  >
+                    <FileText className="h-4 w-4 mr-2" />
+                    AI Resolution Agreement
+                  </Button>
                 )}
 
                 {dispute.meetLink && (
@@ -308,6 +488,16 @@ export default function DisputeDashboardPage() {
 
           </div>
         </div>
+
+        <LegalGateway 
+          isOpen={isSigningOpen} 
+          onClose={() => setIsSigningOpen(false)} 
+          signingUrl={signingUrl}
+          onSuccess={() => {
+            setDispute(prev => ({ ...prev, status: "RESOLVED" }));
+            router.refresh();
+          }}
+        />
 
       </div>
     </div>

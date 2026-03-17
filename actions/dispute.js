@@ -193,3 +193,16 @@ export async function escalateDispute(disputeId) {
     return { success: false, error: error.message };
   }
 }
+
+export async function saveSettlementAgreement(disputeId, settlementDraft) {
+  try {
+    await db.dispute.update({
+      where: { id: disputeId },
+      data: { settlementDraft }
+    });
+    revalidatePath(`/dispute/${disputeId}`);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+}
