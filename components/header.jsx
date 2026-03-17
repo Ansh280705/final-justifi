@@ -58,7 +58,7 @@ export const Header = ({ user }) => {
           {!isMobile && (
             <nav className="flex items-center gap-10 text-[15px] font-black text-slate-500/80">
               <Link href="/" className="hover:text-navy transition-colors">Home</Link>
-              <Link href="/onboarding" className="hover:text-navy transition-colors">Submit Dispute</Link>
+              <Link href="/submit-dispute" className="hover:text-navy transition-colors">Submit Dispute</Link>
               <Link href="/blog" className="hover:text-navy transition-colors">Legal Knowledge</Link>
               <Link href="/about" className="hover:text-navy transition-colors">How It Works</Link>
               <Link href="/cases" className="hover:text-navy transition-colors">My Dashboard</Link>
@@ -104,7 +104,7 @@ const MobileMenu = () => (
         </div>
         <nav className="flex flex-col gap-8">
           <SheetClose asChild><Link href="/" className="text-2xl font-black text-navy border-b border-slate-50 pb-4">Home</Link></SheetClose>
-          <SheetClose asChild><Link href="/onboarding" className="text-2xl font-black text-navy border-b border-slate-50 pb-4">Submit Dispute</Link></SheetClose>
+          <SheetClose asChild><Link href="/submit-dispute" className="text-2xl font-black text-navy border-b border-slate-50 pb-4">Submit Dispute</Link></SheetClose>
           <SheetClose asChild><Link href="/blog" className="text-2xl font-black text-navy border-b border-slate-50 pb-4">Legal Knowledge</Link></SheetClose>
           <SheetClose asChild><Link href="/about" className="text-2xl font-black text-navy border-b border-slate-50 pb-4">How It Works</Link></SheetClose>
           <SheetClose asChild><Link href="/cases" className="text-2xl font-black text-navy border-b border-slate-50 pb-4">My Dashboard</Link></SheetClose>

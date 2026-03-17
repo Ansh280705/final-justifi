@@ -16,7 +16,7 @@ model User {
   clerkUserId String   @unique
   email       String   @unique
   name        String?
-  phone       String? // ✅ Added phone number for WhatsApp
+  phone       String? // Added phone number for WhatsApp
   imageUrl    String?
   role        UserRole @default(UNASSIGNED)
   createdAt   DateTime @default(now())
@@ -40,9 +40,12 @@ model User {
   payouts         Payout[]
   paymentRequests PaymentRequest[]
 
-  // ✅ Emergency / SOS Fields
+  // Emergency / SOS Fields
   emergencyEmails String[] // Family & Friends contact list
   emergencyAlerts EmergencyAlert[]
+
+  // Dispute relations
+  disputes Dispute[]
 }
 
 model EmergencyAlert {
@@ -89,6 +92,18 @@ enum CaseStatus {
   SCHEDULED
   COMPLETED
   CANCELLED
+}
+
+enum DisputeStatus {
+  INTAKE
+  ANALYZED
+  NOTICE_GENERATED
+  NOTICE_SENT
+  MEDIATION
+  RESOLVED
+  ESCALATED_INTERN
+  ESCALATED_SENIOR
+  CLOSED
 }
 
 enum TransactionType {
@@ -301,11 +316,57 @@ model OfflineOffice {
   pincode     String
   latitude    Float
   longitude   Float
-  timing      String   // e.g. "Mon–Sat, 9am–6pm"
+  timing      String   // e.g. "Mon-Sat, 9am-6pm"
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@index([city])
   @@index([isActive])
+}
+
+// ==========================
+// DISPUTE MODEL
+// ==========================
+model Dispute {
+  id               String         @id @default(uuid())
+  userId           String
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Complainant Info
+  complainantName  String
+  complainantEmail String
+  complainantPhone String
+
+  // Opponent Info
+  opponentName     String?
+  opponentEmail    String?
+
+  // Dispute Details
+  category         String
+  description      String         @db.Text
+  aiQuestions      Json?          // [{q: "...", a: "..."}]
+  aiAnalysis       String?        @db.Text
+  legalNotice      String?        @db.Text
+
+  // Scheduling
+  meetLink         String?
+  preferredDate    DateTime?
+  preferredTime    String?
+
+  // Resolution
+  status           DisputeStatus  @default(INTAKE)
+  userResolved     Boolean        @default(false)
+  opponentResolved Boolean        @default(false)
+
+  // Escalation
+  internId         String?
+  seniorLawyerId   String?
+  escalationNotes  String?        @db.Text
+
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([userId])
+  @@index([status])
 }

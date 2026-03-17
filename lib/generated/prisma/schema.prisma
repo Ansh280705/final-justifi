@@ -5,6 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // ==========================
@@ -15,36 +16,36 @@ model User {
   clerkUserId String   @unique
   email       String   @unique
   name        String?
-  phone       String? // ✅ Added phone number for WhatsApp
+  phone       String? // Added phone number for WhatsApp
   imageUrl    String?
   role        UserRole @default(UNASSIGNED)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  credits Int @default(0) // Patient credits — changed default to 0 for new users
+  credits Int @default(0) // Client credits
 
-  // Doctor-specific fields
-  specialty          String?
+  // Lawyer-specific fields
+  practiceArea       String?
   experience         Int?
   credentialUrl      String?
   description        String?             @db.Text
   verificationStatus VerificationStatus? @default(PENDING)
-  qualifications     String[] // ["MBBS", "MD (Cardiology)"]
+  qualifications     String[] // ["LLB", "LLM"]
 
   // Relations
-  patientAppointments Appointment[]       @relation("PatientAppointments")
-  doctorAppointments  Appointment[]       @relation("DoctorAppointments")
-  availabilities      Availability[]
-  transactions        CreditTransaction[]
-  payouts             Payout[]
-  paymentRequests     PaymentRequest[]
+  clientCases     LegalCase[]              @relation("ClientCases")
+  lawyerCases     LegalCase[]              @relation("LawyerCases")
+  availabilities  Availability[]
+  transactions    CreditTransaction[]
+  payouts         Payout[]
+  paymentRequests PaymentRequest[]
 
-  // ✅ Emergency / SOS Fields
+  // Emergency / SOS Fields
   emergencyEmails String[] // Family & Friends contact list
   emergencyAlerts EmergencyAlert[]
 
-  // Medical Reports
-  medicalReports MedicalReport[]
+  // Dispute relations
+  disputes Dispute[]
 }
 
 model EmergencyAlert {
@@ -70,8 +71,8 @@ enum EmergencyStatus {
 // ==========================
 enum UserRole {
   UNASSIGNED
-  PATIENT
-  DOCTOR
+  CLIENT
+  LAWYER
   ADMIN
 }
 
@@ -87,15 +88,27 @@ enum SlotStatus {
   BLOCKED
 }
 
-enum AppointmentStatus {
+enum CaseStatus {
   SCHEDULED
   COMPLETED
   CANCELLED
 }
 
+enum DisputeStatus {
+  INTAKE
+  ANALYZED
+  NOTICE_GENERATED
+  NOTICE_SENT
+  MEDIATION
+  RESOLVED
+  ESCALATED_INTERN
+  ESCALATED_SENIOR
+  CLOSED
+}
+
 enum TransactionType {
   CREDIT_PURCHASE
-  APPOINTMENT_DEDUCTION
+  CASE_DEDUCTION
   ADMIN_ADJUSTMENT
 }
 
@@ -109,35 +122,35 @@ enum PayoutStatus {
 // ==========================
 model Availability {
   id        String     @id @default(uuid())
-  doctorId  String
-  doctor    User       @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  lawyerId  String
+  lawyer    User       @relation(fields: [lawyerId], references: [id], onDelete: Cascade)
   startTime DateTime
   endTime   DateTime
   status    SlotStatus @default(AVAILABLE)
 
-  @@index([doctorId, startTime])
+  @@index([lawyerId, startTime])
 }
 
 // ==========================
-// APPOINTMENT MODEL
+// LEGALCASE MODEL (Formerly Appointment)
 // ==========================
-model Appointment {
+model LegalCase {
   id                 String            @id @default(uuid())
-  patientId          String
-  patient            User              @relation("PatientAppointments", fields: [patientId], references: [id])
-  doctorId           String
-  doctor             User              @relation("DoctorAppointments", fields: [doctorId], references: [id])
+  clientId           String
+  client             User              @relation("ClientCases", fields: [clientId], references: [id])
+  lawyerId           String
+  lawyer             User              @relation("LawyerCases", fields: [lawyerId], references: [id])
   startTime          DateTime
   endTime            DateTime
-  status             AppointmentStatus @default(SCHEDULED)
+  status             CaseStatus        @default(SCHEDULED)
   notes              String?           @db.Text
-  patientDescription String?           @db.Text
-  prescription       Prescription?
+  clientDescription  String?           @db.Text
+  legalAdvice        LegalAdvice?
 
-  patientName   String
-  patientPhone  String
-  patientAge    Int
-  patientGender String
+  clientName   String
+  clientPhone  String
+  clientAge    Int
+  clientGender String
 
   // Video session fields
   videoSessionId    String?
@@ -147,7 +160,7 @@ model Appointment {
   updatedAt DateTime @updatedAt
 
   @@index([status, startTime])
-  @@index([doctorId, startTime])
+  @@index([lawyerId, startTime])
 }
 
 // ==========================
@@ -169,14 +182,14 @@ model CreditTransaction {
 // ==========================
 model Payout {
   id                String       @id @default(uuid())
-  doctorId          String
-  doctor            User         @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  lawyerId          String
+  lawyer            User         @relation(fields: [lawyerId], references: [id], onDelete: Cascade)
   amount            Float
   credits           Int
   platformFee       Float
   netAmount         Float
   paypalEmail       String
-  // Optional payment reference for Razorpay (added to match expected column)
+  // Optional payment reference for Razorpay
   razorpayPaymentId String?
   status            PayoutStatus @default(PROCESSING)
   paymentId         String? // Added field for payment reference
@@ -186,7 +199,7 @@ model Payout {
   processedBy       String?
 
   @@index([status, createdAt])
-  @@index([doctorId, status])
+  @@index([lawyerId, status])
 }
 
 // ==========================
@@ -215,9 +228,9 @@ model Category {
 }
 
 // ==========================
-// LAB MODEL
+// LAWFIRM MODEL
 // ==========================
-model Lab {
+model LawFirm {
   id        String   @id @default(uuid())
   name      String
   address   String
@@ -230,20 +243,20 @@ model Lab {
   updatedAt DateTime @updatedAt
 }
 
-model Prescription {
+model LegalAdvice {
   id             String    @id @default(cuid())
-  appointmentId  String    @unique
-  doctorId       String
-  patientId      String
-  medicalHistory String?   @db.Text
-  diagnosis      String?
-  medicines      String
+  caseId         String    @unique
+  lawyerId       String
+  clientId       String
+  caseHistory    String?   @db.Text
+  caseSummary    String?
+  legalPoints    String
   instructions   String?
   followUpDate   DateTime?
 
   createdAt DateTime @default(now())
 
-  appointment Appointment @relation(fields: [appointmentId], references: [id])
+  case LegalCase @relation(fields: [caseId], references: [id])
 }
 
 // ==========================
@@ -266,7 +279,7 @@ model PaymentRequest {
   transactionId String?
   paymentMethod String?
   packageId     String?
-  isNotified    Boolean       @default(false)
+  isNotified     Boolean       @default(false)
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   processedAt   DateTime?
@@ -288,40 +301,72 @@ model News {
 }
 
 // ==========================
-// OFFLINE CLINIC MODEL
+// OFFLINE CLINIC MODEL (Renamed to OfflineOffice)
 // ==========================
-model OfflineClinic {
-  id         String   @id @default(uuid())
-  name       String
-  doctorName String
-  specialty  String
-  phone      String
-  email      String?
-  address    String   @db.Text
-  city       String
-  state      String
-  pincode    String
-  latitude   Float
-  longitude  Float
-  timing     String // e.g. "Mon–Sat, 9am–6pm"
-  isActive   Boolean  @default(true)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+model OfflineOffice {
+  id          String   @id @default(uuid())
+  name        String
+  lawyerName  String
+  practiceArea String
+  phone       String
+  email       String?
+  address     String   @db.Text
+  city        String
+  state       String
+  pincode     String
+  latitude    Float
+  longitude   Float
+  timing      String   // e.g. "Mon-Sat, 9am-6pm"
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@index([city])
   @@index([isActive])
 }
 
 // ==========================
-// MEDICAL REPORT MODEL
+// DISPUTE MODEL
 // ==========================
-model MedicalReport {
-  id            String   @id @default(uuid())
-  userId        String?
-  user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  vitals        Json? // Stores BP, Heart Rate, SpO2, etc.
-  labResults    Json? // Stores Hemoglobin, Cholesterol, etc. and status (Normal/High/Low)
-  abnormalities String[] // Array of abnormalities found in the report
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+model Dispute {
+  id               String         @id @default(uuid())
+  userId           String
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Complainant Info
+  complainantName  String
+  complainantEmail String
+  complainantPhone String
+
+  // Opponent Info
+  opponentName     String?
+  opponentEmail    String?
+
+  // Dispute Details
+  category         String
+  description      String         @db.Text
+  aiQuestions      Json?          // [{q: "...", a: "..."}]
+  aiAnalysis       String?        @db.Text
+  legalNotice      String?        @db.Text
+
+  // Scheduling
+  meetLink         String?
+  preferredDate    DateTime?
+  preferredTime    String?
+
+  // Resolution
+  status           DisputeStatus  @default(INTAKE)
+  userResolved     Boolean        @default(false)
+  opponentResolved Boolean        @default(false)
+
+  // Escalation
+  internId         String?
+  seniorLawyerId   String?
+  escalationNotes  String?        @db.Text
+
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([userId])
+  @@index([status])
 }
