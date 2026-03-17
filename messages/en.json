@@ -1,0 +1,160 @@
+{
+    "Navbar": {
+        "home": "Home",
+        "submitDispute": "Submit Dispute",
+        "legalKnowledge": "Legal Knowledge",
+        "howItWorks": "How It Works",
+        "dashboard": "My Dashboard",
+        "lawyers": "Find Lawyers",
+        "signIn": "Sign In"
+    },
+    "Hero": {
+        "badge": "Next-Gen AI Legal Platform",
+        "title1": "Your AI Legal",
+        "title2": "Advocate for",
+        "title3": "Every Dispute",
+        "description": "Understand your rights, analyze disputes, and resolve legal conflicts faster with AI-powered legal guidance.",
+        "buttons": {
+            "resolve": "Resolve Dispute",
+            "assistant": "AI Assistant",
+            "lawyers": "Find Top Lawyers"
+        },
+        "trust": {
+            "users": "Trusted by 10,000+ users",
+            "security": "Bank-level security",
+            "verified": "Verified lawyers"
+        }
+    },
+    "Stats": {
+        "response": "Avg Response",
+        "clients": "Verified Clients",
+        "days": "Days Active",
+        "support": "Legal Support"
+    },
+    "Features": {
+        "badge": "Core Platform",
+        "title": "Empowering your legal journey",
+        "description": "We bridge the gap between people and justice with streamlined case management and direct expert access.",
+        "cards": {
+            "scheduling": {
+                "title": "Smart Case Scheduling",
+                "desc": "Centralized legal case management with automated scheduling and deadline tracking for maximum efficiency.",
+                "link": "Learn more"
+            },
+            "secure": {
+                "title": "Secure Video Consults",
+                "desc": "End-to-end encrypted consultations with verified legal professionals from the comfort of your home.",
+                "link": "Find an expert"
+            },
+            "ai": {
+                "title": "Practice Intelligence",
+                "desc": "AI-powered insights and legal document automation to handle repetitive drafting and discovery tasks instantly.",
+                "link": "Explore AI"
+            }
+        }
+    },
+    "HowItWorks": {
+        "badge": "Modern Approach",
+        "title": "Transparent & efficient resolution",
+        "description": "Our three-step process simplifies complex legal procedures through intelligent automation.",
+        "steps": {
+            "submit": {
+                "title": "Submit Dispute",
+                "desc": "Share your case details and documents securely for initial AI analysis."
+            },
+            "analyze": {
+                "title": "AI Legal Analysis",
+                "desc": "Our specialized AI identifies relevant laws and legal precedents for your specific case."
+            },
+            "resolve": {
+                "title": "Direct Lawyer Access",
+                "desc": "Connect with verified legal experts who are specialists in your dispute type."
+            }
+        }
+    },
+    "Analyzer": {
+        "badge": "Featured Innovation",
+        "title": "AI Dispute Analyzer",
+        "description": "Upload a dispute description, and our AI identifies legal issues, suggests legal actions, and even generates drafted documents instantly.",
+        "list": [
+            "Identify core legal issues",
+            "Auto-generate legal notices",
+            "Instant jurisdictional matching",
+            "AI risk-level assessment"
+        ]
+    },
+    "Categories": {
+        "title": "Dispute Categories",
+        "subtitle": "Coverage for every legal struggle in your life.",
+        "viewAll": "View all practice areas",
+        "list": {
+            "tenant": "Tenant Disputes",
+            "consumer": "Consumer Complaints",
+            "employment": "Employment Conflicts",
+            "property": "Property Disputes",
+            "contract": "Contract Breaches",
+            "family": "Family Law"
+        }
+    },
+    "Testimonials": {
+        "title": "Success Stories",
+        "list": [
+            {
+                "name": "Rahul Sharma",
+                "text": "Successfully resolved my rental deposit dispute within 15 days using Justifi AI notice generation.",
+                "role": "Tenant"
+            },
+            {
+                "name": "Priya Varma",
+                "text": "The video consultation was seamless. The lawyer was highly professional and saved me from a bad contract.",
+                "role": "Entrepreneur"
+            },
+            {
+                "name": "S. K. Gupta",
+                "text": "Truly futuristic. My consumer case was stuck for 2 years. AI analyzer gave me the right path immediately.",
+                "role": "Consumer"
+            }
+        ]
+    },
+    "Footer": {
+        "cta": "Consult trusted experts online using a simple credit-based system.",
+        "getStarted": "Get Started",
+        "brandDesc": "Online session scheduling made simple, secure, and accessible for everyone.",
+        "product": "Product",
+        "pricing": "Pricing",
+        "credits": "Credits",
+        "resources": "Resources",
+        "helpCenter": "Help Center",
+        "blogs": "Blogs",
+        "company": "Company",
+        "aboutUs": "About Us",
+        "contactUs": "Contact Us",
+        "developers": "Developers",
+        "legalInfo": "Legal Information",
+        "connect": "Connect",
+        "sosTitle": "SOS Settings",
+        "sosDesc": "Emergency Alerts for Family & Friends",
+        "systems": "All systems operational",
+        "privacy": "Privacy-Policy",
+        "terms": "Terms & Conditions",
+        "refundPolicyLink": "Returns & Refunds",
+        "refundPolicyText": "Refund Policy: If we approve your refund, we will process and credit it to your bank account within 3-5 days.",
+        "disclaimer": "Justifi is a technology platform and does not provide legal consultation, advice, or representation. All services are provided independently by professionals using the platform.",
+        "rights": "© 2026 Justifi AI. All rights reserved."
+    },
+    "Dashboard": {
+        "title": "My Dashboard",
+        "backLabel": "Find Lawyers",
+        "sessionsTitle": "Your Scheduled Case Sessions",
+        "legalAdvice": "Legal Advice",
+        "noCases": "No cases scheduled",
+        "noCasesDesc": "You don't have any legal consultations scheduled yet. Browse our verified lawyers and book your first session.",
+        "disputesTitle": "Your Active Disputes",
+        "disputesDesc": "Legal notices and mediation cases filed via Justifi AI",
+        "noDisputes": "No active disputes",
+        "noDisputesDesc": "You haven't filed any automated disputes yet.",
+        "fileFirst": "File Your First Dispute",
+        "opponent": "Opponent",
+        "finding": "Finding..."
+    }
+}

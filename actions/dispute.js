@@ -24,6 +24,10 @@ export async function createDispute(formData) {
       throw new Error("All fields are required");
     }
 
+    if (!/^\d{10}$/.test(complainantPhone)) {
+      throw new Error("Invalid contact number. Must be exactly 10 digits.");
+    }
+
     const dispute = await db.dispute.create({
       data: {
         userId: user.id,
@@ -125,7 +129,7 @@ export async function setOpponentInfo(disputeId, opponentName, opponentEmail) {
 export async function markResolved(disputeId, isOpponent = false) {
   try {
     const updateData = isOpponent ? { opponentResolved: true } : { userResolved: true };
-    
+
     let dispute = await db.dispute.update({
       where: { id: disputeId },
       data: updateData,

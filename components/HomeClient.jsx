@@ -1,22 +1,23 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { 
+import {
   motion, AnimatePresence, useInView, useScroll, useTransform,
   useMotionValue, useSpring, useAnimationControls
 } from "framer-motion";
-import { 
-  ArrowRight, ShieldCheck, Scale, FileText, 
-  CheckCircle2, PlayCircle, Star, Gavel, 
-  Users, MessageSquare, Shield, Globe, 
+import {
+  ArrowRight, ShieldCheck, Scale, FileText,
+  CheckCircle2, PlayCircle, Star, Gavel,
+  Users, MessageSquare, Shield, Globe,
   Search, FileDown, BrainCircuit, Video,
   ChevronRight, ArrowDownRight, Sparkles,
-  Zap, Building2, Briefcase, FileSignature, 
+  Zap, Building2, Briefcase, FileSignature,
   UserPlus, FileCheck, CheckCircle, ChevronDown, MousePointer
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CanvasBackground from "@/components/CanvasBackground";
+import { useTranslations } from "next-intl";
 
 // ═══════════════════════════════════════════════════
 // ANIMATION PRIMITIVES - World-class reusable components
@@ -27,12 +28,12 @@ function ScrollReveal({ children, className = "", delay = 0, direction = "up" })
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   const variants = {
-    up:    { hidden: { opacity: 0, y: 80 },  visible: { opacity: 1, y: 0 } },
-    down:  { hidden: { opacity: 0, y: -80 }, visible: { opacity: 1, y: 0 } },
-    left:  { hidden: { opacity: 0, x: -80 }, visible: { opacity: 1, x: 0 } },
-    right: { hidden: { opacity: 0, x: 80 },  visible: { opacity: 1, x: 0 } },
+    up: { hidden: { opacity: 0, y: 80 }, visible: { opacity: 1, y: 0 } },
+    down: { hidden: { opacity: 0, y: -80 }, visible: { opacity: 1, y: 0 } },
+    left: { hidden: { opacity: 0, x: -80 }, visible: { opacity: 1, x: 0 } },
+    right: { hidden: { opacity: 0, x: 80 }, visible: { opacity: 1, x: 0 } },
     scale: { hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } },
-    fade:  { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+    fade: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
   };
   return (
     <motion.div ref={ref} className={className}
@@ -57,9 +58,9 @@ function StaggerContainer({ children, className = "", staggerDelay = 0.1 }) {
 
 function StaggerItem({ children, className = "", direction = "up" }) {
   const v = {
-    up:    { hidden: { opacity: 0, y: 60 },  visible: { opacity: 1, y: 0 } },
-    left:  { hidden: { opacity: 0, x: -60 }, visible: { opacity: 1, x: 0 } },
-    right: { hidden: { opacity: 0, x: 60 },  visible: { opacity: 1, x: 0 } },
+    up: { hidden: { opacity: 0, y: 60 }, visible: { opacity: 1, y: 0 } },
+    left: { hidden: { opacity: 0, x: -60 }, visible: { opacity: 1, x: 0 } },
+    right: { hidden: { opacity: 0, x: 60 }, visible: { opacity: 1, x: 0 } },
     scale: { hidden: { opacity: 0, scale: 0.75 }, visible: { opacity: 1, scale: 1 } },
   };
   return (
@@ -249,14 +250,23 @@ function AnimatedLine() {
 // ═══════════════════════════════════════════════════
 
 export default function HomeClient() {
+  const tHero = useTranslations("Hero");
+  const tStats = useTranslations("Stats");
+  const tFeatures = useTranslations("Features");
+  const tHowItWorks = useTranslations("HowItWorks");
+  const tAnalyzer = useTranslations("Analyzer");
+  const tCategories = useTranslations("Categories");
+  const tTestimonials = useTranslations("Testimonials");
+  const tNavbar = useTranslations("Navbar");
+  const tFooter = useTranslations("Footer");
   const [activeStep, setActiveStep] = useState(0);
-  
+
   // Scroll-to-unlock
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
   const scrollIndicatorY = useTransform(scrollYProgress, [0, 0.25], [0, 40]);
-  
+
   // Parallax for hero image
   const heroImageY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const heroBgScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.15]);
@@ -265,7 +275,7 @@ export default function HomeClient() {
     <div className="relative min-h-screen bg-[#fcfcfd] selection:bg-emerald-100 selection:text-emerald-900 overflow-x-hidden pt-24 font-sans text-navy">
       {/* Interactive Canvas Particle Network */}
       <CanvasBackground />
-      
+
       {/* ================= HERO SECTION ================= */}
       <section ref={heroRef} className="relative pt-12 pb-32 lg:pt-20 lg:pb-48">
         <AuroraBackground />
@@ -273,7 +283,7 @@ export default function HomeClient() {
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            
+
             {/* Left Content */}
             <div className="flex-1 text-center lg:text-left z-10">
               <motion.div
@@ -285,16 +295,16 @@ export default function HomeClient() {
                 <motion.div animate={{ rotate: [0, 20, -20, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}>
                   <Sparkles className="w-4 h-4 mr-2" />
                 </motion.div>
-                Next-Gen AI Legal Platform
+                {tHero("badge")}
               </motion.div>
 
               <h1 className="text-6xl lg:text-[88px] font-black text-navy tracking-tighter leading-[0.92] mb-8">
-                <TextReveal text="Your AI Legal" delay={0.2} />
+                <TextReveal text={tHero("title1")} delay={0.2} />
                 <br />
-                <TextReveal text="Advocate for" delay={0.5} />
+                <TextReveal text={tHero("title2")} delay={0.5} />
                 <br />
                 <span className="text-emerald-500">
-                  <TextReveal text="Every Dispute" delay={0.8} />
+                  <TextReveal text={tHero("title3")} delay={0.8} />
                 </span>
               </h1>
 
@@ -304,7 +314,7 @@ export default function HomeClient() {
                 transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
                 className="text-lg lg:text-2xl text-slate-500 max-w-xl mb-12 leading-relaxed font-medium"
               >
-                Understand your rights, analyze disputes, and resolve legal conflicts faster with AI-powered legal guidance.
+                {tHero("description")}
               </motion.p>
 
               <motion.div
@@ -314,15 +324,15 @@ export default function HomeClient() {
                 className="flex flex-col sm:flex-row items-center gap-5 mb-12"
               >
                 <MagneticButton href="/submit-dispute" className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 text-base font-black rounded-2xl text-white bg-navy hover:bg-slate-800 transition-all shadow-2xl hover:-translate-y-1">
-                  Resolve Dispute
+                  {tHero("buttons.resolve")}
                   <ArrowRight className="ml-3 w-5 h-5" />
                 </MagneticButton>
                 <MagneticButton href="/legal-ai" className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 text-base font-black rounded-2xl text-white bg-[#00C896] hover:bg-[#00DDA6] transition-all shadow-xl hover:-translate-y-1">
                   <BrainCircuit className="mr-2 w-5 h-5" />
-                  AI Assistant
+                  {tHero("buttons.assistant")}
                 </MagneticButton>
                 <MagneticButton href="/lawyers" className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 text-base font-bold rounded-2xl text-navy bg-white border border-slate-200 hover:border-emerald-200 hover:bg-slate-50 transition-all shadow-sm">
-                  Find Top Lawyers
+                  {tHero("buttons.lawyers")}
                 </MagneticButton>
               </motion.div>
 
@@ -335,18 +345,18 @@ export default function HomeClient() {
               >
                 <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
-                    {[1,2,3].map(i => <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.9 + i * 0.1, type: "spring" }} className="w-6 h-6 rounded-full bg-slate-200 border-2 border-white" />)}
+                    {[1, 2, 3].map(i => <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.9 + i * 0.1, type: "spring" }} className="w-6 h-6 rounded-full bg-slate-200 border-2 border-white" />)}
                     <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.2, type: "spring" }} className="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[8px] font-black border-2 border-white">+10k</motion.div>
                   </div>
-                  Trusted by 10,000+ users
+                  {tHero("trust.users")}
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-5 h-5 text-emerald-500" />
-                  Bank-level security
+                  {tHero("trust.security")}
                 </div>
                 <div className="flex items-center gap-2">
                   <Scale className="w-5 h-5 text-emerald-500" />
-                  Verified lawyers
+                  {tHero("trust.verified")}
                 </div>
               </motion.div>
             </div>
@@ -359,21 +369,21 @@ export default function HomeClient() {
               style={{ y: heroImageY }}
               className="flex-1 w-full max-w-2xl relative"
             >
-              <motion.div 
+              <motion.div
                 className="absolute -top-10 -left-10 w-24 h-24 bg-white rounded-3xl shadow-2xl flex items-center justify-center z-20 animate-float"
                 whileHover={{ scale: 1.15, rotate: 10 }}
               >
                 <Scale className="w-10 h-10 text-emerald-500" />
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 className="absolute top-1/2 -right-12 w-20 h-20 bg-white rounded-2xl shadow-2xl flex items-center justify-center z-20 animate-float-slow"
                 whileHover={{ scale: 1.15, rotate: -10 }}
               >
                 <FileText className="w-10 h-10 text-blue-500" />
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="absolute bottom-10 -left-5 w-20 h-20 bg-white rounded-2xl shadow-2xl flex items-center justify-center z-20 animate-float-delayed"
                 whileHover={{ scale: 1.15, rotate: 10 }}
               >
@@ -428,18 +438,18 @@ export default function HomeClient() {
         <div className="absolute inset-0 opacity-[0.05]">
           <div className="h-full w-full bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:48px_48px]"></div>
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.12}>
             {[
-              { label: "10", suffix: " min", sub: "Avg Response", icon: <Zap className="w-6 h-6" /> },
-              { label: "10000", suffix: "+", sub: "Verified Clients", icon: <Users className="w-6 h-6" /> },
-              { label: "365", suffix: "", sub: "Days Active", icon: <Globe className="w-6 h-6" /> },
-              { label: "24/7", suffix: "", sub: "Legal Support", icon: <Shield className="w-6 h-6" />, isText: true }
+              { label: "10", suffix: " min", sub: tStats("response"), icon: <Zap className="w-6 h-6" /> },
+              { label: "10000", suffix: "+", sub: tStats("clients"), icon: <Users className="w-6 h-6" /> },
+              { label: "365", suffix: "", sub: tStats("days"), icon: <Globe className="w-6 h-6" /> },
+              { label: "24/7", suffix: "", sub: tStats("support"), icon: <Shield className="w-6 h-6" />, isText: true }
             ].map((stat, i) => (
               <StaggerItem key={i} direction="up">
                 <TiltCard>
-                  <motion.div 
+                  <motion.div
                     whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(16,185,129,0.15)" }}
                     className="p-8 rounded-[32px] bg-white/5 border border-white/10 backdrop-blur-md text-center group transition-all"
                   >
@@ -465,24 +475,24 @@ export default function HomeClient() {
       <section id="features" className="py-32 bg-white relative">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-emerald-500 font-black tracking-widest uppercase text-sm mb-4">Core Platform</h2>
+            <h2 className="text-emerald-500 font-black tracking-widest uppercase text-sm mb-4">{tFeatures("badge")}</h2>
             <h3 className="text-4xl lg:text-5xl font-black text-navy tracking-tight mb-8">
-              <WordReveal text="Empowering your legal journey" />
+              <WordReveal text={tFeatures("title")} />
             </h3>
             <p className="text-lg text-slate-500 leading-relaxed font-medium">
-              We bridge the gap between people and justice with streamlined case management and direct expert access.
+              {tFeatures("description")}
             </p>
           </ScrollReveal>
 
           <StaggerContainer className="grid md:grid-cols-3 gap-8" staggerDelay={0.18}>
             {[
-              { icon: <Building2 className="w-9 h-9" />, title: "Smart Case Scheduling", desc: "Centralized legal case management with automated scheduling and deadline tracking for maximum efficiency.", link: "/onboarding", linkText: "Learn more", color: "emerald", bgColor: "bg-emerald-50", textColor: "text-emerald-600", borderHover: "hover:border-emerald-100", shadowHover: "hover:shadow-[0_40px_80px_rgba(16,185,129,0.08)]", iconHoverBg: "group-hover:bg-emerald-500" },
-              { icon: <Video className="w-9 h-9" />, title: "Secure Video Consults", desc: "End-to-end encrypted consultations with verified legal professionals from the comfort of your home.", link: "/lawyers", linkText: "Find an expert", color: "blue", bgColor: "bg-blue-50", textColor: "text-blue-600", borderHover: "hover:border-blue-100", shadowHover: "hover:shadow-[0_40px_80px_rgba(59,130,246,0.08)]", iconHoverBg: "group-hover:bg-blue-500" },
-              { icon: <BrainCircuit className="w-9 h-9" />, title: "Practice Intelligence", desc: "AI-powered insights and legal document automation to handle repetitive drafting and discovery tasks instantly.", link: "/onboarding", linkText: "Explore AI", color: "purple", bgColor: "bg-purple-50", textColor: "text-purple-600", borderHover: "hover:border-purple-100", shadowHover: "hover:shadow-[0_40px_80px_rgba(168,85,247,0.08)]", iconHoverBg: "group-hover:bg-purple-500" },
+              { icon: <Building2 className="w-9 h-9" />, title: tFeatures("cards.scheduling.title"), desc: tFeatures("cards.scheduling.desc"), link: "/onboarding", linkText: tFeatures("cards.scheduling.link"), color: "emerald", bgColor: "bg-emerald-50", textColor: "text-emerald-600", borderHover: "hover:border-emerald-100", shadowHover: "hover:shadow-[0_40px_80px_rgba(16,185,129,0.08)]", iconHoverBg: "group-hover:bg-emerald-500" },
+              { icon: <Video className="w-9 h-9" />, title: tFeatures("cards.secure.title"), desc: tFeatures("cards.secure.desc"), link: "/lawyers", linkText: tFeatures("cards.secure.link"), color: "blue", bgColor: "bg-blue-50", textColor: "text-blue-600", borderHover: "hover:border-blue-100", shadowHover: "hover:shadow-[0_40px_80px_rgba(59,130,246,0.08)]", iconHoverBg: "group-hover:bg-blue-500" },
+              { icon: <BrainCircuit className="w-9 h-9" />, title: tFeatures("cards.ai.title"), desc: tFeatures("cards.ai.desc"), link: "/onboarding", linkText: tFeatures("cards.ai.link"), color: "purple", bgColor: "bg-purple-50", textColor: "text-purple-600", borderHover: "hover:border-purple-100", shadowHover: "hover:shadow-[0_40px_80px_rgba(168,85,247,0.08)]", iconHoverBg: "group-hover:bg-purple-500" },
             ].map((f, i) => (
               <StaggerItem key={i} direction="up">
                 <TiltCard>
-                  <motion.div 
+                  <motion.div
                     whileHover={{ y: -12 }}
                     className={`group p-12 bg-white rounded-[48px] border border-slate-100 ${f.borderHover} shadow-[0_20px_50px_rgba(0,0,0,0.02)] ${f.shadowHover} transition-all duration-500`}
                   >
@@ -516,7 +526,7 @@ export default function HomeClient() {
 
           <div className="relative">
             <AnimatedLine />
-            
+
             <StaggerContainer className="grid lg:grid-cols-5 gap-8 relative z-10" staggerDelay={0.18}>
               {[
                 { title: "Submit Dispute", icon: <MessageSquare className="w-7 h-7" />, desc: "Describe your situation" },
@@ -527,7 +537,7 @@ export default function HomeClient() {
               ].map((step, i) => (
                 <StaggerItem key={i} direction="scale">
                   <div className="flex flex-col items-center">
-                    <motion.div 
+                    <motion.div
                       whileHover={{ scale: 1.2, rotate: 10, boxShadow: "0 25px 50px rgba(16,185,129,0.2)" }}
                       transition={{ type: "spring", stiffness: 300 }}
                       className="w-20 h-20 rounded-full bg-white border-4 border-slate-100 text-navy flex items-center justify-center mb-6 shadow-xl relative cursor-pointer"
@@ -558,27 +568,22 @@ export default function HomeClient() {
                 animate={{ scale: [1, 1.3, 1], x: [-20, 20, -20] }}
                 transition={{ duration: 12, repeat: Infinity }}
               />
-              
+
               <ScrollReveal direction="left" className="flex-1 z-10">
                 <motion.div className="inline-flex items-center px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-black uppercase tracking-widest mb-8"
                   whileHover={{ scale: 1.05 }}
                 >
-                  Featured Innovation
+                  {tAnalyzer("badge")}
                 </motion.div>
                 <h3 className="text-4xl lg:text-6xl font-black text-white leading-tight mb-8">
-                  <WordReveal text="AI Dispute Analyzer" />
+                  <WordReveal text={tAnalyzer("title")} />
                 </h3>
                 <p className="text-xl text-slate-400 font-medium mb-12 leading-relaxed">
-                  Upload a dispute description, and our AI identifies legal issues, suggests legal actions, and even generates drafted documents instantly.
+                  {tAnalyzer("description")}
                 </p>
-                
+
                 <ul className="space-y-6 mb-12">
-                  {[
-                    "Identify core legal issues",
-                    "Auto-generate legal notices",
-                    "Instant jurisdictional matching",
-                    "AI risk-level assessment"
-                  ].map((item, i) => (
+                  {tAnalyzer.raw("list").map((item, i) => (
                     <motion.li key={i}
                       initial={{ opacity: 0, x: -40 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -604,7 +609,7 @@ export default function HomeClient() {
               </ScrollReveal>
 
               <ScrollReveal direction="right" className="flex-1 w-full relative">
-                <motion.div 
+                <motion.div
                   animate={{ y: [0, -20, 0], rotate: [0, 2, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   className="relative z-10 w-full aspect-square flex items-center justify-center p-10"
@@ -628,26 +633,26 @@ export default function HomeClient() {
           <ScrollReveal className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
             <div className="max-w-xl">
               <h3 className="text-4xl lg:text-5xl font-black text-navy tracking-tight mb-6">
-                <WordReveal text="Dispute Categories" />
+                <WordReveal text={tCategories("title")} />
               </h3>
-              <p className="text-lg text-slate-500 font-medium">Coverage for every legal struggle in your life.</p>
+              <p className="text-lg text-slate-500 font-medium">{tCategories("subtitle")}</p>
             </div>
             <Link href="/lawyers" className="text-navy font-black flex items-center group">
-              View all practice areas <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
+              {tCategories("viewAll")} <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
             </Link>
           </ScrollReveal>
 
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
             {[
-              { title: "Tenant Disputes", icon: <Building2 className="w-6 h-6" />, color: "bg-blue-500" },
-              { title: "Consumer Complaints", icon: <Briefcase className="w-6 h-6" />, color: "bg-emerald-500" },
-              { title: "Employment Conflicts", icon: <Users className="w-6 h-6" />, color: "bg-purple-500" },
-              { title: "Property Disputes", icon: <Globe className="w-6 h-6" />, color: "bg-amber-500" },
-              { title: "Contract Breaches", icon: <FileSignature className="w-6 h-6" />, color: "bg-red-500" },
-              { title: "Family Law", icon: <HeartIcon className="w-6 h-6" />, color: "bg-pink-500" }
+              { title: tCategories("list.tenant"), icon: <Building2 className="w-6 h-6" />, color: "bg-blue-500" },
+              { title: tCategories("list.consumer"), icon: <Briefcase className="w-6 h-6" />, color: "bg-emerald-500" },
+              { title: tCategories("list.employment"), icon: <Users className="w-6 h-6" />, color: "bg-purple-500" },
+              { title: tCategories("list.property"), icon: <Globe className="w-6 h-6" />, color: "bg-amber-500" },
+              { title: tCategories("list.contract"), icon: <FileSignature className="w-6 h-6" />, color: "bg-red-500" },
+              { title: tCategories("list.family"), icon: <HeartIcon className="w-6 h-6" />, color: "bg-pink-500" }
             ].map((cat, i) => (
               <StaggerItem key={i} direction="scale">
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.04, y: -6, boxShadow: "0 20px 40px rgba(0,0,0,0.08)" }}
                   transition={{ type: "spring", stiffness: 300 }}
                   className="p-8 bg-white rounded-[32px] border border-slate-100 shadow-sm flex items-center gap-6 group cursor-pointer hover:border-emerald-200 transition-all"
@@ -671,15 +676,11 @@ export default function HomeClient() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h3 className="text-4xl font-black text-navy mb-20">
-              <WordReveal text="Success Stories" />
+              <WordReveal text={tTestimonials("title")} />
             </h3>
           </ScrollReveal>
           <StaggerContainer className="grid lg:grid-cols-3 gap-8" staggerDelay={0.18}>
-            {[
-              { name: "Rahul Sharma", text: "Successfully resolved my rental deposit dispute within 15 days using Justifi AI notice generation.", role: "Tenant" },
-              { name: "Priya Varma", text: "The video consultation was seamless. The lawyer was highly professional and saved me from a bad contract.", role: "Entrepreneur" },
-              { name: "S. K. Gupta", text: "Truly futuristic. My consumer case was stuck for 2 years. AI analyzer gave me the right path immediately.", role: "Consumer" }
-            ].map((t, i) => (
+            {tTestimonials.raw("list").map((t, i) => (
               <StaggerItem key={i} direction="up">
                 <TiltCard>
                   <motion.div
@@ -687,7 +688,7 @@ export default function HomeClient() {
                     className="p-10 bg-[#fafafa] rounded-[40px] text-left border border-slate-100 flex flex-col justify-between transition-all duration-500 h-full"
                   >
                     <div className="flex gap-1 mb-6">
-                      {[1,2,3,4,5].map(s => (
+                      {[1, 2, 3, 4, 5].map(s => (
                         <motion.div key={s} initial={{ opacity: 0, scale: 0 }} whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }} transition={{ delay: 0.3 + s * 0.05, type: "spring" }}
                         >
@@ -715,42 +716,40 @@ export default function HomeClient() {
             <div className="grid lg:grid-cols-4 gap-16 mb-24">
               <div className="col-span-2">
                 <Link href="/" className="flex items-center gap-3 mb-8">
-                  <motion.div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center"
-                    whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}
-                  >
+                  <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center">
                     <Scale className="w-6 h-6 text-navy" />
-                  </motion.div>
+                  </div>
                   <span className="text-3xl font-black text-white tracking-tighter">Justifi</span>
                 </Link>
                 <p className="text-xl text-slate-400 max-w-sm mb-12">
-                  Empowering citizens with AI-driven legal justice and professional management.
+                  {tFooter("brandDesc")}
                 </p>
               </div>
-              
+
               <div>
-                <h5 className="text-white font-black text-lg mb-8">Resources</h5>
+                <h5 className="text-white font-black text-lg mb-8">{tFooter("resources")}</h5>
                 <ul className="space-y-4">
-                  <li><Link href="/blog" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">Legal Knowledge</Link></li>
-                  <li><Link href="/help-center" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">FAQ</Link></li>
-                  <li><Link href="/privacy-policy" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">Privacy Policy</Link></li>
+                  <li><Link href="/blog" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">{tNavbar("legalKnowledge")}</Link></li>
+                  <li><Link href="/help-center" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">{tFooter("helpCenter")}</Link></li>
+                  <li><Link href="/privacy-policy" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">{tFooter("privacy")}</Link></li>
                 </ul>
               </div>
 
               <div>
-                <h5 className="text-white font-black text-lg mb-8">Connect</h5>
+                <h5 className="text-white font-black text-lg mb-8">{tFooter("connect")}</h5>
                 <ul className="space-y-4">
-                  <li><Link href="/lawyers" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">Contact Lawyers</Link></li>
-                  <li><Link href="/about" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">About Us</Link></li>
-                  <li><Link href="/terms-and-conditions" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">Terms</Link></li>
+                  <li><Link href="/lawyers" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">{tNavbar("lawyers")}</Link></li>
+                  <li><Link href="/about" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">{tNavbar("howItWorks")}</Link></li>
+                  <li><Link href="/terms-and-conditions" className="text-slate-400 hover:text-emerald-400 font-medium transition-colors">{tFooter("terms")}</Link></li>
                 </ul>
               </div>
             </div>
-            
+
             <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-              <p className="text-slate-500 font-bold text-sm">© 2026 Justifi AI. All rights reserved.</p>
+              <p className="text-slate-500 font-bold text-sm">{tFooter("rights")}</p>
               <div className="flex items-center gap-8">
-                 <ShieldCheck className="w-6 h-6 text-slate-600" />
-                 <Gavel className="w-6 h-6 text-slate-600" />
+                <ShieldCheck className="w-6 h-6 text-slate-600" />
+                <Gavel className="w-6 h-6 text-slate-600" />
               </div>
             </div>
           </div>

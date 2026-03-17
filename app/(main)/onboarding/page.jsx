@@ -237,8 +237,14 @@ export default function OnboardingPage() {
               <Input
                 id="phone"
                 type="tel"
-                placeholder="e.g. +91 9876543210"
+                placeholder="e.g. 9876543210"
                 {...register("phone")}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length > 10) return;
+                  setValue("phone", value);
+                }}
+                pattern="[0-9]{10}"
               />
               {errors.phone && (
                 <p className="text-sm text-red-500">{errors.phone.message}</p>

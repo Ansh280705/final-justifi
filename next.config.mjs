@@ -1,26 +1,7 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   experimental: {
-//     serverComponentsHmrCache: false,
-//   },
+import createNextIntlPlugin from 'next-intl/plugin';
 
-//   productionBrowserSourceMaps: false,
+const withNextIntl = createNextIntlPlugin();
 
-//   images: {
-//     remotePatterns: [
-//       {
-//         protocol: "https",
-//         hostname: "img.clerk.com",
-//       },
-//       {
-//         protocol: "https",
-//         hostname: "res.cloudinary.com", // 👈 REQUIRED for blog images
-//       },
-//     ],
-//   },
-// };
-
-// export default nextConfig;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -47,4 +28,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

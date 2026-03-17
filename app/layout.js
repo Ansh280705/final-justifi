@@ -12,6 +12,8 @@ import { Toaster } from "sonner";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SOSButton from "@/components/SOSButton";
 import PaymentToast from "@/components/payment-toast";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, getLocale } from 'next-intl/server';
 
 /* =========================
    FONT SETUP
@@ -34,7 +36,7 @@ export const metadata = {
     "Justifi is a smart case and client management platform for modern legal professionals, enabling online consultations, digital case records, scheduling, billing, and seamless law firm workflows in one secure system.",
 
   keywords: [
-      // Brand
+    // Brand
     "Justifi",
 
     // Core product
@@ -133,100 +135,104 @@ export const viewport = {
    ========================= */
 export default async function RootLayout({ children }) {
   const user = await checkUser(); // Server-side user check
+  const locale = await getLocale();
+  const messages = await getMessages();
 
   return (
-    <ClerkProvider
-      appearance={{
-        theme: "simple",
-        layout: {
-          showLogo: false,
-          logoText: "Justifi",
-          socialButtonsVariant: "none",
-        },
-      }}
-    >
-      <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+    <NextIntlClientProvider messages={messages} locale={locale}>
+      <ClerkProvider
+        appearance={{
+          theme: "simple",
+          layout: {
+            showLogo: false,
+            logoText: "Justifi",
+            socialButtonsVariant: "none",
+          },
+        }}
+      >
+        <html lang="en" suppressHydrationWarning>
+          <body className={inter.className}>
 
-          {/* =========================
+            {/* =========================
              GOOGLE ANALYTICS
              ========================= */}
-          <Script
-            src="https://www.googletagmanager.com/gtag/js?id=G-GXCHKJRJ01"
-            strategy="afterInteractive"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-GXCHKJRJ01"
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'G-GXCHKJRJ01');
             `}
-          </Script>
+            </Script>
 
-          {/* =========================
+            {/* =========================
              🔥 GOOGLE LOGO FIX (IMPORTANT)
              This makes logo appear in Google search
              ========================= */}
-          <Script
-            id="organization-schema"
-            type="application/ld+json"
-            strategy="afterInteractive"
-          >
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Justifi",
-              url: "https://Justifi.co.in",
-              logo: "https://Justifi.co.in/justifi-logo.png",
-            })}
-          </Script>
+            <Script
+              id="organization-schema"
+              type="application/ld+json"
+              strategy="afterInteractive"
+            >
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Justifi",
+                url: "https://Justifi.co.in",
+                logo: "https://Justifi.co.in/justifi-logo.png",
+              })}
+            </Script>
 
-          {/* =========================
+            {/* =========================
              WEBSITE SCHEMA (OPTIONAL)
              ========================= */}
-          <Script
-            id="website-schema"
-            type="application/ld+json"
-            strategy="afterInteractive"
-          >
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "Justifi",
-              url: "https://Justifi.co.in",
-            })}
-          </Script>
+            <Script
+              id="website-schema"
+              type="application/ld+json"
+              strategy="afterInteractive"
+            >
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Justifi",
+                url: "https://Justifi.co.in",
+              })}
+            </Script>
 
-          {/* =========================
+            {/* =========================
              APP PROVIDERS
              ========================= */}
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <CreditsProvider initialCredits={user?.credits || 0}>
-              <PageLoader user={user}>
-                <Header user={user} />
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <CreditsProvider initialCredits={user?.credits || 0}>
+                <PageLoader user={user}>
+                  <Header user={user} />
 
-                <Toaster richColors position="top-center" />
+                  <Toaster richColors position="top-center" />
 
-                <main className="min-h-screen">
-                  {children}
-                </main>
+                  <main className="min-h-screen">
+                    {children}
+                  </main>
 
-                <Footer />
-                <SOSButton userRole={user?.role} />
-                <WhatsAppButton />
-                <PaymentToast />
-              </PageLoader>
-            </CreditsProvider>
-          </ThemeProvider>
+                  <Footer />
+                  <SOSButton userRole={user?.role} />
+                  <WhatsAppButton />
+                  <PaymentToast />
+                </PageLoader>
+              </CreditsProvider>
+            </ThemeProvider>
 
-        </body>
-      </html>
-    </ClerkProvider>
+          </body>
+        </html>
+      </ClerkProvider>
+    </NextIntlClientProvider>
   );
 }

@@ -97,10 +97,15 @@ const CaseForm = ({ lawyerId, slot, onBack, onComplete }) => {
           <Label htmlFor="clientPhone">Phone Number</Label>
           <input
             id="clientPhone"
-            placeholder="e.g. +91 81094 24356"
+            placeholder="e.g. 8109424356"
             value={clientPhone}
-            onChange={(e) => setClientPhone(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value.length > 10) return;
+              setClientPhone(value);
+            }}
             className="w-full border rounded-lg p-2"
+            pattern="[0-9]{10}"
             required
           />
         </div>

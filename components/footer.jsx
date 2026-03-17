@@ -27,7 +27,11 @@ import { useState, useEffect } from "react";
 import { getEmergencyContacts, updateEmergencyContacts } from "@/actions/safety";
 import { toast } from "sonner";
 
+import { useTranslations } from "next-intl";
+
 export default function Footer() {
+  const t = useTranslations("Footer");
+  const tNav = useTranslations("Navbar");
   const [modal, setModal] = useState(null);
   const [emails, setEmails] = useState([]);
   const [newEmail, setNewEmail] = useState("");
@@ -71,15 +75,15 @@ export default function Footer() {
         <div className="relative overflow-hidden rounded-3xl bg-card border border-border p-10 md:p-14">
           {/* BACKGROUND DECOR */}
           <div className="absolute inset-0 pointer-events-none opacity-5">
-             <div className="absolute top-0 right-0 p-8">
-                <Scale className="w-64 h-64 text-client rotate-12" />
-             </div>
+            <div className="absolute top-0 right-0 p-8">
+              <Scale className="w-64 h-64 text-client rotate-12" />
+            </div>
           </div>
 
           {/* CONTENT */}
           <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
             <h2 className="text-2xl md:text-3xl font-semibold leading-snug">
-              Consult trusted experts online using a simple credit-based system.
+              {t("cta")}
             </h2>
 
             <div className="flex items-center gap-4 md:justify-end">
@@ -89,7 +93,7 @@ export default function Footer() {
                 className="rounded-full bg-primary px-6 py-2 text-white"
               >
                 <Link href="/onboarding">
-                  Get Started <ArrowRight className="h-5 w-5 ml-1" />
+                  {t("getStarted")} <ArrowRight className="h-5 w-5 ml-1" />
                 </Link>
               </Button>
             </div>
@@ -109,36 +113,32 @@ export default function Footer() {
         <div className="relative z-10 container mx-auto px-6 lg:px-20 grid grid-cols-2 md:grid-cols-6 gap-10 text-sm text-muted-foreground">
           {/* Brand */}
           <div className="col-span-2">
-            <div className="flex items-center ">
-              <Image
-                src="/justifi-logo.png"
-                alt="Justifi Logo"
-                width={40}
-                height={40}
-                className="object-contain"
-              />
-              <h3 className="text-lg font-semibold text-foreground">
-                Justi<span className="text-client">fi</span>
-              </h3>
-            </div>
+            <Link href="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-navy rounded-xl flex items-center justify-center shadow-lg shadow-navy/20">
+                <Scale className="w-5 h-5 text-emerald-400" />
+              </div>
+              <span className="text-2xl font-black tracking-tighter text-navy flex items-baseline">
+                Justifi
+                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full ml-0.5"></div>
+              </span>
+            </Link>
             <p className="mt-3 max-w-sm">
-              Online session scheduling made simple, secure, and accessible for
-              everyone.
+              {t("brandDesc")}
             </p>
           </div>
 
           {/* Product */}
           <div>
-            <h4 className="font-semibold text-foreground mb-3">Product</h4>
+            <h4 className="font-semibold text-foreground mb-3">{t("product")}</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/pricing" className="hover:text-client">
-                  Pricing
+                  {t("pricing")}
                 </Link>
               </li>
               <li>
                 <Link href="/credits" className="hover:text-client">
-                  Credits
+                  {t("credits")}
                 </Link>
               </li>
             </ul>
@@ -146,7 +146,7 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h4 className="font-semibold text-foreground mb-3">Resources</h4>
+            <h4 className="font-semibold text-foreground mb-3">{t("resources")}</h4>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -155,12 +155,12 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-client"
                 >
-                  Help Center
+                  {t("helpCenter")}
                 </Link>
               </li>
               <li>
                 <Link href="/blog" className="hover:text-client">
-                  Blogs
+                  {t("blogs")}
                 </Link>
               </li>
             </ul>
@@ -168,7 +168,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold text-foreground mb-3">Company</h4>
+            <h4 className="font-semibold text-foreground mb-3">{t("company")}</h4>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -177,7 +177,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-client"
                 >
-                  About Us
+                  {t("aboutUs")}
                 </Link>
               </li>
               <li>
@@ -187,7 +187,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-client"
                 >
-                  Contact Us
+                  {t("contactUs")}
                 </Link>
               </li>
               <li>
@@ -197,7 +197,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-client"
                 >
-                  Developers
+                  {t("developers")}
                 </Link>
               </li>
               <li>
@@ -207,14 +207,14 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-client"
                 >
-                  Legal Information
+                  {t("legalInfo")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground mb-3">Connect</h4>
+            <h4 className="font-semibold text-foreground mb-3">{t("connect")}</h4>
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setModal("sos")}
@@ -239,29 +239,27 @@ export default function Footer() {
         {/* ================= BOTTOM BAR ================= */}
         <div className="mt-20">
           <div className="container mx-auto px-6 lg:px-20 border-t border-border/60 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-            <span>🟢 All systems operational</span>
+            <span>🟢 {t("systems")}</span>
 
             <div className="flex gap-4">
               <Link href="/privacy-policy" className="hover:text-client">
-                Privacy-Policy
+                {t("privacy")}
               </Link>
               <Link href="/terms-and-conditions" className="hover:text-client">
-                Terms & Conditions
+                {t("terms")}
               </Link>
               <Link href="/refund-policy" className="hover:text-client">
-                Returns & Refunds
+                {t("refundPolicyLink")}
               </Link>
             </div>
           </div>
           <div className="container mx-auto px-6 lg:px-20 py-4 text-xs text-muted-foreground text-center border-t border-border/60 flex flex-col items-center gap-2">
             <span>© {new Date().getFullYear()} Justifi</span>
-            <p className="mt-2">
-              <strong>Refund Policy:</strong> If we approve your refund, we will process and credit it to your bank account within 3-5 days.
+            <p className="mt-2 text-center text-[10px] leading-relaxed max-w-2xl">
+              <strong>{t("refundPolicyLink")}:</strong> {t("refundPolicyText")}
             </p>
-            <p className="mt-2">
-              Justifi is a technology platform and does not provide legal
-              consultation, advice, or representation. All services
-              are provided independently by professionals using the platform.
+            <p className="mt-2 text-center text-[10px] leading-relaxed max-w-2xl">
+              {t("disclaimer")}
             </p>
           </div>
         </div>
@@ -285,8 +283,8 @@ export default function Footer() {
                     <AlertCircle className="w-6 h-6 text-red-500" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-gray-900">SOS Settings</h4>
-                    <p className="text-xs text-muted-foreground">Emergency Alerts for Family & Friends</p>
+                    <h4 className="text-xl font-bold text-gray-900">{t("sosTitle")}</h4>
+                    <p className="text-xs text-muted-foreground">{t("sosDesc")}</p>
                   </div>
                 </div>
 

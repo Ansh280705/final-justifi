@@ -55,7 +55,7 @@ export async function getLawyerById(lawyerId) {
 
 export async function getAvailableTimeSlots(lawyerId) {
 
-    const Slot_duration=2;
+  const Slot_duration = 2;
   try {
     // Validate lawyer existence and verification
     const lawyer = await db.user.findUnique({
@@ -81,12 +81,12 @@ export async function getAvailableTimeSlots(lawyerId) {
     // if (!availability) {
     //   throw new Error("No availability set by lawyer");
     // }
-if (!availability) {
-  return {
-    days: [],
-    message: "Lawyer has not set availability yet",
-  };
-}
+    if (!availability) {
+      return {
+        days: [],
+        message: "Lawyer has not set availability yet",
+      };
+    }
     // Get the next 4 days
     const now = new Date();
     const days = [now, addDays(now, 1), addDays(now, 2), addDays(now, 3)];
@@ -185,8 +185,8 @@ if (!availability) {
   }
 }
 
-export async function bookCase(formData){
- const { userId } = await auth();
+export async function bookCase(formData) {
+  const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
   try {
@@ -201,13 +201,17 @@ export async function bookCase(formData){
     const clientDescription = formData.get("description") || null;
 
     // New client info fields
-  const clientName = formData.get("clientName");
-const clientPhone = formData.get("clientPhone");
-const clientAge = parseInt(formData.get("clientAge"));
-const clientGender = formData.get("clientGender");
+    const clientName = formData.get("clientName");
+    const clientPhone = formData.get("clientPhone");
+    const clientAge = parseInt(formData.get("clientAge"));
+    const clientGender = formData.get("clientGender");
 
     if (!lawyerId || !startTime || !endTime || !clientName || !clientPhone || !clientAge || !clientGender) {
       throw new Error("All fields are required");
+    }
+
+    if (!/^\d{10}$/.test(clientPhone)) {
+      throw new Error("Invalid contact number. Must be exactly 10 digits.");
     }
 
     // Check if the lawyer exists and is verified
@@ -393,18 +397,18 @@ export async function generateVideoToken(formData) {
     const millisecondsUntilEnd = caseEnd.getTime() - Date.now();
 
     if (millisecondsUntilEnd > 0) {
-  setTimeout(async () => {
-  try {
-    await db.legalCase.update({
-      where: { id: caseId },
-      data: { status: "COMPLETED" },
-    });
+      setTimeout(async () => {
+        try {
+          await db.legalCase.update({
+            where: { id: caseId },
+            data: { status: "COMPLETED" },
+          });
 
-    console.log("Session marked as completed");
-  } catch (err) {
-    console.error("Failed to end session:", err);
-  }
-}, millisecondsUntilEnd);
+          console.log("Session marked as completed");
+        } catch (err) {
+          console.error("Failed to end session:", err);
+        }
+      }, millisecondsUntilEnd);
     }
 
     return {
@@ -419,7 +423,7 @@ export async function generateVideoToken(formData) {
 }
 
 export async function getCaseById(id) {
- const legalCase = await db.legalCase.findUnique({
+  const legalCase = await db.legalCase.findUnique({
     where: { id },
     include: {
       client: {

@@ -8,8 +8,10 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/actions/onboarding";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 export default async function ClientCasesPage() {
+  const t = await getTranslations("Dashboard");
   const user = await getCurrentUser();
 
   if (!user || user.role !== "CLIENT") {
@@ -23,17 +25,17 @@ export default async function ClientCasesPage() {
     <div className="container mx-auto px-4 py-8">
       <PageHeader
         icon={<Gavel />}
-        title="My Cases"
+        title={t("title")}
         backLink="/lawyers"
-        backLabel="Find Lawyers"
+        backLabel={t("backLabel")}
       />
 
       <Card className="border-emerald-900/20">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-black flex justify-between">
-          
-            <h4>Your Scheduled Case Sessions</h4>
-           <Link href="/legal-advice"> <Button variant="outline" className="border-client bg-muted-background">Legal Advice</Button></Link>
+
+            <h4>{t("sessionsTitle")}</h4>
+            <Link href="/legal-advice"> <Button variant="outline" className="border-client bg-muted-background">{t("legalAdvice")}</Button></Link>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -55,11 +57,10 @@ export default async function ClientCasesPage() {
             <div className="text-center py-8">
               <Calendar className="h-12 w-12 mx-auto text-muted-foreground mb-3" />
               <h3 className="text-xl font-medium text-black mb-2">
-                No cases scheduled
+                {t("noCases")}
               </h3>
               <p className="text-muted-foreground">
-                You don&apos;t have any legal consultations scheduled yet. Browse our
-                verified lawyers and book your first session.
+                {t("noCasesDesc")}
               </p>
             </div>
           )}
@@ -70,9 +71,9 @@ export default async function ClientCasesPage() {
         <CardHeader>
           <CardTitle className="text-xl font-bold text-black flex items-center gap-2">
             <ShieldAlert className="text-emerald-600" />
-            <h4>Your Active Disputes</h4>
+            <h4>{t("disputesTitle")}</h4>
           </CardTitle>
-          <CardDescription>Legal notices and mediation cases filed via Justifi AI</CardDescription>
+          <CardDescription>{t("disputesDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           {disputeError ? (
@@ -97,11 +98,11 @@ export default async function ClientCasesPage() {
                       <div className="flex items-center gap-2">
                         {dispute.status === "RESOLVED" ? (
                           <div className="flex items-center gap-1 text-emerald-600 text-[10px] font-bold">
-                            <CheckCircle2 size={12} /> Resolved
+                            <CheckCircle2 size={12} /> {t("resolved")}
                           </div>
                         ) : (
                           <div className="text-[10px] text-gray-400">
-                             Opponent: {dispute.opponentName || "Finding..."}
+                            {t("opponent")}: {dispute.opponentName || t("finding")}
                           </div>
                         )}
                       </div>
@@ -117,14 +118,14 @@ export default async function ClientCasesPage() {
             <div className="text-center py-8">
               <ShieldAlert className="h-12 w-12 mx-auto text-muted-foreground mb-3 opacity-20" />
               <h3 className="text-lg font-medium text-black mb-2">
-                No active disputes
+                {t("noDisputes")}
               </h3>
               <p className="text-sm text-muted-foreground">
-                You haven&apos;t filed any automated disputes yet.
+                {t("noDisputesDesc")}
               </p>
               <Link href="/submit-dispute" className="mt-4 inline-block">
                 <Button variant="outline" size="sm" className="border-emerald-600 text-emerald-600">
-                  File Your First Dispute
+                  {t("fileFirst")}
                 </Button>
               </Link>
             </div>
@@ -133,4 +134,4 @@ export default async function ClientCasesPage() {
       </Card>
     </div>
   );
-}
+}

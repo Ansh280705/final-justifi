@@ -76,7 +76,7 @@ export default function SubmitDisputePage() {
   const submitInitialDetails = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     const data = new FormData();
     Object.keys(formData).forEach(key => data.append(key, formData[key]));
 
@@ -198,7 +198,7 @@ export default function SubmitDisputePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ disputeId, opponentName, opponentEmail })
       });
-      
+
       const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -220,24 +220,24 @@ export default function SubmitDisputePage() {
   };
 
 
-  if (!isLoaded) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="animate-spin h-8 w-8 text-emerald-600"/></div>;
+  if (!isLoaded) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="animate-spin h-8 w-8 text-emerald-600" /></div>;
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-12">
       <div className="max-w-3xl mx-auto px-4">
-        
+
         {/* Progress Bar */}
         <div className="mb-8 relative">
           <div className="flex justify-between mb-2">
             {["Details", "Interview", "Analysis", "Notice"].map((label, i) => (
-              <span key={i} className={`text-xs font-semibold uppercase ${step >= i+1 ? 'text-emerald-600' : 'text-gray-400'}`}>
+              <span key={i} className={`text-xs font-semibold uppercase ${step >= i + 1 ? 'text-emerald-600' : 'text-gray-400'}`}>
                 {label}
               </span>
             ))}
           </div>
           <div className="h-2 bg-gray-200 rounded-full w-full">
-            <div 
-              className="h-2 bg-emerald-500 rounded-full transition-all duration-500 ease-in-out" 
+            <div
+              className="h-2 bg-emerald-500 rounded-full transition-all duration-500 ease-in-out"
               style={{ width: `${((step - 1) / 3) * 100}%` }}
             ></div>
           </div>
@@ -248,7 +248,7 @@ export default function SubmitDisputePage() {
           <Card className="border-emerald-100 shadow-md">
             <CardHeader className="bg-emerald-50/50 border-b border-emerald-100">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><ShieldAlert size={24}/></div>
+                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><ShieldAlert size={24} /></div>
                 <div>
                   <CardTitle className="text-xl">File a New Dispute</CardTitle>
                   <CardDescription>Tell us the basic facts. Our AI will guide you through the rest.</CardDescription>
@@ -267,15 +267,27 @@ export default function SubmitDisputePage() {
                     <Input id="complainantEmail" type="email" value={formData.complainantEmail} onChange={handleInputChange} required />
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="complainantPhone">Phone Number</Label>
-                    <Input id="complainantPhone" type="tel" value={formData.complainantPhone} onChange={handleInputChange} required />
+                    <Input
+                      id="complainantPhone"
+                      type="tel"
+                      value={formData.complainantPhone}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (value.length > 10) return;
+                        setFormData((prev) => ({ ...prev, complainantPhone: value }));
+                      }}
+                      placeholder="e.g. 9876543210"
+                      pattern="[0-9]{10}"
+                      required
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="category">Dispute Category</Label>
-                    <Select onValueChange={(v) => setFormData(p => ({...p, category: v}))} required>
+                    <Select onValueChange={(v) => setFormData(p => ({ ...p, category: v }))} required>
                       <SelectTrigger><SelectValue placeholder="Select Category..." /></SelectTrigger>
                       <SelectContent>
                         <SelectItem value="Consumer Complaint">Consumer Complaint</SelectItem>
@@ -291,9 +303,9 @@ export default function SubmitDisputePage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="description">Brief Initial Description</Label>
-                  <Textarea 
-                    id="description" 
-                    placeholder="E.g., I bought a fridge from XYZ Electronics but it was defective. They refuse to replace it." 
+                  <Textarea
+                    id="description"
+                    placeholder="E.g., I bought a fridge from XYZ Electronics but it was defective. They refuse to replace it."
                     rows={4}
                     value={formData.description}
                     onChange={handleInputChange}
@@ -317,7 +329,7 @@ export default function SubmitDisputePage() {
           <Card className="border-emerald-100 shadow-md flex flex-col h-[600px]">
             <CardHeader className="bg-emerald-50/50 border-b border-emerald-100 flex-shrink-0">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><Bot size={24}/></div>
+                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><Bot size={24} /></div>
                 <div>
                   <CardTitle className="text-xl">AI Fact-Finding</CardTitle>
                   <CardDescription>Justifi AI needs a few more details to assess your legal standing.</CardDescription>
@@ -327,11 +339,10 @@ export default function SubmitDisputePage() {
             <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
               {chatHistory.filter(m => m.role === 'ai' || m.role === 'user').map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] rounded-2xl p-3 px-4 ${
-                    msg.role === 'user' 
-                      ? 'bg-emerald-600 text-white rounded-br-sm' 
+                  <div className={`max-w-[80%] rounded-2xl p-3 px-4 ${msg.role === 'user'
+                      ? 'bg-emerald-600 text-white rounded-br-sm'
                       : 'bg-white border text-gray-800 rounded-bl-sm shadow-sm'
-                  }`}>
+                    }`}>
                     {msg.content}
                   </div>
                 </div>
@@ -348,7 +359,7 @@ export default function SubmitDisputePage() {
             </CardContent>
             <div className="p-4 bg-white border-t">
               <div className="flex gap-2">
-                <Input 
+                <Input
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   placeholder="Type your answer..."
@@ -368,7 +379,7 @@ export default function SubmitDisputePage() {
           <Card className="border-emerald-100 shadow-md">
             <CardHeader className="bg-emerald-50/50 border-b border-emerald-100">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><BrainCircuit size={24}/></div>
+                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><BrainCircuit size={24} /></div>
                 <div>
                   <CardTitle className="text-xl">Legal Assessment</CardTitle>
                   <CardDescription>Based on your input, here is the AI's legal evaluation of your case.</CardDescription>
@@ -409,7 +420,7 @@ export default function SubmitDisputePage() {
           <Card className="border-emerald-100 shadow-md">
             <CardHeader className="bg-emerald-50/50 border-b border-emerald-100">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><FileText size={24}/></div>
+                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><FileText size={24} /></div>
                 <div>
                   <CardTitle className="text-xl">Formal Legal Notice</CardTitle>
                   <CardDescription>Review the drafted notice. Provide the opponent's email to send it immediately.</CardDescription>
@@ -427,23 +438,23 @@ export default function SubmitDisputePage() {
                   <div className="bg-gray-50 border whitespace-pre-wrap p-6 text-sm font-mono text-gray-800 rounded-lg max-h-[400px] overflow-y-auto">
                     {noticeDraft}
                   </div>
-                  
+
                   <div className="pt-4 border-t border-gray-100">
                     <Label>Opponent's Email Address</Label>
                     <div className="flex gap-4 mt-2">
-                      <Input 
-                        type="email" 
-                        value={opponentEmail} 
-                        onChange={e => setOpponentEmail(e.target.value)} 
-                        placeholder="opponent@example.com" 
+                      <Input
+                        type="email"
+                        value={opponentEmail}
+                        onChange={e => setOpponentEmail(e.target.value)}
+                        placeholder="opponent@example.com"
                         className="max-w-md"
                       />
-                      <Button 
-                        onClick={sendNoticeRequest} 
-                        disabled={!opponentEmail || loading || !opponentEmail.includes("@")} 
+                      <Button
+                        onClick={sendNoticeRequest}
+                        disabled={!opponentEmail || loading || !opponentEmail.includes("@")}
                         className="bg-blue-600 hover:bg-blue-700"
                       >
-                        {loading && noticeDraft ? <Loader2 className="animate-spin h-4 w-4 mr-2"/> : <Send className="h-4 w-4 mr-2"/>}
+                        {loading && noticeDraft ? <Loader2 className="animate-spin h-4 w-4 mr-2" /> : <Send className="h-4 w-4 mr-2" />}
                         Send Formal Notice
                       </Button>
                     </div>

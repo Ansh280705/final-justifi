@@ -194,6 +194,10 @@ export async function setUserRole(formData) {
       throw new Error("All fields are required");
     }
 
+    if (!/^\d{10}$/.test(phone)) {
+      throw new Error("Invalid contact number. Must be exactly 10 digits.");
+    }
+
     await db.user.update({
       where: { clerkUserId: userId },
       data: {

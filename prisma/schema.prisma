@@ -16,7 +16,7 @@ model User {
   clerkUserId String   @unique
   email       String   @unique
   name        String?
-  phone       String? // Added phone number for WhatsApp
+  phone       String? /// @zod.string.length(10) // Added phone number for WhatsApp
   imageUrl    String?
   role        UserRole @default(UNASSIGNED)
   createdAt   DateTime @default(now())

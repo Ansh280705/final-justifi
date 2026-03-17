@@ -2629,6 +2629,9 @@ export namespace Prisma {
       clerkUserId: string
       email: string
       name: string | null
+      /**
+       * @zod.string.length(10) // Added phone number for WhatsApp
+       */
       phone: string | null
       imageUrl: string | null
       role: $Enums.UserRole
