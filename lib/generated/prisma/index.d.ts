@@ -88,6 +88,16 @@ export type Dispute = $Result.DefaultSelection<Prisma.$DisputePayload>
  * 
  */
 export type LegalDocument = $Result.DefaultSelection<Prisma.$LegalDocumentPayload>
+/**
+ * Model Hearing
+ * 
+ */
+export type Hearing = $Result.DefaultSelection<Prisma.$HearingPayload>
+/**
+ * Model Penalty
+ * 
+ */
+export type Penalty = $Result.DefaultSelection<Prisma.$PenaltyPayload>
 
 /**
  * Enums
@@ -487,6 +497,26 @@ export class PrismaClient<
     * ```
     */
   get legalDocument(): Prisma.LegalDocumentDelegate<ExtArgs>;
+
+  /**
+   * `prisma.hearing`: Exposes CRUD operations for the **Hearing** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Hearings
+    * const hearings = await prisma.hearing.findMany()
+    * ```
+    */
+  get hearing(): Prisma.HearingDelegate<ExtArgs>;
+
+  /**
+   * `prisma.penalty`: Exposes CRUD operations for the **Penalty** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Penalties
+    * const penalties = await prisma.penalty.findMany()
+    * ```
+    */
+  get penalty(): Prisma.PenaltyDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -971,7 +1001,9 @@ export namespace Prisma {
     News: 'News',
     OfflineOffice: 'OfflineOffice',
     Dispute: 'Dispute',
-    LegalDocument: 'LegalDocument'
+    LegalDocument: 'LegalDocument',
+    Hearing: 'Hearing',
+    Penalty: 'Penalty'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -988,7 +1020,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'emergencyAlert' | 'availability' | 'legalCase' | 'creditTransaction' | 'payout' | 'blog' | 'category' | 'lawFirm' | 'legalAdvice' | 'paymentRequest' | 'news' | 'offlineOffice' | 'dispute' | 'legalDocument'
+      modelProps: 'user' | 'emergencyAlert' | 'availability' | 'legalCase' | 'creditTransaction' | 'payout' | 'blog' | 'category' | 'lawFirm' | 'legalAdvice' | 'paymentRequest' | 'news' | 'offlineOffice' | 'dispute' | 'legalDocument' | 'hearing' | 'penalty'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1979,6 +2011,138 @@ export namespace Prisma {
           count: {
             args: Prisma.LegalDocumentCountArgs<ExtArgs>,
             result: $Utils.Optional<LegalDocumentCountAggregateOutputType> | number
+          }
+        }
+      }
+      Hearing: {
+        payload: Prisma.$HearingPayload<ExtArgs>
+        fields: Prisma.HearingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HearingFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HearingFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload>
+          }
+          findFirst: {
+            args: Prisma.HearingFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HearingFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload>
+          }
+          findMany: {
+            args: Prisma.HearingFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload>[]
+          }
+          create: {
+            args: Prisma.HearingCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload>
+          }
+          createMany: {
+            args: Prisma.HearingCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.HearingDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload>
+          }
+          update: {
+            args: Prisma.HearingUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload>
+          }
+          deleteMany: {
+            args: Prisma.HearingDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HearingUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.HearingUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$HearingPayload>
+          }
+          aggregate: {
+            args: Prisma.HearingAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateHearing>
+          }
+          groupBy: {
+            args: Prisma.HearingGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<HearingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HearingCountArgs<ExtArgs>,
+            result: $Utils.Optional<HearingCountAggregateOutputType> | number
+          }
+        }
+      }
+      Penalty: {
+        payload: Prisma.$PenaltyPayload<ExtArgs>
+        fields: Prisma.PenaltyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PenaltyFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PenaltyFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload>
+          }
+          findFirst: {
+            args: Prisma.PenaltyFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PenaltyFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload>
+          }
+          findMany: {
+            args: Prisma.PenaltyFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload>[]
+          }
+          create: {
+            args: Prisma.PenaltyCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload>
+          }
+          createMany: {
+            args: Prisma.PenaltyCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.PenaltyDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload>
+          }
+          update: {
+            args: Prisma.PenaltyUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload>
+          }
+          deleteMany: {
+            args: Prisma.PenaltyDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PenaltyUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.PenaltyUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PenaltyPayload>
+          }
+          aggregate: {
+            args: Prisma.PenaltyAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregatePenalty>
+          }
+          groupBy: {
+            args: Prisma.PenaltyGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<PenaltyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PenaltyCountArgs<ExtArgs>,
+            result: $Utils.Optional<PenaltyCountAggregateOutputType> | number
           }
         }
       }
@@ -17476,6 +17640,1906 @@ export namespace Prisma {
 
 
   /**
+   * Model Hearing
+   */
+
+  export type AggregateHearing = {
+    _count: HearingCountAggregateOutputType | null
+    _avg: HearingAvgAggregateOutputType | null
+    _sum: HearingSumAggregateOutputType | null
+    _min: HearingMinAggregateOutputType | null
+    _max: HearingMaxAggregateOutputType | null
+  }
+
+  export type HearingAvgAggregateOutputType = {
+    reminders_sent: number | null
+    absences: number | null
+  }
+
+  export type HearingSumAggregateOutputType = {
+    reminders_sent: number | null
+    absences: number | null
+  }
+
+  export type HearingMinAggregateOutputType = {
+    hearing_id: string | null
+    case_id: string | null
+    hearing_date: Date | null
+    hearing_link: string | null
+    plaintiff_status: string | null
+    defendant_status: string | null
+    reminders_sent: number | null
+    absences: number | null
+    penalty_applied: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HearingMaxAggregateOutputType = {
+    hearing_id: string | null
+    case_id: string | null
+    hearing_date: Date | null
+    hearing_link: string | null
+    plaintiff_status: string | null
+    defendant_status: string | null
+    reminders_sent: number | null
+    absences: number | null
+    penalty_applied: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HearingCountAggregateOutputType = {
+    hearing_id: number
+    case_id: number
+    hearing_date: number
+    hearing_link: number
+    plaintiff_status: number
+    defendant_status: number
+    reminders_sent: number
+    absences: number
+    penalty_applied: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type HearingAvgAggregateInputType = {
+    reminders_sent?: true
+    absences?: true
+  }
+
+  export type HearingSumAggregateInputType = {
+    reminders_sent?: true
+    absences?: true
+  }
+
+  export type HearingMinAggregateInputType = {
+    hearing_id?: true
+    case_id?: true
+    hearing_date?: true
+    hearing_link?: true
+    plaintiff_status?: true
+    defendant_status?: true
+    reminders_sent?: true
+    absences?: true
+    penalty_applied?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HearingMaxAggregateInputType = {
+    hearing_id?: true
+    case_id?: true
+    hearing_date?: true
+    hearing_link?: true
+    plaintiff_status?: true
+    defendant_status?: true
+    reminders_sent?: true
+    absences?: true
+    penalty_applied?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HearingCountAggregateInputType = {
+    hearing_id?: true
+    case_id?: true
+    hearing_date?: true
+    hearing_link?: true
+    plaintiff_status?: true
+    defendant_status?: true
+    reminders_sent?: true
+    absences?: true
+    penalty_applied?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type HearingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Hearing to aggregate.
+     */
+    where?: HearingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Hearings to fetch.
+     */
+    orderBy?: HearingOrderByWithRelationInput | HearingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HearingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Hearings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Hearings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Hearings
+    **/
+    _count?: true | HearingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HearingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HearingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HearingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HearingMaxAggregateInputType
+  }
+
+  export type GetHearingAggregateType<T extends HearingAggregateArgs> = {
+        [P in keyof T & keyof AggregateHearing]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHearing[P]>
+      : GetScalarType<T[P], AggregateHearing[P]>
+  }
+
+
+
+
+  export type HearingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HearingWhereInput
+    orderBy?: HearingOrderByWithAggregationInput | HearingOrderByWithAggregationInput[]
+    by: HearingScalarFieldEnum[] | HearingScalarFieldEnum
+    having?: HearingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HearingCountAggregateInputType | true
+    _avg?: HearingAvgAggregateInputType
+    _sum?: HearingSumAggregateInputType
+    _min?: HearingMinAggregateInputType
+    _max?: HearingMaxAggregateInputType
+  }
+
+  export type HearingGroupByOutputType = {
+    hearing_id: string
+    case_id: string
+    hearing_date: Date
+    hearing_link: string
+    plaintiff_status: string
+    defendant_status: string
+    reminders_sent: number
+    absences: number
+    penalty_applied: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: HearingCountAggregateOutputType | null
+    _avg: HearingAvgAggregateOutputType | null
+    _sum: HearingSumAggregateOutputType | null
+    _min: HearingMinAggregateOutputType | null
+    _max: HearingMaxAggregateOutputType | null
+  }
+
+  type GetHearingGroupByPayload<T extends HearingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HearingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HearingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HearingGroupByOutputType[P]>
+            : GetScalarType<T[P], HearingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HearingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    hearing_id?: boolean
+    case_id?: boolean
+    hearing_date?: boolean
+    hearing_link?: boolean
+    plaintiff_status?: boolean
+    defendant_status?: boolean
+    reminders_sent?: boolean
+    absences?: boolean
+    penalty_applied?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["hearing"]>
+
+  export type HearingSelectScalar = {
+    hearing_id?: boolean
+    case_id?: boolean
+    hearing_date?: boolean
+    hearing_link?: boolean
+    plaintiff_status?: boolean
+    defendant_status?: boolean
+    reminders_sent?: boolean
+    absences?: boolean
+    penalty_applied?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $HearingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Hearing"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      hearing_id: string
+      case_id: string
+      hearing_date: Date
+      hearing_link: string
+      plaintiff_status: string
+      defendant_status: string
+      reminders_sent: number
+      absences: number
+      penalty_applied: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["hearing"]>
+    composites: {}
+  }
+
+
+  type HearingGetPayload<S extends boolean | null | undefined | HearingDefaultArgs> = $Result.GetResult<Prisma.$HearingPayload, S>
+
+  type HearingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<HearingFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: HearingCountAggregateInputType | true
+    }
+
+  export interface HearingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Hearing'], meta: { name: 'Hearing' } }
+    /**
+     * Find zero or one Hearing that matches the filter.
+     * @param {HearingFindUniqueArgs} args - Arguments to find a Hearing
+     * @example
+     * // Get one Hearing
+     * const hearing = await prisma.hearing.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends HearingFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, HearingFindUniqueArgs<ExtArgs>>
+    ): Prisma__HearingClient<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Hearing that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {HearingFindUniqueOrThrowArgs} args - Arguments to find a Hearing
+     * @example
+     * // Get one Hearing
+     * const hearing = await prisma.hearing.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends HearingFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, HearingFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__HearingClient<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Hearing that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HearingFindFirstArgs} args - Arguments to find a Hearing
+     * @example
+     * // Get one Hearing
+     * const hearing = await prisma.hearing.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends HearingFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, HearingFindFirstArgs<ExtArgs>>
+    ): Prisma__HearingClient<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Hearing that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HearingFindFirstOrThrowArgs} args - Arguments to find a Hearing
+     * @example
+     * // Get one Hearing
+     * const hearing = await prisma.hearing.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends HearingFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, HearingFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__HearingClient<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Hearings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HearingFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Hearings
+     * const hearings = await prisma.hearing.findMany()
+     * 
+     * // Get first 10 Hearings
+     * const hearings = await prisma.hearing.findMany({ take: 10 })
+     * 
+     * // Only select the `hearing_id`
+     * const hearingWithHearing_idOnly = await prisma.hearing.findMany({ select: { hearing_id: true } })
+     * 
+    **/
+    findMany<T extends HearingFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, HearingFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Hearing.
+     * @param {HearingCreateArgs} args - Arguments to create a Hearing.
+     * @example
+     * // Create one Hearing
+     * const Hearing = await prisma.hearing.create({
+     *   data: {
+     *     // ... data to create a Hearing
+     *   }
+     * })
+     * 
+    **/
+    create<T extends HearingCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, HearingCreateArgs<ExtArgs>>
+    ): Prisma__HearingClient<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Hearings.
+     *     @param {HearingCreateManyArgs} args - Arguments to create many Hearings.
+     *     @example
+     *     // Create many Hearings
+     *     const hearing = await prisma.hearing.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends HearingCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, HearingCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Hearing.
+     * @param {HearingDeleteArgs} args - Arguments to delete one Hearing.
+     * @example
+     * // Delete one Hearing
+     * const Hearing = await prisma.hearing.delete({
+     *   where: {
+     *     // ... filter to delete one Hearing
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends HearingDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, HearingDeleteArgs<ExtArgs>>
+    ): Prisma__HearingClient<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Hearing.
+     * @param {HearingUpdateArgs} args - Arguments to update one Hearing.
+     * @example
+     * // Update one Hearing
+     * const hearing = await prisma.hearing.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends HearingUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, HearingUpdateArgs<ExtArgs>>
+    ): Prisma__HearingClient<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Hearings.
+     * @param {HearingDeleteManyArgs} args - Arguments to filter Hearings to delete.
+     * @example
+     * // Delete a few Hearings
+     * const { count } = await prisma.hearing.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends HearingDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, HearingDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Hearings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HearingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Hearings
+     * const hearing = await prisma.hearing.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends HearingUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, HearingUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Hearing.
+     * @param {HearingUpsertArgs} args - Arguments to update or create a Hearing.
+     * @example
+     * // Update or create a Hearing
+     * const hearing = await prisma.hearing.upsert({
+     *   create: {
+     *     // ... data to create a Hearing
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Hearing we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends HearingUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, HearingUpsertArgs<ExtArgs>>
+    ): Prisma__HearingClient<$Result.GetResult<Prisma.$HearingPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Hearings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HearingCountArgs} args - Arguments to filter Hearings to count.
+     * @example
+     * // Count the number of Hearings
+     * const count = await prisma.hearing.count({
+     *   where: {
+     *     // ... the filter for the Hearings we want to count
+     *   }
+     * })
+    **/
+    count<T extends HearingCountArgs>(
+      args?: Subset<T, HearingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HearingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Hearing.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HearingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HearingAggregateArgs>(args: Subset<T, HearingAggregateArgs>): Prisma.PrismaPromise<GetHearingAggregateType<T>>
+
+    /**
+     * Group by Hearing.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HearingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HearingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HearingGroupByArgs['orderBy'] }
+        : { orderBy?: HearingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HearingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHearingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Hearing model
+   */
+  readonly fields: HearingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Hearing.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HearingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Hearing model
+   */ 
+  interface HearingFieldRefs {
+    readonly hearing_id: FieldRef<"Hearing", 'String'>
+    readonly case_id: FieldRef<"Hearing", 'String'>
+    readonly hearing_date: FieldRef<"Hearing", 'DateTime'>
+    readonly hearing_link: FieldRef<"Hearing", 'String'>
+    readonly plaintiff_status: FieldRef<"Hearing", 'String'>
+    readonly defendant_status: FieldRef<"Hearing", 'String'>
+    readonly reminders_sent: FieldRef<"Hearing", 'Int'>
+    readonly absences: FieldRef<"Hearing", 'Int'>
+    readonly penalty_applied: FieldRef<"Hearing", 'Boolean'>
+    readonly createdAt: FieldRef<"Hearing", 'DateTime'>
+    readonly updatedAt: FieldRef<"Hearing", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Hearing findUnique
+   */
+  export type HearingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * Filter, which Hearing to fetch.
+     */
+    where: HearingWhereUniqueInput
+  }
+
+
+  /**
+   * Hearing findUniqueOrThrow
+   */
+  export type HearingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * Filter, which Hearing to fetch.
+     */
+    where: HearingWhereUniqueInput
+  }
+
+
+  /**
+   * Hearing findFirst
+   */
+  export type HearingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * Filter, which Hearing to fetch.
+     */
+    where?: HearingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Hearings to fetch.
+     */
+    orderBy?: HearingOrderByWithRelationInput | HearingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Hearings.
+     */
+    cursor?: HearingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Hearings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Hearings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Hearings.
+     */
+    distinct?: HearingScalarFieldEnum | HearingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Hearing findFirstOrThrow
+   */
+  export type HearingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * Filter, which Hearing to fetch.
+     */
+    where?: HearingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Hearings to fetch.
+     */
+    orderBy?: HearingOrderByWithRelationInput | HearingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Hearings.
+     */
+    cursor?: HearingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Hearings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Hearings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Hearings.
+     */
+    distinct?: HearingScalarFieldEnum | HearingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Hearing findMany
+   */
+  export type HearingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * Filter, which Hearings to fetch.
+     */
+    where?: HearingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Hearings to fetch.
+     */
+    orderBy?: HearingOrderByWithRelationInput | HearingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Hearings.
+     */
+    cursor?: HearingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Hearings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Hearings.
+     */
+    skip?: number
+    distinct?: HearingScalarFieldEnum | HearingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Hearing create
+   */
+  export type HearingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Hearing.
+     */
+    data: XOR<HearingCreateInput, HearingUncheckedCreateInput>
+  }
+
+
+  /**
+   * Hearing createMany
+   */
+  export type HearingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Hearings.
+     */
+    data: HearingCreateManyInput | HearingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Hearing update
+   */
+  export type HearingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Hearing.
+     */
+    data: XOR<HearingUpdateInput, HearingUncheckedUpdateInput>
+    /**
+     * Choose, which Hearing to update.
+     */
+    where: HearingWhereUniqueInput
+  }
+
+
+  /**
+   * Hearing updateMany
+   */
+  export type HearingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Hearings.
+     */
+    data: XOR<HearingUpdateManyMutationInput, HearingUncheckedUpdateManyInput>
+    /**
+     * Filter which Hearings to update
+     */
+    where?: HearingWhereInput
+  }
+
+
+  /**
+   * Hearing upsert
+   */
+  export type HearingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Hearing to update in case it exists.
+     */
+    where: HearingWhereUniqueInput
+    /**
+     * In case the Hearing found by the `where` argument doesn't exist, create a new Hearing with this data.
+     */
+    create: XOR<HearingCreateInput, HearingUncheckedCreateInput>
+    /**
+     * In case the Hearing was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HearingUpdateInput, HearingUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Hearing delete
+   */
+  export type HearingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+    /**
+     * Filter which Hearing to delete.
+     */
+    where: HearingWhereUniqueInput
+  }
+
+
+  /**
+   * Hearing deleteMany
+   */
+  export type HearingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Hearings to delete
+     */
+    where?: HearingWhereInput
+  }
+
+
+  /**
+   * Hearing without action
+   */
+  export type HearingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hearing
+     */
+    select?: HearingSelect<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model Penalty
+   */
+
+  export type AggregatePenalty = {
+    _count: PenaltyCountAggregateOutputType | null
+    _avg: PenaltyAvgAggregateOutputType | null
+    _sum: PenaltySumAggregateOutputType | null
+    _min: PenaltyMinAggregateOutputType | null
+    _max: PenaltyMaxAggregateOutputType | null
+  }
+
+  export type PenaltyAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type PenaltySumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type PenaltyMinAggregateOutputType = {
+    penalty_id: string | null
+    case_id: string | null
+    user_id: string | null
+    amount: number | null
+    reason: string | null
+    timestamp: Date | null
+    status: string | null
+  }
+
+  export type PenaltyMaxAggregateOutputType = {
+    penalty_id: string | null
+    case_id: string | null
+    user_id: string | null
+    amount: number | null
+    reason: string | null
+    timestamp: Date | null
+    status: string | null
+  }
+
+  export type PenaltyCountAggregateOutputType = {
+    penalty_id: number
+    case_id: number
+    user_id: number
+    amount: number
+    reason: number
+    timestamp: number
+    status: number
+    _all: number
+  }
+
+
+  export type PenaltyAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type PenaltySumAggregateInputType = {
+    amount?: true
+  }
+
+  export type PenaltyMinAggregateInputType = {
+    penalty_id?: true
+    case_id?: true
+    user_id?: true
+    amount?: true
+    reason?: true
+    timestamp?: true
+    status?: true
+  }
+
+  export type PenaltyMaxAggregateInputType = {
+    penalty_id?: true
+    case_id?: true
+    user_id?: true
+    amount?: true
+    reason?: true
+    timestamp?: true
+    status?: true
+  }
+
+  export type PenaltyCountAggregateInputType = {
+    penalty_id?: true
+    case_id?: true
+    user_id?: true
+    amount?: true
+    reason?: true
+    timestamp?: true
+    status?: true
+    _all?: true
+  }
+
+  export type PenaltyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Penalty to aggregate.
+     */
+    where?: PenaltyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Penalties to fetch.
+     */
+    orderBy?: PenaltyOrderByWithRelationInput | PenaltyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PenaltyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Penalties from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Penalties.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Penalties
+    **/
+    _count?: true | PenaltyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PenaltyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PenaltySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PenaltyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PenaltyMaxAggregateInputType
+  }
+
+  export type GetPenaltyAggregateType<T extends PenaltyAggregateArgs> = {
+        [P in keyof T & keyof AggregatePenalty]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePenalty[P]>
+      : GetScalarType<T[P], AggregatePenalty[P]>
+  }
+
+
+
+
+  export type PenaltyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PenaltyWhereInput
+    orderBy?: PenaltyOrderByWithAggregationInput | PenaltyOrderByWithAggregationInput[]
+    by: PenaltyScalarFieldEnum[] | PenaltyScalarFieldEnum
+    having?: PenaltyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PenaltyCountAggregateInputType | true
+    _avg?: PenaltyAvgAggregateInputType
+    _sum?: PenaltySumAggregateInputType
+    _min?: PenaltyMinAggregateInputType
+    _max?: PenaltyMaxAggregateInputType
+  }
+
+  export type PenaltyGroupByOutputType = {
+    penalty_id: string
+    case_id: string
+    user_id: string
+    amount: number
+    reason: string
+    timestamp: Date
+    status: string
+    _count: PenaltyCountAggregateOutputType | null
+    _avg: PenaltyAvgAggregateOutputType | null
+    _sum: PenaltySumAggregateOutputType | null
+    _min: PenaltyMinAggregateOutputType | null
+    _max: PenaltyMaxAggregateOutputType | null
+  }
+
+  type GetPenaltyGroupByPayload<T extends PenaltyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PenaltyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PenaltyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PenaltyGroupByOutputType[P]>
+            : GetScalarType<T[P], PenaltyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PenaltySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    penalty_id?: boolean
+    case_id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    reason?: boolean
+    timestamp?: boolean
+    status?: boolean
+  }, ExtArgs["result"]["penalty"]>
+
+  export type PenaltySelectScalar = {
+    penalty_id?: boolean
+    case_id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    reason?: boolean
+    timestamp?: boolean
+    status?: boolean
+  }
+
+
+  export type $PenaltyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Penalty"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      penalty_id: string
+      case_id: string
+      user_id: string
+      amount: number
+      reason: string
+      timestamp: Date
+      status: string
+    }, ExtArgs["result"]["penalty"]>
+    composites: {}
+  }
+
+
+  type PenaltyGetPayload<S extends boolean | null | undefined | PenaltyDefaultArgs> = $Result.GetResult<Prisma.$PenaltyPayload, S>
+
+  type PenaltyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PenaltyFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PenaltyCountAggregateInputType | true
+    }
+
+  export interface PenaltyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Penalty'], meta: { name: 'Penalty' } }
+    /**
+     * Find zero or one Penalty that matches the filter.
+     * @param {PenaltyFindUniqueArgs} args - Arguments to find a Penalty
+     * @example
+     * // Get one Penalty
+     * const penalty = await prisma.penalty.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends PenaltyFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, PenaltyFindUniqueArgs<ExtArgs>>
+    ): Prisma__PenaltyClient<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Penalty that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {PenaltyFindUniqueOrThrowArgs} args - Arguments to find a Penalty
+     * @example
+     * // Get one Penalty
+     * const penalty = await prisma.penalty.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends PenaltyFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, PenaltyFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__PenaltyClient<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Penalty that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PenaltyFindFirstArgs} args - Arguments to find a Penalty
+     * @example
+     * // Get one Penalty
+     * const penalty = await prisma.penalty.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends PenaltyFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, PenaltyFindFirstArgs<ExtArgs>>
+    ): Prisma__PenaltyClient<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Penalty that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PenaltyFindFirstOrThrowArgs} args - Arguments to find a Penalty
+     * @example
+     * // Get one Penalty
+     * const penalty = await prisma.penalty.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends PenaltyFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, PenaltyFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__PenaltyClient<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Penalties that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PenaltyFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Penalties
+     * const penalties = await prisma.penalty.findMany()
+     * 
+     * // Get first 10 Penalties
+     * const penalties = await prisma.penalty.findMany({ take: 10 })
+     * 
+     * // Only select the `penalty_id`
+     * const penaltyWithPenalty_idOnly = await prisma.penalty.findMany({ select: { penalty_id: true } })
+     * 
+    **/
+    findMany<T extends PenaltyFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PenaltyFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Penalty.
+     * @param {PenaltyCreateArgs} args - Arguments to create a Penalty.
+     * @example
+     * // Create one Penalty
+     * const Penalty = await prisma.penalty.create({
+     *   data: {
+     *     // ... data to create a Penalty
+     *   }
+     * })
+     * 
+    **/
+    create<T extends PenaltyCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, PenaltyCreateArgs<ExtArgs>>
+    ): Prisma__PenaltyClient<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Penalties.
+     *     @param {PenaltyCreateManyArgs} args - Arguments to create many Penalties.
+     *     @example
+     *     // Create many Penalties
+     *     const penalty = await prisma.penalty.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends PenaltyCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PenaltyCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Penalty.
+     * @param {PenaltyDeleteArgs} args - Arguments to delete one Penalty.
+     * @example
+     * // Delete one Penalty
+     * const Penalty = await prisma.penalty.delete({
+     *   where: {
+     *     // ... filter to delete one Penalty
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends PenaltyDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, PenaltyDeleteArgs<ExtArgs>>
+    ): Prisma__PenaltyClient<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Penalty.
+     * @param {PenaltyUpdateArgs} args - Arguments to update one Penalty.
+     * @example
+     * // Update one Penalty
+     * const penalty = await prisma.penalty.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends PenaltyUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, PenaltyUpdateArgs<ExtArgs>>
+    ): Prisma__PenaltyClient<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Penalties.
+     * @param {PenaltyDeleteManyArgs} args - Arguments to filter Penalties to delete.
+     * @example
+     * // Delete a few Penalties
+     * const { count } = await prisma.penalty.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends PenaltyDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PenaltyDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Penalties.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PenaltyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Penalties
+     * const penalty = await prisma.penalty.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends PenaltyUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, PenaltyUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Penalty.
+     * @param {PenaltyUpsertArgs} args - Arguments to update or create a Penalty.
+     * @example
+     * // Update or create a Penalty
+     * const penalty = await prisma.penalty.upsert({
+     *   create: {
+     *     // ... data to create a Penalty
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Penalty we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends PenaltyUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, PenaltyUpsertArgs<ExtArgs>>
+    ): Prisma__PenaltyClient<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Penalties.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PenaltyCountArgs} args - Arguments to filter Penalties to count.
+     * @example
+     * // Count the number of Penalties
+     * const count = await prisma.penalty.count({
+     *   where: {
+     *     // ... the filter for the Penalties we want to count
+     *   }
+     * })
+    **/
+    count<T extends PenaltyCountArgs>(
+      args?: Subset<T, PenaltyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PenaltyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Penalty.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PenaltyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PenaltyAggregateArgs>(args: Subset<T, PenaltyAggregateArgs>): Prisma.PrismaPromise<GetPenaltyAggregateType<T>>
+
+    /**
+     * Group by Penalty.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PenaltyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PenaltyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PenaltyGroupByArgs['orderBy'] }
+        : { orderBy?: PenaltyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PenaltyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPenaltyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Penalty model
+   */
+  readonly fields: PenaltyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Penalty.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PenaltyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Penalty model
+   */ 
+  interface PenaltyFieldRefs {
+    readonly penalty_id: FieldRef<"Penalty", 'String'>
+    readonly case_id: FieldRef<"Penalty", 'String'>
+    readonly user_id: FieldRef<"Penalty", 'String'>
+    readonly amount: FieldRef<"Penalty", 'Float'>
+    readonly reason: FieldRef<"Penalty", 'String'>
+    readonly timestamp: FieldRef<"Penalty", 'DateTime'>
+    readonly status: FieldRef<"Penalty", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Penalty findUnique
+   */
+  export type PenaltyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * Filter, which Penalty to fetch.
+     */
+    where: PenaltyWhereUniqueInput
+  }
+
+
+  /**
+   * Penalty findUniqueOrThrow
+   */
+  export type PenaltyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * Filter, which Penalty to fetch.
+     */
+    where: PenaltyWhereUniqueInput
+  }
+
+
+  /**
+   * Penalty findFirst
+   */
+  export type PenaltyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * Filter, which Penalty to fetch.
+     */
+    where?: PenaltyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Penalties to fetch.
+     */
+    orderBy?: PenaltyOrderByWithRelationInput | PenaltyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Penalties.
+     */
+    cursor?: PenaltyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Penalties from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Penalties.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Penalties.
+     */
+    distinct?: PenaltyScalarFieldEnum | PenaltyScalarFieldEnum[]
+  }
+
+
+  /**
+   * Penalty findFirstOrThrow
+   */
+  export type PenaltyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * Filter, which Penalty to fetch.
+     */
+    where?: PenaltyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Penalties to fetch.
+     */
+    orderBy?: PenaltyOrderByWithRelationInput | PenaltyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Penalties.
+     */
+    cursor?: PenaltyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Penalties from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Penalties.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Penalties.
+     */
+    distinct?: PenaltyScalarFieldEnum | PenaltyScalarFieldEnum[]
+  }
+
+
+  /**
+   * Penalty findMany
+   */
+  export type PenaltyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * Filter, which Penalties to fetch.
+     */
+    where?: PenaltyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Penalties to fetch.
+     */
+    orderBy?: PenaltyOrderByWithRelationInput | PenaltyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Penalties.
+     */
+    cursor?: PenaltyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Penalties from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Penalties.
+     */
+    skip?: number
+    distinct?: PenaltyScalarFieldEnum | PenaltyScalarFieldEnum[]
+  }
+
+
+  /**
+   * Penalty create
+   */
+  export type PenaltyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * The data needed to create a Penalty.
+     */
+    data: XOR<PenaltyCreateInput, PenaltyUncheckedCreateInput>
+  }
+
+
+  /**
+   * Penalty createMany
+   */
+  export type PenaltyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Penalties.
+     */
+    data: PenaltyCreateManyInput | PenaltyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Penalty update
+   */
+  export type PenaltyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * The data needed to update a Penalty.
+     */
+    data: XOR<PenaltyUpdateInput, PenaltyUncheckedUpdateInput>
+    /**
+     * Choose, which Penalty to update.
+     */
+    where: PenaltyWhereUniqueInput
+  }
+
+
+  /**
+   * Penalty updateMany
+   */
+  export type PenaltyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Penalties.
+     */
+    data: XOR<PenaltyUpdateManyMutationInput, PenaltyUncheckedUpdateManyInput>
+    /**
+     * Filter which Penalties to update
+     */
+    where?: PenaltyWhereInput
+  }
+
+
+  /**
+   * Penalty upsert
+   */
+  export type PenaltyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * The filter to search for the Penalty to update in case it exists.
+     */
+    where: PenaltyWhereUniqueInput
+    /**
+     * In case the Penalty found by the `where` argument doesn't exist, create a new Penalty with this data.
+     */
+    create: XOR<PenaltyCreateInput, PenaltyUncheckedCreateInput>
+    /**
+     * In case the Penalty was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PenaltyUpdateInput, PenaltyUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Penalty delete
+   */
+  export type PenaltyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * Filter which Penalty to delete.
+     */
+    where: PenaltyWhereUniqueInput
+  }
+
+
+  /**
+   * Penalty deleteMany
+   */
+  export type PenaltyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Penalties to delete
+     */
+    where?: PenaltyWhereInput
+  }
+
+
+  /**
+   * Penalty without action
+   */
+  export type PenaltyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -17745,6 +19809,36 @@ export namespace Prisma {
   };
 
   export type LegalDocumentScalarFieldEnum = (typeof LegalDocumentScalarFieldEnum)[keyof typeof LegalDocumentScalarFieldEnum]
+
+
+  export const HearingScalarFieldEnum: {
+    hearing_id: 'hearing_id',
+    case_id: 'case_id',
+    hearing_date: 'hearing_date',
+    hearing_link: 'hearing_link',
+    plaintiff_status: 'plaintiff_status',
+    defendant_status: 'defendant_status',
+    reminders_sent: 'reminders_sent',
+    absences: 'absences',
+    penalty_applied: 'penalty_applied',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type HearingScalarFieldEnum = (typeof HearingScalarFieldEnum)[keyof typeof HearingScalarFieldEnum]
+
+
+  export const PenaltyScalarFieldEnum: {
+    penalty_id: 'penalty_id',
+    case_id: 'case_id',
+    user_id: 'user_id',
+    amount: 'amount',
+    reason: 'reason',
+    timestamp: 'timestamp',
+    status: 'status'
+  };
+
+  export type PenaltyScalarFieldEnum = (typeof PenaltyScalarFieldEnum)[keyof typeof PenaltyScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -19315,6 +21409,154 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"LegalDocument"> | Date | string
   }
 
+  export type HearingWhereInput = {
+    AND?: HearingWhereInput | HearingWhereInput[]
+    OR?: HearingWhereInput[]
+    NOT?: HearingWhereInput | HearingWhereInput[]
+    hearing_id?: StringFilter<"Hearing"> | string
+    case_id?: StringFilter<"Hearing"> | string
+    hearing_date?: DateTimeFilter<"Hearing"> | Date | string
+    hearing_link?: StringFilter<"Hearing"> | string
+    plaintiff_status?: StringFilter<"Hearing"> | string
+    defendant_status?: StringFilter<"Hearing"> | string
+    reminders_sent?: IntFilter<"Hearing"> | number
+    absences?: IntFilter<"Hearing"> | number
+    penalty_applied?: BoolFilter<"Hearing"> | boolean
+    createdAt?: DateTimeFilter<"Hearing"> | Date | string
+    updatedAt?: DateTimeFilter<"Hearing"> | Date | string
+  }
+
+  export type HearingOrderByWithRelationInput = {
+    hearing_id?: SortOrder
+    case_id?: SortOrder
+    hearing_date?: SortOrder
+    hearing_link?: SortOrder
+    plaintiff_status?: SortOrder
+    defendant_status?: SortOrder
+    reminders_sent?: SortOrder
+    absences?: SortOrder
+    penalty_applied?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HearingWhereUniqueInput = Prisma.AtLeast<{
+    hearing_id?: string
+    AND?: HearingWhereInput | HearingWhereInput[]
+    OR?: HearingWhereInput[]
+    NOT?: HearingWhereInput | HearingWhereInput[]
+    case_id?: StringFilter<"Hearing"> | string
+    hearing_date?: DateTimeFilter<"Hearing"> | Date | string
+    hearing_link?: StringFilter<"Hearing"> | string
+    plaintiff_status?: StringFilter<"Hearing"> | string
+    defendant_status?: StringFilter<"Hearing"> | string
+    reminders_sent?: IntFilter<"Hearing"> | number
+    absences?: IntFilter<"Hearing"> | number
+    penalty_applied?: BoolFilter<"Hearing"> | boolean
+    createdAt?: DateTimeFilter<"Hearing"> | Date | string
+    updatedAt?: DateTimeFilter<"Hearing"> | Date | string
+  }, "hearing_id">
+
+  export type HearingOrderByWithAggregationInput = {
+    hearing_id?: SortOrder
+    case_id?: SortOrder
+    hearing_date?: SortOrder
+    hearing_link?: SortOrder
+    plaintiff_status?: SortOrder
+    defendant_status?: SortOrder
+    reminders_sent?: SortOrder
+    absences?: SortOrder
+    penalty_applied?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: HearingCountOrderByAggregateInput
+    _avg?: HearingAvgOrderByAggregateInput
+    _max?: HearingMaxOrderByAggregateInput
+    _min?: HearingMinOrderByAggregateInput
+    _sum?: HearingSumOrderByAggregateInput
+  }
+
+  export type HearingScalarWhereWithAggregatesInput = {
+    AND?: HearingScalarWhereWithAggregatesInput | HearingScalarWhereWithAggregatesInput[]
+    OR?: HearingScalarWhereWithAggregatesInput[]
+    NOT?: HearingScalarWhereWithAggregatesInput | HearingScalarWhereWithAggregatesInput[]
+    hearing_id?: StringWithAggregatesFilter<"Hearing"> | string
+    case_id?: StringWithAggregatesFilter<"Hearing"> | string
+    hearing_date?: DateTimeWithAggregatesFilter<"Hearing"> | Date | string
+    hearing_link?: StringWithAggregatesFilter<"Hearing"> | string
+    plaintiff_status?: StringWithAggregatesFilter<"Hearing"> | string
+    defendant_status?: StringWithAggregatesFilter<"Hearing"> | string
+    reminders_sent?: IntWithAggregatesFilter<"Hearing"> | number
+    absences?: IntWithAggregatesFilter<"Hearing"> | number
+    penalty_applied?: BoolWithAggregatesFilter<"Hearing"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Hearing"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Hearing"> | Date | string
+  }
+
+  export type PenaltyWhereInput = {
+    AND?: PenaltyWhereInput | PenaltyWhereInput[]
+    OR?: PenaltyWhereInput[]
+    NOT?: PenaltyWhereInput | PenaltyWhereInput[]
+    penalty_id?: StringFilter<"Penalty"> | string
+    case_id?: StringFilter<"Penalty"> | string
+    user_id?: StringFilter<"Penalty"> | string
+    amount?: FloatFilter<"Penalty"> | number
+    reason?: StringFilter<"Penalty"> | string
+    timestamp?: DateTimeFilter<"Penalty"> | Date | string
+    status?: StringFilter<"Penalty"> | string
+  }
+
+  export type PenaltyOrderByWithRelationInput = {
+    penalty_id?: SortOrder
+    case_id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrder
+    timestamp?: SortOrder
+    status?: SortOrder
+  }
+
+  export type PenaltyWhereUniqueInput = Prisma.AtLeast<{
+    penalty_id?: string
+    AND?: PenaltyWhereInput | PenaltyWhereInput[]
+    OR?: PenaltyWhereInput[]
+    NOT?: PenaltyWhereInput | PenaltyWhereInput[]
+    case_id?: StringFilter<"Penalty"> | string
+    user_id?: StringFilter<"Penalty"> | string
+    amount?: FloatFilter<"Penalty"> | number
+    reason?: StringFilter<"Penalty"> | string
+    timestamp?: DateTimeFilter<"Penalty"> | Date | string
+    status?: StringFilter<"Penalty"> | string
+  }, "penalty_id">
+
+  export type PenaltyOrderByWithAggregationInput = {
+    penalty_id?: SortOrder
+    case_id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrder
+    timestamp?: SortOrder
+    status?: SortOrder
+    _count?: PenaltyCountOrderByAggregateInput
+    _avg?: PenaltyAvgOrderByAggregateInput
+    _max?: PenaltyMaxOrderByAggregateInput
+    _min?: PenaltyMinOrderByAggregateInput
+    _sum?: PenaltySumOrderByAggregateInput
+  }
+
+  export type PenaltyScalarWhereWithAggregatesInput = {
+    AND?: PenaltyScalarWhereWithAggregatesInput | PenaltyScalarWhereWithAggregatesInput[]
+    OR?: PenaltyScalarWhereWithAggregatesInput[]
+    NOT?: PenaltyScalarWhereWithAggregatesInput | PenaltyScalarWhereWithAggregatesInput[]
+    penalty_id?: StringWithAggregatesFilter<"Penalty"> | string
+    case_id?: StringWithAggregatesFilter<"Penalty"> | string
+    user_id?: StringWithAggregatesFilter<"Penalty"> | string
+    amount?: FloatWithAggregatesFilter<"Penalty"> | number
+    reason?: StringWithAggregatesFilter<"Penalty"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"Penalty"> | Date | string
+    status?: StringWithAggregatesFilter<"Penalty"> | string
+  }
+
   export type UserCreateInput = {
     id?: string
     clerkUserId: string
@@ -20836,6 +23078,174 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HearingCreateInput = {
+    hearing_id?: string
+    case_id: string
+    hearing_date: Date | string
+    hearing_link: string
+    plaintiff_status?: string
+    defendant_status?: string
+    reminders_sent?: number
+    absences?: number
+    penalty_applied?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HearingUncheckedCreateInput = {
+    hearing_id?: string
+    case_id: string
+    hearing_date: Date | string
+    hearing_link: string
+    plaintiff_status?: string
+    defendant_status?: string
+    reminders_sent?: number
+    absences?: number
+    penalty_applied?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HearingUpdateInput = {
+    hearing_id?: StringFieldUpdateOperationsInput | string
+    case_id?: StringFieldUpdateOperationsInput | string
+    hearing_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hearing_link?: StringFieldUpdateOperationsInput | string
+    plaintiff_status?: StringFieldUpdateOperationsInput | string
+    defendant_status?: StringFieldUpdateOperationsInput | string
+    reminders_sent?: IntFieldUpdateOperationsInput | number
+    absences?: IntFieldUpdateOperationsInput | number
+    penalty_applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HearingUncheckedUpdateInput = {
+    hearing_id?: StringFieldUpdateOperationsInput | string
+    case_id?: StringFieldUpdateOperationsInput | string
+    hearing_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hearing_link?: StringFieldUpdateOperationsInput | string
+    plaintiff_status?: StringFieldUpdateOperationsInput | string
+    defendant_status?: StringFieldUpdateOperationsInput | string
+    reminders_sent?: IntFieldUpdateOperationsInput | number
+    absences?: IntFieldUpdateOperationsInput | number
+    penalty_applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HearingCreateManyInput = {
+    hearing_id?: string
+    case_id: string
+    hearing_date: Date | string
+    hearing_link: string
+    plaintiff_status?: string
+    defendant_status?: string
+    reminders_sent?: number
+    absences?: number
+    penalty_applied?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HearingUpdateManyMutationInput = {
+    hearing_id?: StringFieldUpdateOperationsInput | string
+    case_id?: StringFieldUpdateOperationsInput | string
+    hearing_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hearing_link?: StringFieldUpdateOperationsInput | string
+    plaintiff_status?: StringFieldUpdateOperationsInput | string
+    defendant_status?: StringFieldUpdateOperationsInput | string
+    reminders_sent?: IntFieldUpdateOperationsInput | number
+    absences?: IntFieldUpdateOperationsInput | number
+    penalty_applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HearingUncheckedUpdateManyInput = {
+    hearing_id?: StringFieldUpdateOperationsInput | string
+    case_id?: StringFieldUpdateOperationsInput | string
+    hearing_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hearing_link?: StringFieldUpdateOperationsInput | string
+    plaintiff_status?: StringFieldUpdateOperationsInput | string
+    defendant_status?: StringFieldUpdateOperationsInput | string
+    reminders_sent?: IntFieldUpdateOperationsInput | number
+    absences?: IntFieldUpdateOperationsInput | number
+    penalty_applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PenaltyCreateInput = {
+    penalty_id?: string
+    case_id: string
+    user_id: string
+    amount: number
+    reason?: string
+    timestamp?: Date | string
+    status?: string
+  }
+
+  export type PenaltyUncheckedCreateInput = {
+    penalty_id?: string
+    case_id: string
+    user_id: string
+    amount: number
+    reason?: string
+    timestamp?: Date | string
+    status?: string
+  }
+
+  export type PenaltyUpdateInput = {
+    penalty_id?: StringFieldUpdateOperationsInput | string
+    case_id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PenaltyUncheckedUpdateInput = {
+    penalty_id?: StringFieldUpdateOperationsInput | string
+    case_id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PenaltyCreateManyInput = {
+    penalty_id?: string
+    case_id: string
+    user_id: string
+    amount: number
+    reason?: string
+    timestamp?: Date | string
+    status?: string
+  }
+
+  export type PenaltyUpdateManyMutationInput = {
+    penalty_id?: StringFieldUpdateOperationsInput | string
+    case_id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PenaltyUncheckedUpdateManyInput = {
+    penalty_id?: StringFieldUpdateOperationsInput | string
+    case_id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -22105,6 +24515,96 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type HearingCountOrderByAggregateInput = {
+    hearing_id?: SortOrder
+    case_id?: SortOrder
+    hearing_date?: SortOrder
+    hearing_link?: SortOrder
+    plaintiff_status?: SortOrder
+    defendant_status?: SortOrder
+    reminders_sent?: SortOrder
+    absences?: SortOrder
+    penalty_applied?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HearingAvgOrderByAggregateInput = {
+    reminders_sent?: SortOrder
+    absences?: SortOrder
+  }
+
+  export type HearingMaxOrderByAggregateInput = {
+    hearing_id?: SortOrder
+    case_id?: SortOrder
+    hearing_date?: SortOrder
+    hearing_link?: SortOrder
+    plaintiff_status?: SortOrder
+    defendant_status?: SortOrder
+    reminders_sent?: SortOrder
+    absences?: SortOrder
+    penalty_applied?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HearingMinOrderByAggregateInput = {
+    hearing_id?: SortOrder
+    case_id?: SortOrder
+    hearing_date?: SortOrder
+    hearing_link?: SortOrder
+    plaintiff_status?: SortOrder
+    defendant_status?: SortOrder
+    reminders_sent?: SortOrder
+    absences?: SortOrder
+    penalty_applied?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HearingSumOrderByAggregateInput = {
+    reminders_sent?: SortOrder
+    absences?: SortOrder
+  }
+
+  export type PenaltyCountOrderByAggregateInput = {
+    penalty_id?: SortOrder
+    case_id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrder
+    timestamp?: SortOrder
+    status?: SortOrder
+  }
+
+  export type PenaltyAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type PenaltyMaxOrderByAggregateInput = {
+    penalty_id?: SortOrder
+    case_id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrder
+    timestamp?: SortOrder
+    status?: SortOrder
+  }
+
+  export type PenaltyMinOrderByAggregateInput = {
+    penalty_id?: SortOrder
+    case_id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrder
+    timestamp?: SortOrder
+    status?: SortOrder
+  }
+
+  export type PenaltySumOrderByAggregateInput = {
+    amount?: SortOrder
   }
 
   export type UserCreatequalificationsInput = {
@@ -25626,6 +28126,14 @@ export namespace Prisma {
      * @deprecated Use LegalDocumentDefaultArgs instead
      */
     export type LegalDocumentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LegalDocumentDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use HearingDefaultArgs instead
+     */
+    export type HearingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = HearingDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PenaltyDefaultArgs instead
+     */
+    export type PenaltyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PenaltyDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

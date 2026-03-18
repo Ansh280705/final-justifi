@@ -14,13 +14,13 @@ const PLATFORM_FEE_PERCENT = 0.03; // 3% Razorpay fee
  * Request payout for all remaining credits
  */
 export async function requestPayout(formData) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,
@@ -93,13 +93,13 @@ const netAmount = totalAmount - platformFee;
  * Get lawyer's payout history
  */
 export async function getLawyerPayouts() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,
@@ -130,13 +130,13 @@ export async function getLawyerPayouts() {
  * Get lawyer's earnings summary
  */
 export async function getLawyerEarnings() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,

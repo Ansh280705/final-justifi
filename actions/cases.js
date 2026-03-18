@@ -186,10 +186,10 @@ if (!availability) {
 }
 
 export async function bookCase(formData){
- const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
   try {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+
     const client = await db.user.findUnique({
       where: { clerkUserId: userId, role: "CLIENT" },
     });
@@ -316,13 +316,13 @@ async function createVideoSession() {
  * This will be called when either lawyer or client is about to join the call
  */
 export async function generateVideoToken(formData) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     // 1️⃣ Fetch logged-in user
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },

@@ -7,13 +7,11 @@ import { revalidatePath } from "next/cache";
 
 // Create a new manual payment request
 export async function createPaymentRequest(data) {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
-  // data = { amount, credits, screenshotUrl, transactionId, packageId }
-  
   try {
-     const user = await db.user.findUnique({
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+
+    const user = await db.user.findUnique({
         where: { clerkUserId: userId },
      });
      

@@ -5,13 +5,13 @@ import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 export async function setAvailabilitySlots(formData) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,
@@ -50,13 +50,13 @@ export async function setAvailabilitySlots(formData) {
   }
 }
 export async function getLawyerAvailability() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,
@@ -84,10 +84,10 @@ export async function getLawyerAvailability() {
 }
 
 export async function deleteAvailability(slotId) {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
   try {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+
     const lawyer = await db.user.findUnique({
       where: { clerkUserId: userId, role: "LAWYER" },
     });
@@ -119,13 +119,13 @@ export async function deleteAvailability(slotId) {
 }
 
 export async function getLawyerCases() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,
@@ -159,13 +159,13 @@ export async function getLawyerCases() {
 }
 
 export async function getRecentLawyerCases() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,
@@ -200,13 +200,13 @@ export async function getRecentLawyerCases() {
 }
 
 export async function cancelCase(formData) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const user = await db.user.findUnique({
       where: {
         clerkUserId: userId,
@@ -318,13 +318,13 @@ export async function cancelCase(formData) {
  * Add notes to an appointment
  */
 export async function addCaseNotes(formData) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,
@@ -377,13 +377,13 @@ export async function addCaseNotes(formData) {
  * Mark an appointment as completed (only by lawyer after end time)
  */
 export async function markCaseCompleted(formData) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const lawyer = await db.user.findUnique({
       where: {
         clerkUserId: userId,

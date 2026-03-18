@@ -380,3 +380,36 @@ export async function getAllSOSAlerts() {
   }
 }
 
+/**
+ * Gets all hearing violations and penalties for Admin dashboard
+ */
+export async function getHearingViolations() {
+  const isAdmin = await verifyAdmin();
+  if (!isAdmin) return { cases_with_missed_hearings: [], penalties_generated: [] };
+
+  try {
+    const violations = await db.hearing.findMany({
+      where: {
+        OR: [
+          { plaintiff_status: "absent" },
+          { defendant_status: "absent" },
+          { absences: { gt: 0 } }
+        ]
+      },
+      orderBy: { updatedAt: "desc" }
+    });
+    
+    const penalties = await db.penalty.findMany({
+      orderBy: { timestamp: "desc" }
+    });
+
+    return {
+      cases_with_missed_hearings: violations,
+      penalties_generated: penalties,
+    };
+  } catch (error) {
+    console.error("Failed to fetch hearing violations:", error);
+    return { cases_with_missed_hearings: [], penalties_generated: [] };
+  }
+}
+

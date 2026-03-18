@@ -6,13 +6,13 @@ import { auth } from "@clerk/nextjs/server";
  * Get all cases for the authenticated client
  */
 export async function getClientCases() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const user = await db.user.findUnique({
       where: {
         clerkUserId: userId,

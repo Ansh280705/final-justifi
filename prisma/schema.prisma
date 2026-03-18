@@ -383,3 +383,37 @@ model LegalDocument {
   @@index([clerkUserId])
   @@index([leegalityDocId])
 }
+
+// ==========================
+// HEARING & PENALTY MODELS
+// ==========================
+
+model Hearing {
+  hearing_id       String   @id @default(uuid())
+  case_id          String
+  hearing_date     DateTime
+  hearing_link     String
+  plaintiff_status String   @default("pending") // pending | present | absent
+  defendant_status String   @default("pending") // pending | present | absent
+  reminders_sent   Int      @default(0)
+  absences         Int      @default(0)
+  penalty_applied  Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([case_id])
+}
+
+model Penalty {
+  penalty_id String   @id @default(uuid())
+  case_id    String
+  user_id    String
+  amount     Float
+  reason     String   @default("Missed Hearing")
+  timestamp  DateTime @default(now())
+  status     String   @default("pending") // pending | paid
+
+  @@index([case_id])
+  @@index([user_id])
+}

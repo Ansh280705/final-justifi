@@ -5,10 +5,10 @@ import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 export async function createDispute(formData) {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
   try {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },
     });
@@ -46,10 +46,10 @@ export async function createDispute(formData) {
 }
 
 export async function updateDisputeStatus(disputeId, newStatus) {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
   try {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+
     const dispute = await db.dispute.update({
       where: { id: disputeId },
       data: { status: newStatus },
@@ -146,10 +146,10 @@ export async function markResolved(disputeId, isOpponent = false) {
 }
 
 export async function getUserDisputes() {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
   try {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },
     });
