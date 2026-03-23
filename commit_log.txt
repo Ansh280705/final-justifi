@@ -13,3 +13,4 @@ commit 12 - 2026-03-21 01:56 - Create city-based lawyer search functionality
 commit 13 - 2026-03-21 17:23 - Implement dispute dashboard layout
 commit 14 - 2026-03-22 08:50 - Add case status tracking components
 commit 15 - 2026-03-23 00:17 - Integrate Leegality e-sign workflow
+commit 16 - 2026-03-23 15:44 - Add document upload and management
