@@ -14,3 +14,4 @@ commit 13 - 2026-03-21 17:23 - Implement dispute dashboard layout
 commit 14 - 2026-03-22 08:50 - Add case status tracking components
 commit 15 - 2026-03-23 00:17 - Integrate Leegality e-sign workflow
 commit 16 - 2026-03-23 15:44 - Add document upload and management
+commit 17 - 2026-03-24 07:11 - Create admin dashboard foundation
