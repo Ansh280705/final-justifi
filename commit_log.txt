@@ -19,3 +19,4 @@ commit 18 - 2026-03-24 22:37 - Implement user profile management
 commit 19 - 2026-03-25 14:04 - Add email notification system with Nodemailer
 commit 20 - 2026-03-26 05:31 - Create mediation scheduling interface
 commit 21 - 2026-03-26 20:58 - Add settlement draft generation
+commit 22 - 2026-03-27 12:25 - Implement penalty tracking for non-responsive parties
