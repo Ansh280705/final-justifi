@@ -21,3 +21,4 @@ commit 20 - 2026-03-26 05:31 - Create mediation scheduling interface
 commit 21 - 2026-03-26 20:58 - Add settlement draft generation
 commit 22 - 2026-03-27 12:25 - Implement penalty tracking for non-responsive parties
 commit 23 - 2026-03-28 03:52 - Add Framer Motion animations to landing page
+commit 24 - 2026-03-28 19:19 - Create lawyer profile detail pages
