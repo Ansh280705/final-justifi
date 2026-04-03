@@ -30,3 +30,4 @@ commit 29 - 2026-04-01 00:34 - Add legal document template system
 commit 30 - 2026-04-01 16:01 - Create practice area filtering system
 commit 31 - 2026-04-02 07:28 - Implement Prisma migrations and seed data
 commit 32 - 2026-04-02 22:55 - Add dark mode support with next-themes
+commit 33 - 2026-04-03 14:22 - Create notification center component
