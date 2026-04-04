@@ -32,3 +32,4 @@ commit 31 - 2026-04-02 07:28 - Implement Prisma migrations and seed data
 commit 32 - 2026-04-02 22:55 - Add dark mode support with next-themes
 commit 33 - 2026-04-03 14:22 - Create notification center component
 commit 34 - 2026-04-04 05:48 - Implement search and filtering for disputes
+commit 35 - 2026-04-04 21:15 - Add PDF generation for legal notices
